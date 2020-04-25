@@ -1,6 +1,7 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const generateToken = require('../middleware/generateToken')
 
 // import schemas 
 const User = require('../schemas/UserSchema')
@@ -46,12 +47,13 @@ router.post('/register', (req, res) => {
     newUser
         .save()
         .then(createdUser => {
+            let token = generateToken(createdUser._id, 3600);
             res 
                 .status(200)
                 .json({
                     success: true,
                     user: createdUser,
-                    token: '' // TODO: add jwt tokens
+                    token
                 })
         })
 })
@@ -82,12 +84,9 @@ router.post('/login', (req, res) => {
                     })
                 return;
             }
-            if (creds.password === foundUser.password) {
-                let token = jwt.sign({
-                    userId: foundUser._id,
-                }, process.env.JWT_SECRET, {
-                    expiresIn: 3600
-                })
+            let doPasswordsMatch = bcrypt.compareSync(creds.password, foundUser.password)
+            if (doPasswordsMatch) {
+                let token = generateToken(foundUser._id, 3600);
                 res
                     .status(200)
                     .json({
