@@ -3,6 +3,10 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
+// import routes
+
+const usersRoutes = require('./routes/users')
+
 // configure dotenv
 
 const dotenv = require('dotenv')
@@ -34,6 +38,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Routes
+
+app.use('/users', usersRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello from express!')

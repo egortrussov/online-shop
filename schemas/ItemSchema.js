@@ -14,4 +14,4 @@ const ItemSchema = new mongoose.Schema({
     categoryId: String
 })
 
-export const User = new.mongoose.model('items', UserSchema);
+module.exports = Item = new mongoose.model('items', UserSchema);
