@@ -1,14 +1,55 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const generateToken = require('../middleware/generateToken')
+
 
 // import schemas 
 const User = require('../schemas/UserSchema')
 
+// import middleware 
+const generateToken = require('../middleware/generateToken')
+const auth = require('../middleware/routeProtection')
+
 const router = express.Router();
 
 // GET Routes
+
+/*
+    @Method: GET
+    @Access: Protected
+    @Description: Get info about the user from the database
+    @Request Params: {
+        userId
+    }
+    @Request headers: {
+        token
+    }
+    @Response: {
+        success <true, false>, user
+    }
+*/
+router.get('/userInfo/:userId', auth, (req, res) => {
+    const userId = req.params.userId;
+    User 
+        .findOne({ _id: userId })
+        .then(foundUser => {
+            if (!foundUser) {
+                res 
+                    .status(400)
+                    .json({
+                        success: false,
+                        user: null
+                    })
+                return;
+            }
+            res
+                .status(200)
+                .json({
+                    success: true,
+                    user: foundUser
+                })
+        })
+})
 
 
 // POST Routes
@@ -47,7 +88,7 @@ router.post('/register', (req, res) => {
     newUser
         .save()
         .then(createdUser => {
-            let token = generateToken(createdUser._id, 3600);
+            let token = generateToken(createdUser._id, false, 3600);
             res 
                 .status(200)
                 .json({
@@ -86,7 +127,7 @@ router.post('/login', (req, res) => {
             }
             let doPasswordsMatch = bcrypt.compareSync(creds.password, foundUser.password)
             if (doPasswordsMatch) {
-                let token = generateToken(foundUser._id, 3600);
+                let token = generateToken(foundUser._id, foundUser.isAdmin, 3600);
                 res
                     .status(200)
                     .json({
