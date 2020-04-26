@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const ItemSchema = new mongoose.Schema({
     title: String,
     description: String,
-    costomers: [String],
+    customers: [String],
     quantity: Number,
     image: String,
     price: Number,
@@ -11,7 +11,10 @@ const ItemSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    categoryId: String
+    categoryId: {
+        type: String,
+        required: false
+    }
 })
 
-module.exports = Item = new mongoose.model('items', UserSchema);
+module.exports = Item = new mongoose.model('items', ItemSchema);
