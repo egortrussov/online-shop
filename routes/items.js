@@ -9,6 +9,7 @@ const auth = require('../middleware/routeProtection')
 // import schemas
 
 const Item = require('../schemas/ItemSchema')
+const Category = require('../schemas/CategorySchema')
 
 // GET routes
 
@@ -87,12 +88,23 @@ router.post('/createItem', auth, (req, res) => {
     newItem
         .save()
         .then(createdItem => {
-            res 
-                .status(200)
-                .json({
-                    success: true,
-                    item: createdItem
+            Category 
+                .findOne({ _id: req.body.categoryId })
+                .then(foundCategory => {
+                    foundCategory.items.push(createdItem._id);
+                    foundCategory
+                        .save()
+                        .then(() => {
+                            res 
+                                .status(200)
+                                .json({
+                                    success: true,
+                                    item: createdItem
+                                })
+                        })
                 })
+
+            
         })
 }) 
 
