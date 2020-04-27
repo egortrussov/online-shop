@@ -1,5 +1,6 @@
 const express = require('express');
-const multer = require('multer')
+const multer = require('multer');
+const path = require('path')
 
 const router = express.Router();
 
@@ -67,6 +68,32 @@ router.get('/itemInfo/:itemId', (req, res) => {
                     success: true,
                     item: foundItem
                 })
+        })
+})
+
+/*
+    @Method: GET
+    @Access: Protected
+    @Description: get item image
+    @Request Params: {
+        itemId
+    }
+    @Request headers: {
+        token
+    }
+    @Response: {
+        image
+    }
+*/
+
+router.get('/itemImage/:itemId', auth, (req, res) => {
+    Item 
+        .findOne({ _id: req.params.itemId })
+        .then(item => {
+            var filePath = path.join(__dirname, `../uploads/${ item.image }`);
+            res
+                .status(200)
+                .sendFile(filePath)
         })
 })
 
@@ -166,19 +193,35 @@ router.post('/createItem', auth, upload.single('photo'), (req, res) => {
     @Access: protected (admin only)
     @Description: update existing item
     @Request Body type: {
-        title,
-        description,
-        quantity,
-        image ???,
-        price,
-        company,
-        categoryId
+        item
     }
-    @Request
+    @Request params: {
+        itemId
+    }
     @Response: {
         success <true, false>, item?, msg?
     }
 */
+router.post('/updateItem/:itemId', (req, res) => {
+    Item 
+        .findOne({ _id: req.params.itemId })
+        .then(item => {
+            item = {
+                ...item,
+                ...req.item
+            }
+            item
+                .save()
+                .then((updatedItem) => {
+                    res 
+                        .status(200)
+                        .json({
+                            success: true,
+                            item: updatedItem
+                        })
+                })
+        })
+})
 
 
 module.exports = router;
