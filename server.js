@@ -41,11 +41,11 @@ if (process.env.NODE_ENV === 'development') {
 
 // Routes
 
-app.use('/users', usersRoutes);
-app.use('/items', itemsRoutes);
-app.use('/categories', categoriesRoute);
+app.use('/api/users', usersRoutes);
+app.use('/api/items', itemsRoutes);
+app.use('/api/categories', categoriesRoute);
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('Hello from express!')
 })
 

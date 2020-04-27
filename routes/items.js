@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer')
 
 const router = express.Router();
 
@@ -10,6 +11,23 @@ const auth = require('../middleware/routeProtection')
 
 const Item = require('../schemas/ItemSchema')
 const Category = require('../schemas/CategorySchema')
+
+// Config multer
+
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, './uploads')
+    },
+    filename: (req, file, cb) => {
+        console.log(file)
+        cb(null, file.originalname)
+    }
+})
+
+const upload = multer({
+    storage: storage
+}) 
+
 
 // GET routes
 
@@ -104,7 +122,7 @@ router.get('/categoryItems/:categoryId', auth, (req, res) => {
         success <true, false>, item?, msg?
     }
 */
-router.post('/createItem', auth, (req, res) => {
+router.post('/createItem', auth, upload.single('photo'), (req, res) => {
     if (!req.userData || !req.userData.isAdmin) {
         res
             .status(401)
@@ -116,6 +134,7 @@ router.post('/createItem', auth, (req, res) => {
     }
     let newItem = new Item({
         ...req.body,
+        image: req.file.filename,
         customers: []
     })
 
@@ -136,7 +155,7 @@ router.post('/createItem', auth, (req, res) => {
                                     item: createdItem
                                 })
                         })
-                })
+                }) 
 
             
         })
