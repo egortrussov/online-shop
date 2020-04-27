@@ -13,7 +13,30 @@ const router = express.Router()
 
 // GET routes
 
+/*
+    @Method: GET
+    @Access: Protected
+    @Description: Get all categories
+    @Request headers: {
+        token
+    }
+    @Response: {
+        success <true, false>, categories
+    }
+*/
 
+router.get('/allCategories', auth, (req, res) => {
+    Category
+        .find()
+        .then(categories => {
+            res
+                .status(200)
+                .json({
+                    success: true,
+                    categories
+                })
+        })
+})
 
 // POST routes
 

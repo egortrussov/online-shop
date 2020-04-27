@@ -52,6 +52,40 @@ router.get('/itemInfo/:itemId', (req, res) => {
         })
 })
 
+/*
+    @Method: GET
+    @Access: Protected
+    @Description: Get all items from category
+    @Request params: {
+        categoryId
+    }
+    @Request headers: {
+        token
+    }
+    @Response: {
+        success <true, false>, items
+    }
+*/
+
+router.get('/categoryItems/:categoryId', auth, (req, res) => {
+    const categoryId = req.params.categoryId;
+
+    Category
+        .findOne({ _id: categoryId })
+        .then(category => {
+            Item 
+                .find({ _id: { $in: category.items } })
+                .then(items => {
+                    res 
+                        .status(200)
+                        .json({
+                            success: true,
+                            items
+                        })
+                })
+        })
+})
+
 // POST routes
 /*
     @Method: POST
