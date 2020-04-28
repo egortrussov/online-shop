@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 
 const usersRoutes = require('./routes/users')
 const itemsRoutes = require('./routes/items')
+const ordersRoutes = require('./routes/orders')
 const categoriesRoute = require('./routes/categories')
 
 // configure dotenv
@@ -44,6 +45,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/users', usersRoutes);
 app.use('/api/items', itemsRoutes);
 app.use('/api/categories', categoriesRoute);
+app.use('/api/orders', ordersRoutes);
 
 app.get('/api', (req, res) => {
     res.send('Hello from express!')
