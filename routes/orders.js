@@ -51,8 +51,6 @@ router.post('/newOrder', (req, res) => {
         .find({ _id: { $in: itemIds } })
         .then(orderedItems => {
             orderedItems.forEach(it => {
-                console.log(it.quantity)
-                console.log(it.quantity < items[it._id])
                 if (+it.quantity < +items[it._id]) {
                     errors[it._id] = true;
                     hasErrors = true;
@@ -71,17 +69,28 @@ router.post('/newOrder', (req, res) => {
                     })
                 return;
             }
-        
-            newOrder
-                .save()
-                .then(createdOrder => {
-                    res 
-                        .status(200)
-                        .json({
-                            success: true,
-                            order: createdOrder
+
+            Item
+                .find({ _id: { $in: itemIds } })
+                .then(orderedItems => {
+                    orderedItems.forEach(it => {
+                        it.quantity -= items[it._id];
+                        it.save()
+                    })
+                })
+                .then(() => {
+                    newOrder
+                        .save()
+                        .then(createdOrder => {
+                            res 
+                                .status(200)
+                                .json({
+                                    success: true,
+                                    order: createdOrder
+                                })
                         })
                 })
+        
         })
 })
 
