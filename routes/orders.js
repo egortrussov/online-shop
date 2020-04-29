@@ -82,6 +82,13 @@ router.post('/newOrder', (req, res) => {
                     newOrder
                         .save()
                         .then(createdOrder => {
+                            User 
+                                .findOne({ _id: newOrder.userId })
+                                .then(foundUser => {
+                                    foundUser.orders.push(createdOrder._id);
+                                    foundUser.save()
+                                })
+
                             res 
                                 .status(200)
                                 .json({
