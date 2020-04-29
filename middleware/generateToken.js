@@ -5,7 +5,7 @@ module.exports = geterateToken = (userId, isAdmin, expiration) => {
         userId: userId,
         isAdmin
     }, process.env.JWT_SECRET, {
-        expiresIn: expiration
+        expiresIn: 360000
     })
     
     return token;
