@@ -1,5 +1,4 @@
 const express = require('express')
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 
@@ -68,7 +67,8 @@ router.get('/userInfo/:userId', auth, (req, res) => {
 
 router.post('/register', (req, res) => {
     const userCreds = req.body;
-    if (!userCreds.email || !userCreds.password || !userCreds.telephone || !userCreds.username) {
+    console.log(userCreds)
+    if (!userCreds.email || !userCreds.password || (!userCreds.isCompany && !userCreds.telephone) || (!userCreds.isCompany && !userCreds.username)) {
         res
             .status(400)
             .json({ success: false, msg: 'Please fill in all creds' });
