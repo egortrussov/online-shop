@@ -1,10 +1,18 @@
 import React, { Component, createContext } from 'react'
 
+import { getProxy } from './ContextMiddleware'
+
 export const ItemContext = createContext();
 
 class ItemContextProvider extends Component {
     state = {
-        items: []
+        items: [10]
+    }
+
+    addItem(item) {
+        console.log(this.items)
+        console.log(getProxy())
+        this.items.push(item)
     }
 
     render() {
@@ -12,6 +20,7 @@ class ItemContextProvider extends Component {
         return (
             <ItemContext.Provider value={ {
                 ...this.state,
+                addItem: this.addItem
             } }>
                 { this.props.children }
             </ItemContext.Provider>

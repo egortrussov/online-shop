@@ -1,37 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-import { Provider } from 'react-redux';
-import store from './store/index'
-import Items from './components/Items';
+import React, { Component } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 // contexts
 
-import ItemContextProvider from './contexts/ItemContext' 
+import AuthContextProvider from './contexts/AuthContext'
 
-function App() {
-  return (
-    <ItemContextProvider>
-      <Items />
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    </ItemContextProvider>
-  );
+// components
+
+import Navbar from './components/Navbar/Navbar';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+
+export default class App extends Component {
+
+    render() {
+        
+        return (
+            <BrowserRouter>
+                <AuthContextProvider>
+                    <>
+                        <Navbar />
+                        <Switch>
+                            {/* <Route exact path="/" component={ } />  */}
+                            <Route path="/login" component={ Login } /> 
+                            <Route path="/register" component={ Register } /> 
+                        </Switch>
+                    </>
+                </AuthContextProvider>
+            </BrowserRouter>
+        )
+    }
 }
-
-export default App;
