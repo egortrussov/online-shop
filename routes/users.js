@@ -113,6 +113,7 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
     const creds = req.body;
+    console.log(creds)
     User 
         .findOne({ email: creds.email })
         .then(foundUser => {
@@ -133,6 +134,7 @@ router.post('/login', (req, res) => {
                     .json({
                         success: true,
                         token,
+                        user: foundUser
                     })
             } else {
                 res

@@ -7,14 +7,14 @@ export const AuthContext = createContext();
 
 class AuthContextProvider extends Component {
     state = {
-        token: null,
-        userId: null,
+        token: ls.get('token'),
+        user: ls.get('user'),
         proxy: getProxy()
     }
 
-    login(token, userId) {
+    login(token, user) {
         ls.set('token', token)
-        ls.set('userId', userId)
+        ls.set('user', user)
     }
 
     render() {
