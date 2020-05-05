@@ -48,10 +48,7 @@ export default class Login extends Component {
                 if (!res.success)
                     return;
                 this.context.login(res.token, res.user);
-                this.setState({
-                    ...this.state,
-                    isRedirectToHomepage: true
-                })
+                window.location.href = '/'
             })
     }
 

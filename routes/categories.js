@@ -25,7 +25,7 @@ const router = express.Router()
     }
 */
 
-router.get('/allCategories', auth, (req, res) => {
+router.get('/allCategories', (req, res) => {
     Category
         .find()
         .then(categories => {

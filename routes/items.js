@@ -34,7 +34,7 @@ const upload = multer({
 
 /*
     @Method: GET
-    @Access: Protected
+    @Access: Public
     @Description: Get info about the item from the database
     @Request Params: {
         itemId
@@ -73,7 +73,7 @@ router.get('/itemInfo/:itemId', (req, res) => {
 
 /*
     @Method: GET
-    @Access: Protected
+    @Access: Public
     @Description: get item image
     @Request Params: {
         itemId
@@ -86,7 +86,7 @@ router.get('/itemInfo/:itemId', (req, res) => {
     }
 */
 
-router.get('/itemImage/:itemId', auth, (req, res) => {
+router.get('/itemImage/:itemId', (req, res) => {
     Item 
         .findOne({ _id: req.params.itemId })
         .then(item => {
@@ -99,7 +99,7 @@ router.get('/itemImage/:itemId', auth, (req, res) => {
 
 /*
     @Method: GET
-    @Access: Protected
+    @Access: Public
     @Description: Get all items from category
     @Request params: {
         categoryId
@@ -112,7 +112,7 @@ router.get('/itemImage/:itemId', auth, (req, res) => {
     }
 */
 
-router.get('/categoryItems/:categoryId', auth, (req, res) => {
+router.get('/categoryItems/:categoryId', (req, res) => {
     const categoryId = req.params.categoryId;
 
     Category

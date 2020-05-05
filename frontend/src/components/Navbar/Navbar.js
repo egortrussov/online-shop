@@ -14,6 +14,7 @@ export default class Navbar extends Component {
 
     componentDidMount() {
         const { token, user } = this.context;
+        console.log(this.context)
         if (!token || !user)
             return;
         this.setState({
@@ -21,10 +22,18 @@ export default class Navbar extends Component {
             isLoggedIn: true
         })
     }
-    
+
+    logout() {
+        this.context.logout()
+        this.setState({
+            ...this.state,
+            isLoggedIn: false
+        })
+    }    
 
     render() {
         const { isLoggedIn } = this.state;
+        console.log(isLoggedIn)
 
         return (
             <div>
@@ -32,6 +41,8 @@ export default class Navbar extends Component {
                     isLoggedIn ? (
                         <>
                             Hello!
+
+                            <button onClick={ () => this.logout() }>Logout</button>
                         </>
                     ) : (
                         <>

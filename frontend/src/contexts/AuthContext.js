@@ -15,6 +15,15 @@ class AuthContextProvider extends Component {
     login(token, user) {
         ls.set('token', token)
         ls.set('user', user)
+        this.token = token;
+        this.user = user
+    }
+
+    logout() {
+        ls.set('token', null)
+        ls.set('user', null)
+        this.token = null;
+        this.user = null
     }
 
     render() {
@@ -22,7 +31,8 @@ class AuthContextProvider extends Component {
         return (
             <AuthContext.Provider value={ {
                 ...this.state,
-                login: this.login
+                login: this.login,
+                logout: this.logout
             } }>
                 { this.props.children }
             </AuthContext.Provider>
