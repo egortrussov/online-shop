@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 
 // contexts
 
@@ -27,6 +27,9 @@ export default class App extends Component {
                             <Route path="/register" component={ Register } /> 
                             <Route path="/items" component={ Items } />
                         </Switch>
+                        <Link to="/items">
+                            items page
+                        </Link>
                     </>
                 </AuthContextProvider>
             </BrowserRouter>

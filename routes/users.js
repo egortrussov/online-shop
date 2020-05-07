@@ -58,7 +58,9 @@ router.get('/userInfo/:userId', auth, (req, res) => {
     @Access: public
     @Description: Register new user
     @Request Body type: {
-        email, password, telephone, username
+        email, password, telephone, username, isCompany, {
+            ...company creds
+        }
     }
     @Response: {
         success <true, false>, createdUser, token
