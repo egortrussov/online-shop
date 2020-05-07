@@ -55,6 +55,10 @@ export default class Login extends Component {
     render() {
         const { isRedirectToHomepage } = this.state;
 
+        if (this.context.token) return (
+            <Redirect to="/" />
+        )
+
         if (isRedirectToHomepage) return (
             <Redirect to='/' />
         )
