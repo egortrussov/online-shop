@@ -11,6 +11,7 @@ import Navbar from './components/Navbar/Navbar'
 import Register from './components/Register/Register'
 import Login from './components/Login/Login'
 import Items from './components/Items/Items'
+import ItemInfo from './components/ItemInfo/ItemInfo'
 
 export default class App extends Component {
 
@@ -26,6 +27,7 @@ export default class App extends Component {
                             <Route path="/login" component={ Login } /> 
                             <Route path="/register" component={ Register } /> 
                             <Route path="/items" component={ Items } />
+                            <Route path="/item/:itemId" component={ ItemInfo } />
                         </Switch>
                         <Link to="/items">
                             items page

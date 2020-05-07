@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { Link } from 'react-router-dom'
+
 import { AuthContext } from '../../contexts/AuthContext'
 import CategoriesContainer from './CategoriesContainer/CategoriesContainer';
 
@@ -90,10 +92,10 @@ export default class Items extends Component {
                         items.map(item => {
                             console.log(item)
                             return (
-                                <>
-                                    { item.imageData && <img src={ item.imageData } alt=""/> }
+                                <Link to={ `/item/${ item._id }` }>
+                                    { item.imageData && <img width="200" height="200" src={ item.imageData } alt=""/> }
                                     { item.title }
-                                </>
+                                </Link>
                             )
                         })
                     : <h1>Loading...</h1>
