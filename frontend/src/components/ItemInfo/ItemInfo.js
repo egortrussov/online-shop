@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { AuthContext } from '../../contexts/AuthContext'
+import AddToShoppingCart from './AddToShoppingCart/AddToShoppingCart';
 
 export default class ItemInfo extends Component {
 
@@ -52,7 +53,8 @@ export default class ItemInfo extends Component {
             itemId
         })
     }
-    
+
+        
 
     render() {
         const { isLoading, item, imageData } = this.state;
@@ -69,6 +71,9 @@ export default class ItemInfo extends Component {
                         <img src={ imageData } width="200" height="200" alt="" />
                     )
                 }
+                <AddToShoppingCart 
+                    itemId={ item._id }
+                />
             </div>
         )
     }
