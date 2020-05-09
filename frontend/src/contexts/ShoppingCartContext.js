@@ -5,8 +5,18 @@ export const ShoppingCartContext = createContext();
 
 class ShoppingCartContextProvider extends Component {
     state = {
-        items: []
+        items: ls.get('shoppingCart') || []
     }
+
+    componentWillMount() {
+        let items = ls.get('shoppingCart');
+        console.log(items === null)
+        if (!items || items === null)
+            items = [];
+        console.log(items)
+        this.items = items
+    }
+    
 
     addToShoppingCart(itemId) {
         if (!this.items.find(item => item.itemId === itemId))
@@ -14,8 +24,18 @@ class ShoppingCartContextProvider extends Component {
                 itemId,
                 quantity: 1
             })
-        else
-            console.log('no')
+        ls.set('shoppingCart', this.items)
+
+        return this.items;
+    }
+
+    deleteItem(itemId) {
+        console.log(itemId)
+        let newItems = this.items.filter(item => item.itemId !== itemId)
+        this.items = newItems;
+        ls.set('shoppingCart', this.items)
+
+        return this.items
     }
 
     render() {
@@ -24,7 +44,8 @@ class ShoppingCartContextProvider extends Component {
             <ShoppingCartContext.Provider
                 value={ {
                     ...this.state,
-                    addToShoppingCart: this.addToShoppingCart
+                    addToShoppingCart: this.addToShoppingCart,
+                    deleteItem: this.deleteItem
                 } }
             >
                 { this.props.children }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 import { AuthContext } from '../../contexts/AuthContext';
@@ -8,7 +8,15 @@ const ShoppingCart = () => {
 
     const cartContext = useContext(ShoppingCartContext);
     const authContext = useContext(AuthContext);
+
+    const [items, setItems] = useState(cartContext.items);
     
+    const deleteItem = (itemId) => {
+        let newItems = cartContext.deleteItem(itemId);
+
+        setItems(newItems)
+    }
+
     if (!authContext.token) return (
         <Redirect to="/login" />
     )
@@ -16,8 +24,10 @@ const ShoppingCart = () => {
     return (
         <div>
             {
-                cartContext.items.map(item => (
-                    <div>{ item.itemId }</div>
+                items.map(item => (
+                    <div>{ item.itemId }
+                        <button onClick={ () => deleteItem(item.itemId) }>x</button>
+                    </div>
                 ))
             }
         </div>
