@@ -239,7 +239,10 @@ router.post('/updateItem/:itemId', (req, res) => {
 */
 
 router.post('/shoppingCartItems', auth, (req, res) => {
-    const itemIds = req.body.items;
+    const items = req.body;
+    let itemIds = []
+
+    items.forEach(item => itemIds.push(item.itemId))
 
     Item 
         .find({ _id: { $in: itemIds } })

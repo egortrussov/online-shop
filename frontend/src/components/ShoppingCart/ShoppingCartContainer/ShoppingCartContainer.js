@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 export default class ShoppingCartContainer extends Component {
 
     state = {
-
+        itemInfos: null,
+        isLoading: true
     }
 
     componentDidMount() {
@@ -28,16 +29,31 @@ export default class ShoppingCartContainer extends Component {
                 }
                 this.setState({
                     ...this.state,
-                    itemInfos: res.items
+                    itemInfos: res.items,
+                    isLoading: false
                 })
             })
     }
     
 
     render() {
+        const { isLoading, itemInfos } = this.state;
+
+        if (isLoading) return (
+            <h1>Loading...</h1>
+        )
+
         return (
             <div>
-                
+                {
+                    itemInfos.map(item => {
+                        return (
+                            <div>
+                                { item.title }
+                            </div>
+                        )
+                    })
+                }
             </div>
         )
     }
