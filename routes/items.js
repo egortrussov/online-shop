@@ -223,5 +223,35 @@ router.post('/updateItem/:itemId', (req, res) => {
         })
 })
 
+/*
+    @Method: POST
+    @Access: Private
+    @Description: Get all items from shopping cart
+    @Request headers: {
+        token
+    }
+    @Request body: {
+        items: [itemId]
+    }
+    @Response: {
+        success <true, false>, items
+    }
+*/
+
+router.post('/shoppingCartItems', auth, (req, res) => {
+    const itemIds = req.body.items;
+
+    Item 
+        .find({ _id: { $in: itemIds } })
+        .then(foundItems => {
+            res
+                .status(200)
+                .json({
+                    success: true,
+                    items: foundItems
+                })
+        })
+})
+
 
 module.exports = router;
