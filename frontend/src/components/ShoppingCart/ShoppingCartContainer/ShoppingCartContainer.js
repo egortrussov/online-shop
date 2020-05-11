@@ -56,6 +56,51 @@ export default class ShoppingCartContainer extends Component {
         })
     }    
 
+    createOrder() {
+        const { cartContext, currentItemQtys, itemInfos, authContext } = this.state;
+        
+        let nums = new Map();
+
+        itemInfos.forEach(item => nums.set(item._id, {
+            quantity: item.quantity,
+            price: item.price
+        }))
+
+        let hasErrors = false;
+        let totalPrice = 0
+
+        currentItemQtys.forEach(item => {
+            if (nums.get(item.itemId).quantity < item.quantity) {
+                hasErrors = false;
+                return;
+            }
+            totalPrice += nums.get(item.itemId).price * item.quantity;
+        })
+
+
+        if (hasErrors)
+            return;
+        
+        let request = {
+            userId: authContext.user.userId,
+            totalPrice,
+            items: currentItemQtys
+        }
+        
+        fetch(`${ authContext.proxy }/api/orders/newOrder`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': authContext.token
+            },
+            body: JSON.stringify(request)
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res)
+            })
+    }
+
     render() {
         const { isLoading, itemInfos, currentItemQtys } = this.state;
 
@@ -81,6 +126,7 @@ export default class ShoppingCartContainer extends Component {
                         )
                     })
                 }
+                <button onClick={ () => this.createOrder() }>Order!</button>
             </div>
         )
     }
