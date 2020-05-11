@@ -4,12 +4,21 @@ export default class ShoppingCartContainer extends Component {
 
     state = {
         itemInfos: null,
-        isLoading: true
+        currentItemQtys: null,
+        isLoading: true,
+        authContext: null,
+        cartContext: null
     }
 
     componentDidMount() {
         const { authContext, cartContext } = this.props;
-        console.log(cartContext)
+
+        this.setState({
+            ...this.state,
+            currentItemQtys: cartContext.items,
+            cartContext,
+            authContext
+        })
 
         fetch(`${ authContext.proxy }/api/items/shoppingCartItems`, {
             method: 'POST',
@@ -34,10 +43,21 @@ export default class ShoppingCartContainer extends Component {
                 })
             })
     }
-    
+
+    setItemQuantity(e, itemId) {
+        let newQuantity = +e.target.value;
+
+        let { cartContext } = this.state;
+
+        let newItems = cartContext.changeItemQuantity(itemId, newQuantity);
+
+        this.setState({
+            currentItemQtys: newItems
+        })
+    }    
 
     render() {
-        const { isLoading, itemInfos } = this.state;
+        const { isLoading, itemInfos, currentItemQtys } = this.state;
 
         if (isLoading) return (
             <h1>Loading...</h1>
@@ -47,9 +67,16 @@ export default class ShoppingCartContainer extends Component {
             <div>
                 {
                     itemInfos.map(item => {
+                        let currItemQty = 1;
+                        currentItemQtys.forEach(cartItem => {
+                            if (cartItem.itemId === item._id) 
+                                currItemQty = cartItem.quantity;
+                        })
+
                         return (
                             <div>
-                                { item.title }
+                                { item.title } quantity: <input type="text" onChange={ (e) => this.setItemQuantity(e, item._id) } value={ currItemQty } /> / { item.quantity }
+                                
                             </div>
                         )
                     })

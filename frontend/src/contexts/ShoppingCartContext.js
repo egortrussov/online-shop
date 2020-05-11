@@ -19,11 +19,18 @@ class ShoppingCartContextProvider extends Component {
     
 
     addToShoppingCart(itemId) {
-        if (!this.items.find(item => item.itemId === itemId))
+        if (this.items)
+            if (!this.items.find(item => item.itemId === itemId))
+                this.items.push({
+                    itemId,
+                    quantity: 1
+                })
+        if (!this.items) {
             this.items.push({
                 itemId,
                 quantity: 1
             })
+        }
         ls.set('shoppingCart', this.items)
 
         return this.items;
@@ -38,6 +45,19 @@ class ShoppingCartContextProvider extends Component {
         return this.items
     }
 
+    changeItemQuantity(itemId, qty) {
+        let items = this.items;
+        for (let i = 0; i < items.length; i++) 
+            if (items[i].itemId === itemId) {
+                items[i].quantity = qty;
+                break;
+            }
+        ls.set('shoppingCart', items);
+        this.items = items;
+
+        return items;
+    }
+
     render() {
 
         return (
@@ -45,7 +65,8 @@ class ShoppingCartContextProvider extends Component {
                 value={ {
                     ...this.state,
                     addToShoppingCart: this.addToShoppingCart,
-                    deleteItem: this.deleteItem
+                    deleteItem: this.deleteItem,
+                    changeItemQuantity: this.changeItemQuantity
                 } }
             >
                 { this.props.children }
