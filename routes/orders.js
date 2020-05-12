@@ -4,6 +4,7 @@ const express = require('express')
 
 const Order = require('../schemas/OrderSchema')
 const Item = require('../schemas/ItemSchema')
+const User = require('../schemas/UserSchema')
 
 // import middleware
 
@@ -13,7 +14,48 @@ const router = express.Router();
 
 // GET routes
 
+/*
+    @Method: GET
+    @Access: Private
+    @Description: Get all orders of a user
+    @Request Params: {
+        userId
+    }
+    @Request headers: {
+        token
+    }
+    @Response: {
+        success <true, false>, orders
+    }
+*/
 
+router.get('/allOrders/:userId', auth, (req, res) => {
+    const { userId } = req.params;
+
+    User
+        .findOne({ _id: userId })
+        .then(foundUser => {
+            if (!foundUser) {
+                res
+                    .status(400)
+                    .json({ 
+                        success: false 
+                    });
+                return;
+            }
+            
+            Order 
+                .find({ _id: { $in: foundUser.orders } })
+                .then(orders => {
+                    res 
+                        .status(200)
+                        .json({
+                            success: true,
+                            orders
+                        })
+                })
+        })
+})
 
 // POST routes
 /*

@@ -14,9 +14,12 @@ export default class Profile extends Component {
     render() {
         return (
             <h1>
-                Hi, { this.context.user.username } 
+                Hi, { this.context.user.username } <br/>
                 <Link to="/shoppingCart">
                     Cart
+                </Link> <br/>
+                <Link to="/profile/orders">
+                    Orders
                 </Link>
             </h1>
         )

@@ -103,7 +103,7 @@ export default class ShoppingCartContainer extends Component {
             return;
         
         let request = {
-            userId: authContext.user.userId,
+            userId: authContext.user._id,
             totalPrice,
             items: currentItemQtys
         }

@@ -15,6 +15,7 @@ import Items from './components/Items/Items'
 import ItemInfo from './components/ItemInfo/ItemInfo'
 import Profile from './components/Profile/Profile'
 import ShoppingCart from './components/ShoppingCart/ShoppingCart'
+import Orders from './components/Orders/Orders'
 
 export default class App extends Component {
 
@@ -32,7 +33,8 @@ export default class App extends Component {
                                 <Route path="/register" component={ Register } /> 
                                 <Route path="/items" component={ Items } />
                                 <Route path="/item/:itemId" component={ ItemInfo } />
-                                <Route path="/profile" component={ Profile } />
+                                <Route exact path="/profile" component={ Profile } />
+                                <Route path="/profile/orders" component={ Orders } />
                                 <Route path="/shoppingCart" component={ ShoppingCart } />
                             </Switch>
                             <Link to="/items">
