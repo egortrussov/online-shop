@@ -58,11 +58,15 @@ export default class ShoppingCartContainer extends Component {
 
         let { cartContext, totalPrice, itemInfos } = this.state;
 
-        let oldQuantity = cartContext.items.find(item => item.itemId === itemId).quantity
+        let itemInfo = itemInfos.find(itemInfo => itemInfo._id === itemId);
+
+        let oldQuantity = cartContext.items.find(item => item.itemId === itemId).quantity;
+
+        if (itemInfo.quantity < newQuantity) {
+            return;
+        }
 
         let newItems = cartContext.changeItemQuantity(itemId, newQuantity);
-
-        let itemInfo = itemInfos.find(itemInfo => itemInfo._id === itemId);
 
         totalPrice = totalPrice - oldQuantity * itemInfo.price + itemInfo.price * newQuantity;
 
@@ -115,6 +119,10 @@ export default class ShoppingCartContainer extends Component {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
+                if (res.success) {
+                    cartContext.clearCart();
+                    window.location.href = '/';
+                }
             })
     }
 

@@ -52,10 +52,14 @@ class ShoppingCartContextProvider extends Component {
                 items[i].quantity = qty;
                 break;
             }
-        ls.set('shoppingCart', items);
         this.items = items;
 
         return items;
+    }
+
+    clearCart() {
+        this.items = [];
+        ls.set('shoppingCart', []);
     }
 
     render() {
@@ -66,7 +70,8 @@ class ShoppingCartContextProvider extends Component {
                     ...this.state,
                     addToShoppingCart: this.addToShoppingCart,
                     deleteItem: this.deleteItem,
-                    changeItemQuantity: this.changeItemQuantity
+                    changeItemQuantity: this.changeItemQuantity,
+                    clearCart: this.clearCart
                 } }
             >
                 { this.props.children }
