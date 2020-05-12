@@ -7,7 +7,8 @@ export default class ShoppingCartContainer extends Component {
         currentItemQtys: null,
         isLoading: true,
         authContext: null,
-        cartContext: null
+        cartContext: null,
+        totalPrice: 0
     }
 
     componentDidMount() {
@@ -36,9 +37,17 @@ export default class ShoppingCartContainer extends Component {
                     window.location.href = '/login';
                     return;
                 }
+
+                let totalPrice = 0;
+
+                cartContext.items.forEach(item => {
+                    totalPrice += res.items.find(itemInfo => itemInfo._id === item.itemId).price * item.quantity;
+                })
+
                 this.setState({
                     ...this.state,
                     itemInfos: res.items,
+                    totalPrice,
                     isLoading: false
                 })
             })
@@ -47,12 +56,20 @@ export default class ShoppingCartContainer extends Component {
     setItemQuantity(e, itemId) {
         let newQuantity = +e.target.value;
 
-        let { cartContext } = this.state;
+        let { cartContext, totalPrice, itemInfos } = this.state;
+
+        let oldQuantity = cartContext.items.find(item => item.itemId === itemId).quantity
 
         let newItems = cartContext.changeItemQuantity(itemId, newQuantity);
 
+        let itemInfo = itemInfos.find(itemInfo => itemInfo._id === itemId);
+
+        totalPrice = totalPrice - oldQuantity * itemInfo.price + itemInfo.price * newQuantity;
+
         this.setState({
-            currentItemQtys: newItems
+            ...this.state,
+            currentItemQtys: newItems,
+            totalPrice
         })
     }    
 
@@ -102,7 +119,7 @@ export default class ShoppingCartContainer extends Component {
     }
 
     render() {
-        const { isLoading, itemInfos, currentItemQtys } = this.state;
+        const { isLoading, itemInfos, currentItemQtys, totalPrice } = this.state;
 
         if (isLoading) return (
             <h1>Loading...</h1>
@@ -126,6 +143,7 @@ export default class ShoppingCartContainer extends Component {
                         )
                     })
                 }
+                <h3>Total price: { totalPrice }</h3>
                 <button onClick={ () => this.createOrder() }>Order!</button>
             </div>
         )
