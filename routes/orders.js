@@ -57,6 +57,36 @@ router.get('/allOrders/:userId', auth, (req, res) => {
         })
 })
 
+/*
+    @Method: GET
+    @Access: Protected
+    @Description: Get order info
+    @Request Params: {
+        order id
+    }
+    @Request headers: {
+        token
+    }
+    @Response: {
+        success <true, false>, orders
+    }
+*/
+
+router.get('/getOrder/:orderId', auth, (req, res) => {
+    const { orderId } = req.params;
+
+    Order 
+        .findOne({ _id: orderId })
+        .then(order => {
+            res 
+                .status(200)
+                .json({
+                    sucess: true,
+                    order
+                })
+        })
+})
+
 // POST routes
 /*
     @Method: POST
