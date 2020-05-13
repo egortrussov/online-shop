@@ -54,7 +54,7 @@ export default class OrderInfo extends Component {
                                 return;
                             }
                             return (
-                                <h2>value.currentOrder.date</h2>
+                                <h2>{ value.currentOrder.date }</h2>
                             )
                         } }
                 </OrdersContext.Consumer>

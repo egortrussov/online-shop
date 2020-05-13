@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import { Redirect } from 'react-router';
 
+import OrderLink from './OrderLink/OrderLink'
+
 export default class Orders extends Component {
 
     state = {
         isLoading: true,
         isRedirectToLogin: false,
-        orders: null
+        orders: null,
+        isRedirectToOrder: false,
+        currentOrderId: null
     }
 
     static contextType = AuthContext;
@@ -33,7 +37,10 @@ export default class Orders extends Component {
                 })
             })
     }
-    
+
+    goToOrderPage(orderId) {
+
+    }    
 
     render() {
         const { isLoading, orders, isRedirectToLogin } = this.state;
@@ -46,9 +53,9 @@ export default class Orders extends Component {
             <div>
                 {
                     orders.map(order => (
-                        <Link to={ `/profile/orders/${ order._id }` }>
-                            <h2>{ order.date }, total price: { order.totalPrice }</h2>
-                        </Link>
+                        <OrderLink 
+                            order={ order }
+                        /> 
                     ))
                 }
             </div>
