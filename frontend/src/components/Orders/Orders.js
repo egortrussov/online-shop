@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext'
 import { Redirect } from 'react-router';
@@ -23,11 +24,7 @@ export default class Orders extends Component {
             .then(res => {
                 if (res.isTokenError) {
                     this.context.logout();
-                    return this.setState({
-                        ...this.state,
-                        isLoading: false,
-                        isRedirectToLogin: true
-                    })
+                    window.location.href = '/login'
                 }
                 this.setState({
                     ...this.state,
@@ -45,15 +42,13 @@ export default class Orders extends Component {
             <h1>Loading...</h1>
         )
 
-        if (isRedirectToLogin) return (
-            <Redirect to="/login" />
-        )
-
         return (
             <div>
                 {
                     orders.map(order => (
-                        <h2>{ order.date }, total price: { order.totalPrice }</h2>
+                        <Link to={ `/profile/orders/${ order._id }` }>
+                            <h2>{ order.date }, total price: { order.totalPrice }</h2>
+                        </Link>
                     ))
                 }
             </div>
