@@ -8,7 +8,8 @@ export default class ShoppingCartContainer extends Component {
         isLoading: true,
         authContext: null,
         cartContext: null,
-        totalPrice: 0
+        totalPrice: 0,
+        isSubmitted: false
     }
 
     componentDidMount() {
@@ -78,7 +79,15 @@ export default class ShoppingCartContainer extends Component {
     }    
 
     createOrder() {
-        const { cartContext, currentItemQtys, itemInfos, authContext } = this.state;
+        const { cartContext, currentItemQtys, itemInfos, authContext, isSubmitted } = this.state;
+
+        if (isSubmitted) 
+            return;
+        
+        this.setState({
+            ...this.state,
+            isSubmitted: true
+        })
         
         let nums = new Map();
 
@@ -121,13 +130,13 @@ export default class ShoppingCartContainer extends Component {
                 console.log(res)
                 if (res.success) {
                     cartContext.clearCart();
-                    window.location.href = '/';
+                    window.location.href = `/profile/orders/${ res.order._id }`;
                 }
             })
     }
 
     render() {
-        const { isLoading, itemInfos, currentItemQtys, totalPrice } = this.state;
+        const { isLoading, itemInfos, currentItemQtys, totalPrice, isSubmitted } = this.state;
 
         if (isLoading) return (
             <h1>Loading...</h1>
@@ -153,6 +162,9 @@ export default class ShoppingCartContainer extends Component {
                 }
                 <h3>Total price: { totalPrice }</h3>
                 <button onClick={ () => this.createOrder() }>Order!</button>
+                {
+                    isSubmitted && <span>waiting...</span>
+                }
             </div>
         )
     }
