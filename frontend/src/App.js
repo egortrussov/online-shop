@@ -18,6 +18,8 @@ import ShoppingCart from './components/ShoppingCart/ShoppingCart'
 import Orders from './components/Orders/Orders'
 import OrderInfo from './components/OrderInfo/OrderInfo'
 import OrdersContextProvider from './contexts/OrdersContext'
+import AdminPage from './components/AdminPage/AdminPage'
+import CreateItem from './components/CreateItem/CreateItem'
 
 export default class App extends Component {
 
@@ -31,7 +33,6 @@ export default class App extends Component {
                             <>
                                 <Navbar />
                                 <Switch>
-                                    {/* <Route exact path="/" component={ } />  */}
                                     <Route path="/login" component={ Login } /> 
                                     <Route path="/register" component={ Register } /> 
                                     <Route path="/items" component={ Items } />
@@ -40,6 +41,8 @@ export default class App extends Component {
                                     <Route exact path="/profile/orders" component={ Orders } />
                                     <Route path="/profile/orders/:orderId" component={ OrderInfo } />
                                     <Route path="/shoppingCart" component={ ShoppingCart } />
+                                    <Route exact path="/adminPage" component={ AdminPage } />
+                                    <Route path="/adminPage/createItem" component={ CreateItem } />
                                 </Switch>
                                 <Link to="/items">
                                     items page

@@ -155,6 +155,7 @@ router.post('/createItem', auth, upload.single('photo'), (req, res) => {
             .status(401)
             .json({
                 success: false,
+                isAccessError: true,
                 msg: 'You mush be an admin'
             })
         return;

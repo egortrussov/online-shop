@@ -33,6 +33,9 @@ export default class Navbar extends Component {
 
     render() {
         const { isLoggedIn } = this.state;
+        const user = this.context.user;
+        console.log(user)
+
         console.log(isLoggedIn)
 
         return (
@@ -47,6 +50,14 @@ export default class Navbar extends Component {
                             </Link>
 
                             <button onClick={ () => this.logout() }>Logout</button>
+
+                            {
+                                user.isAdmin && (
+                                    <Link to="/adminPage">
+                                        Admin page
+                                    </Link>
+                                )
+                            }
                         </>
                     ) : (
                         <>
