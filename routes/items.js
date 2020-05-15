@@ -150,6 +150,7 @@ router.get('/categoryItems/:categoryId', (req, res) => {
     }
 */
 router.post('/createItem', auth, upload.single('photo'), (req, res) => {
+    console.log(req.body)
     if (!req.userData || !req.userData.isAdmin) {
         res
             .status(401)
