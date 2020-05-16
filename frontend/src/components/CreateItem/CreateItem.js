@@ -87,6 +87,7 @@ export default class CreateItem extends Component {
                     <InputField name="quantity" label="quantity" type="text" />
                     <InputField name="price" label="price" type="text" />
                     <InputField name="company" label="company" type="text" />
+                    <InputField name="article" label="article" type="text" />
                     <input type="file" name="photo" accept="image/*" />
                     <input type="submit" value="Create!" />
                 </form>

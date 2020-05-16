@@ -131,6 +131,22 @@ export default class ShoppingCartContainer extends Component {
                 if (res.success) {
                     cartContext.clearCart();
                     window.location.href = `/profile/orders/${ res.order._id }`;
+                } else {
+                    if (res.isTokenError) {
+                        authContext.logout();
+                        window.location.href = '/login';
+                    }
+
+                    const { itemQuantities } = res;
+
+                    for (let item of itemInfos) {
+                        item.quantity = itemQuantities.get(item._id);
+                    }
+
+                    this.setState({
+                        ...this.state,
+                        itemInfos
+                    })
                 }
             })
     }

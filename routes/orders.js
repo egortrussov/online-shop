@@ -102,7 +102,7 @@ router.get('/getOrder/:orderId', auth, (req, res) => {
     }
 */ 
 router.post('/newOrder', (req, res) => {
-    let items = [], itemIds = [];
+    let items = new Map(), itemIds = [];
     
     let newOrder = new Order({
         ...req.body
@@ -111,7 +111,7 @@ router.post('/newOrder', (req, res) => {
     // Check if there are less items available than reqested
 
     newOrder.items.forEach(it => {
-        items[it.itemId] = it.quantity;
+        items.set(it.itemId, it.quantity);
         itemIds.push(it.itemId);
     });
     console.log(itemIds)
@@ -131,12 +131,12 @@ router.post('/newOrder', (req, res) => {
         })
         .then(() => {
             if (hasErrors) {
-                console.log(errors['5ea502bf11f84e32608a5603'])
                 res 
                     .status(400)
                     .json({
                         success: false,
                         errors,
+                        itemQuantities: items,
                         order: null
                     })
                 return;
