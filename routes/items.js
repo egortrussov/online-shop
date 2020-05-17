@@ -155,6 +155,46 @@ router.get('/categoryItems/:categoryId', (req, res) => {
         })
 })
 
+/*
+    @Method: GET
+    @Access: Public
+    @Description: Get all items by name
+    @Request params: {
+        categoryId
+    }
+    @Request headers: {
+        token
+    }
+    @Response: {
+        success <true, false>, items
+    }
+*/
+
+router.get('/itemsByName/:itemName', (req, res) => {
+    let { itemName } = req.params;
+
+    Item 
+        .find()
+        .then(items => {
+            let matchingItems = [];
+
+            itemName = itemName.toLowerCase().trim();
+
+            items.forEach(item => {
+                let currItemName = item.title.toLowerCase().trim();
+                if (currItemName.includes(itemName)) 
+                    matchingItems.push(item);
+            })
+
+            res 
+                .status(200)
+                .json({
+                    success: true,
+                    items: matchingItems
+                })
+        })
+})
+
 // POST routes
 /*
     @Method: POST

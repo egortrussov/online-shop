@@ -20,6 +20,7 @@ export default class Items extends Component {
         super(props);
 
         this.articleFormRef = createRef();
+        this.itemNameFormRef = createRef();
     }
 
     loadItems() {
@@ -108,7 +109,7 @@ export default class Items extends Component {
                 })
 
                 let items = [res.item];
-                let item = res.item
+                let item = res.item;
 
                 fetch(`${ this.context.proxy }/api/items/itemImage/${ res.item._id }`)
                     .then(res => res.blob())
@@ -139,6 +140,60 @@ export default class Items extends Component {
             })
     }
 
+    findItemsByName(e) {
+        e.preventDefault();
+
+        const formEl = this.itemNameFormRef.current;
+
+        const formData = new FormData(formEl);
+
+        this.setState({
+            ...this.state,
+            items: []
+        })
+
+        fetch(`${ this.context.proxy }/api/items/itemsByName/${ formData.get('itemName') }`)
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    ...this.state,
+                    items: res.items
+                })
+
+                let items = res.items;
+                
+                items.forEach(item => {
+
+                    fetch(`${ this.context.proxy }/api/items/itemImage/${ item._id }`)
+                        .then(res => res.blob())
+                        .then(res => {
+                            let reader = new FileReader();
+                            reader.readAsDataURL(res); 
+
+                            const update = () => {
+                                this.setState({
+                                    ...this.state,
+                                    items
+                                })
+                            }
+
+                            reader.onloadend = function() {
+                                let base64data = reader.result;      
+                                for (let i = 0; i < items.length; i++) {
+                                    let currItem = items[i];
+                                    if (currItem._id === item._id) {
+                                        console.log(i)
+                                        items[i].imageData = base64data;
+                                        update()
+                                        break;
+                                    }
+                                }
+                            }
+                        })
+                })
+            })
+    }
+
     render() {
         const { category, isLoading, items, searchType } = this.state;
 
@@ -151,6 +206,11 @@ export default class Items extends Component {
                 <span>Search by article</span>
                 <form ref={ this.articleFormRef } onSubmit={ (e) => this.findItemByArticle(e) }>
                     <input type="text" name="article" />
+                    <input type="submit" value="find" />
+                </form>
+                <span>Search by name</span>
+                <form ref={ this.itemNameFormRef } onSubmit={ (e) => this.findItemsByName(e) }>
+                    <input type="text" name="itemName" />
                     <input type="submit" value="find" />
                 </form>
                 Items page
