@@ -97,15 +97,24 @@ export default class Items extends Component {
 
         this.setState({
             ...this.state,
-            items: []
+            items: [],
+            isLoading: true
         })
 
         fetch(`${ this.context.proxy }/api/items/itemInfoByArticle/${ formData.get('article') }`)
             .then(res => res.json())
             .then(res => {
+                if (!res.item) 
+                    return this.setState({
+                        ...this.state,
+                        isLoading: false,
+                        items: []
+                    })
+
                 this.setState({
                     ...this.state,
-                    items: [res.item]
+                    items: [res.item],
+                    isLoading: false
                 })
 
                 let items = [res.item];
@@ -149,7 +158,8 @@ export default class Items extends Component {
 
         this.setState({
             ...this.state,
-            items: []
+            items: [],
+            isLoading: true
         })
 
         fetch(`${ this.context.proxy }/api/items/itemsByName/${ formData.get('itemName') }`)
@@ -157,7 +167,8 @@ export default class Items extends Component {
             .then(res => {
                 this.setState({
                     ...this.state,
-                    items: res.items
+                    items: res.items,
+                    isLoading: false
                 })
 
                 let items = res.items;
@@ -197,6 +208,8 @@ export default class Items extends Component {
     render() {
         const { category, isLoading, items, searchType } = this.state;
 
+        console.log(items)
+
         return (
             <div>
                 <CategoriesContainer 
@@ -217,6 +230,12 @@ export default class Items extends Component {
                 { category && (
                     <h2>{ category.name }</h2>
                 ) }
+                {
+                    isLoading && <h1>Loading...</h1>
+                }
+                {
+                    (!items.length && !isLoading) && <h1>No items found!</h1>
+                }
                 {
                     items ? 
                         items.map(item => {
