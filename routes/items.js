@@ -39,9 +39,6 @@ const upload = multer({
     @Request Params: {
         itemId
     }
-    @Request headers: {
-        token
-    }
     @Response: {
         success <true, false>, item
     }
@@ -62,6 +59,33 @@ router.get('/itemInfo/:itemId', (req, res) => {
                     })
                 return;
             }
+            res 
+                .status(200)
+                .json({
+                    success: true,
+                    item: foundItem
+                })
+        })
+})
+
+/*
+    @Method: GET
+    @Access: Public
+    @Description: Get item by article
+    @Request Params: {
+        article
+    }
+    @Response: {
+        success <true, false>, item
+    }
+*/
+
+router.get('/itemInfoByArticle/:article', (req, res) => {
+    const { article } = req.params;
+
+    Item
+        .findOne({ article: article })
+        .then(foundItem => {
             res 
                 .status(200)
                 .json({
