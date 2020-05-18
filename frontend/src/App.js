@@ -20,6 +20,7 @@ import OrderInfo from './components/OrderInfo/OrderInfo'
 import OrdersContextProvider from './contexts/OrdersContext'
 import AdminPage from './components/AdminPage/AdminPage'
 import CreateItem from './components/CreateItem/CreateItem'
+import UpdateItem from './components/UpdateItem/UpdateItem'
 
 export default class App extends Component {
 
@@ -43,6 +44,7 @@ export default class App extends Component {
                                     <Route path="/shoppingCart" component={ ShoppingCart } />
                                     <Route exact path="/adminPage" component={ AdminPage } />
                                     <Route path="/adminPage/createItem" component={ CreateItem } />
+                                    <Route path="/updateItem/:itemId" component={ UpdateItem } />
                                 </Switch>
                                 <Link to="/items">
                                     items page

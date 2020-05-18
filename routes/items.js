@@ -269,22 +269,16 @@ router.post('/createItem', auth, upload.single('photo'), (req, res) => {
     }
 */
 router.post('/updateItem/:itemId', (req, res) => {
+    console.log(req.params.itemId, req.body)
     Item 
-        .findOne({ _id: req.params.itemId })
-        .then(item => {
-            item = {
-                ...item,
-                ...req.item
-            }
-            item
-                .save()
-                .then((updatedItem) => {
-                    res 
-                        .status(200)
-                        .json({
-                            success: true,
-                            item: updatedItem
-                        })
+        .findOneAndUpdate({ _id: req.params.itemId }, { ...req.body })
+        .then((updatedItem) => {
+            console.log(updatedItem)
+            res 
+                .status(200)
+                .json({ 
+                    success: true,
+                    item: updatedItem
                 })
         })
 })

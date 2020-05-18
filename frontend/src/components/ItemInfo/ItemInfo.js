@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext'
 import AddToShoppingCart from './AddToShoppingCart/AddToShoppingCart';
@@ -74,6 +75,9 @@ export default class ItemInfo extends Component {
                 <AddToShoppingCart 
                     itemId={ item._id }
                 />
+                <Link to={ `/updateItem/${ item._id }` }>
+                    Update item
+                </Link>
             </div>
         )
     }
