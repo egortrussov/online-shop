@@ -5,6 +5,8 @@ import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
 
 import AuthContextProvider from './contexts/AuthContext'
 import ShoppingCartContextProvider from './contexts/ShoppingCartContext'
+import ItemContextProvider from './contexts/ItemContext'
+import OrdersContextProvider from './contexts/OrdersContext'
 
 // components
 
@@ -17,7 +19,6 @@ import Profile from './components/Profile/Profile'
 import ShoppingCart from './components/ShoppingCart/ShoppingCart'
 import Orders from './components/Orders/Orders'
 import OrderInfo from './components/OrderInfo/OrderInfo'
-import OrdersContextProvider from './contexts/OrdersContext'
 import AdminPage from './components/AdminPage/AdminPage'
 import CreateItem from './components/CreateItem/CreateItem'
 import UpdateItem from './components/UpdateItem/UpdateItem'
@@ -31,25 +32,27 @@ export default class App extends Component {
                 <AuthContextProvider>
                     <ShoppingCartContextProvider>
                         <OrdersContextProvider>
-                            <>
-                                <Navbar />
-                                <Switch>
-                                    <Route path="/login" component={ Login } /> 
-                                    <Route path="/register" component={ Register } /> 
-                                    <Route path="/items" component={ Items } />
-                                    <Route path="/item/:itemId" component={ ItemInfo } />
-                                    <Route exact path="/profile" component={ Profile } />
-                                    <Route exact path="/profile/orders" component={ Orders } />
-                                    <Route path="/profile/orders/:orderId" component={ OrderInfo } />
-                                    <Route path="/shoppingCart" component={ ShoppingCart } />
-                                    <Route exact path="/adminPage" component={ AdminPage } />
-                                    <Route path="/adminPage/createItem" component={ CreateItem } />
-                                    <Route path="/updateItem/:itemId" component={ UpdateItem } />
-                                </Switch>
-                                <Link to="/items">
-                                    items page
-                                </Link>
-                            </>
+                            <ItemContextProvider>
+                                <>
+                                    <Navbar />
+                                    <Switch>
+                                        <Route path="/login" component={ Login } /> 
+                                        <Route path="/register" component={ Register } /> 
+                                        <Route path="/items" component={ Items } />
+                                        <Route path="/item/:itemId" component={ ItemInfo } />
+                                        <Route exact path="/profile" component={ Profile } />
+                                        <Route exact path="/profile/orders" component={ Orders } />
+                                        <Route path="/profile/orders/:orderId" component={ OrderInfo } />
+                                        <Route path="/shoppingCart" component={ ShoppingCart } />
+                                        <Route exact path="/adminPage" component={ AdminPage } />
+                                        <Route path="/adminPage/createItem" component={ CreateItem } />
+                                        <Route path="/updateItem/:itemId" component={ UpdateItem } />
+                                    </Switch>
+                                    <Link to="/items">
+                                        items page
+                                    </Link>
+                                </>
+                            </ItemContextProvider>
                         </OrdersContextProvider>
                     </ShoppingCartContextProvider>
                 </AuthContextProvider>

@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react'
 
 import { Link } from 'react-router-dom'
 
-import { AuthContext } from '../../contexts/AuthContext'
+import { ItemContext } from '../../contexts/ItemContext'
 import CategoriesContainer from './CategoriesContainer/CategoriesContainer';
 
 export default class Items extends Component {
@@ -14,14 +14,14 @@ export default class Items extends Component {
         items: []
     }
 
-    static contextType = AuthContext;
+    static contextType = ItemContext;
 
     constructor(props) {
         super(props);
 
         this.articleFormRef = createRef();
         this.itemNameFormRef = createRef();
-    }
+    }    
 
     loadItems() {
         const { category } = this.state;
@@ -72,10 +72,24 @@ export default class Items extends Component {
             }) 
     }
 
+    componentDidMount() {
+        console.log(this.context)
+        this.setState({
+            category: this.context.currentCategory,
+            items: this.context.items
+        }, () => {
+            if (this.context.currentCategory) 
+                this.loadItems()
+        })
+    }
+
     setCategory(category) {
         const currentCategory = this.state.category;
+
         if (currentCategory === category)
             return;
+        
+        this.context.setCategory(category)
 
         this.setState({
             ...this.state,
@@ -215,6 +229,7 @@ export default class Items extends Component {
                 <CategoriesContainer 
                     setCategory={ (category) => this.setCategory(category) }
                     searchType={ searchType }
+                    isCategoryChosen={ category ? true : false }
                 /> 
                 <span>Search by article</span>
                 <form ref={ this.articleFormRef } onSubmit={ (e) => this.findItemByArticle(e) }>
@@ -234,7 +249,10 @@ export default class Items extends Component {
                     isLoading && <h1>Loading...</h1>
                 }
                 {
-                    (!items.length && !isLoading) && <h1>No items found!</h1>
+                    (!items.length && !isLoading) && <h1>No items found!</h1> 
+                }
+                {
+                    items ? (!items.length && !isLoading) && <h1>No items found!</h1> : ''
                 }
                 {
                     items ? 

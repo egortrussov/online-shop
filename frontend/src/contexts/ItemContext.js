@@ -6,13 +6,17 @@ export const ItemContext = createContext();
 
 class ItemContextProvider extends Component {
     state = {
-        items: [10]
+        items: [],
+        currentCategory: null,
+        proxy: getProxy()
     }
 
-    addItem(item) {
-        console.log(this.items)
-        console.log(getProxy())
-        this.items.push(item)
+    setCurrentCategory(category) {
+        this.currentCategory = category;
+    }
+
+    setItems(items) {
+        this.items = items;
     }
 
     render() {
@@ -20,7 +24,8 @@ class ItemContextProvider extends Component {
         return (
             <ItemContext.Provider value={ {
                 ...this.state,
-                addItem: this.addItem
+                setCategory: this.setCurrentCategory,
+                setItems: this.setItems
             } }>
                 { this.props.children }
             </ItemContext.Provider>

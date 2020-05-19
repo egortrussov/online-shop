@@ -20,7 +20,8 @@ export default class CategoriesContainer extends Component {
                     categories: res.categories
                 })
                 console.log(res)
-                this.props.setCategory(res.categories[0])
+                if (!this.props.isCategoryChosen)
+                    this.props.setCategory(res.categories[0])
             })
     }
     
