@@ -76,7 +76,8 @@ export default class Items extends Component {
         console.log(this.context)
         this.setState({
             category: this.context.currentCategory,
-            items: this.context.items
+            items: this.context.items,
+            isLoading: this.context.items.length ? false : true
         }, () => {
             if (this.context.currentCategory) 
                 this.loadItems()
@@ -105,6 +106,8 @@ export default class Items extends Component {
     findItemByArticle(e) {
         e.preventDefault();
 
+        this.context.setSearchType('article');
+
         const formEl = this.articleFormRef.current;
 
         const formData = new FormData(formEl);
@@ -118,12 +121,14 @@ export default class Items extends Component {
         fetch(`${ this.context.proxy }/api/items/itemInfoByArticle/${ formData.get('article') }`)
             .then(res => res.json())
             .then(res => {
-                if (!res.item) 
+                if (!res.item) {
+                    this.context.setItems([])
                     return this.setState({
                         ...this.state,
                         isLoading: false,
                         items: []
                     })
+                }
 
                 this.setState({
                     ...this.state,
@@ -141,6 +146,7 @@ export default class Items extends Component {
                         reader.readAsDataURL(res); 
 
                         const update = () => {
+                            this.context.setItems(items);
                             this.setState({
                                 ...this.state,
                                 items
@@ -167,6 +173,8 @@ export default class Items extends Component {
         e.preventDefault();
 
         const formEl = this.itemNameFormRef.current;
+
+        this.context.setSearchType('name');
 
         const formData = new FormData(formEl);
 
@@ -196,6 +204,7 @@ export default class Items extends Component {
                             reader.readAsDataURL(res); 
 
                             const update = () => {
+                                this.context.setItems(items)
                                 this.setState({
                                     ...this.state,
                                     items
@@ -229,7 +238,7 @@ export default class Items extends Component {
                 <CategoriesContainer 
                     setCategory={ (category) => this.setCategory(category) }
                     searchType={ searchType }
-                    isCategoryChosen={ category ? true : false }
+                    isCategoryChosen={ category ? true : false } 
                 /> 
                 <span>Search by article</span>
                 <form ref={ this.articleFormRef } onSubmit={ (e) => this.findItemByArticle(e) }>
@@ -252,7 +261,7 @@ export default class Items extends Component {
                     (!items.length && !isLoading) && <h1>No items found!</h1> 
                 }
                 {
-                    items ? (!items.length && !isLoading) && <h1>No items found!</h1> : ''
+                    items ? ((!items.length && !isLoading) && <h1>No items found!</h1>) : ''
                 }
                 {
                     items ? 
