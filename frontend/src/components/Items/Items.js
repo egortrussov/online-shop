@@ -11,7 +11,8 @@ export default class Items extends Component {
         category: null,
         isLoading: true,
         searchType: 'category',
-        items: []
+        items: [],
+        categories: null
     }
 
     static contextType = ItemContext;
@@ -73,11 +74,12 @@ export default class Items extends Component {
     }
 
     componentDidMount() {
-        console.log(this.context)
+        console.log(this.context.categories ? false : true)
         this.setState({
             category: this.context.currentCategory,
             items: this.context.items,
-            isLoading: this.context.items.length ? false : true
+            isLoading: this.context.items.length ? false : true,
+            categories: this.context.categories
         }, () => {
             if (this.context.currentCategory) 
                 this.loadItems()
@@ -229,9 +231,9 @@ export default class Items extends Component {
     }
 
     render() {
-        const { category, isLoading, items, searchType } = this.state;
+        const { category, isLoading, items, searchType, categories } = this.state;
 
-        console.log(items)
+        console.log(categories, 'categ', categories ? false : true)
 
         return (
             <div>
@@ -239,6 +241,8 @@ export default class Items extends Component {
                     setCategory={ (category) => this.setCategory(category) }
                     searchType={ searchType }
                     isCategoryChosen={ category ? true : false } 
+                    hasToLoadCategories={ categories ? false : true }
+                    itemContext={ this.context }
                 /> 
                 <span>Search by article</span>
                 <form ref={ this.articleFormRef } onSubmit={ (e) => this.findItemByArticle(e) }>
@@ -266,7 +270,6 @@ export default class Items extends Component {
                 {
                     items ? 
                         items.map(item => {
-                            console.log(item)
                             return (
                                 <Link to={ `/item/${ item._id }` }>
                                     { item.imageData && <img width="200" height="200" src={ item.imageData } alt=""/> }

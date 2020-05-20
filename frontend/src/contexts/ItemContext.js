@@ -9,7 +9,8 @@ class ItemContextProvider extends Component {
         items: [],
         currentCategory: null,
         currentSearchType: 'category',
-        proxy: getProxy()
+        proxy: getProxy(),
+        categories: null
     }
 
     setCurrentCategory(category) {
@@ -24,6 +25,10 @@ class ItemContextProvider extends Component {
         this.currentSearchType = type;
     }
 
+    setCategories(categories) {
+        this.categories = categories;
+    }
+
     render() {
 
         return (
@@ -31,7 +36,8 @@ class ItemContextProvider extends Component {
                 ...this.state,
                 setCategory: this.setCurrentCategory,
                 setItems: this.setItems,
-                setSearchType: this.setCurrentCategory
+                setSearchType: this.setCurrentCategory,
+                setCategories: this.setCategories
             } }>
                 { this.props.children }
             </ItemContext.Provider>

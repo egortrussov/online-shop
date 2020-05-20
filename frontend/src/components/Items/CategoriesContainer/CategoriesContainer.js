@@ -6,12 +6,18 @@ export default class CategoriesContainer extends Component {
 
     state = {
         isLoading: true,
-        categories: null
+        categories: this.props.categories
     }
 
     static contextType = AuthContext;
 
     componentDidMount() {
+
+        console.log(this.props.hasToLoadCategories, 'jojojojoj')
+
+        if (!this.props.hasToLoadCategories)
+            return;
+
         fetch(`${ this.context.proxy }/api/categories/allCategories`)
             .then(res => res.json())
             .then(res => {
@@ -19,7 +25,8 @@ export default class CategoriesContainer extends Component {
                     isLoading: false,
                     categories: res.categories
                 })
-                console.log(res)
+                console.log('kkkkkk')
+                this.props.itemContext.setCategories(res.categories);
                 if (!this.props.isCategoryChosen)
                     this.props.setCategory(res.categories[0])
             })
