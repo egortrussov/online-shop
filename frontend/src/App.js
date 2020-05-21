@@ -49,6 +49,7 @@ export default class App extends Component {
                                         <Route path="/adminPage/createItem" component={ CreateItem } />
                                         <Route path="/adminPage/allOrders" component={ AllOrders } />
                                         <Route path="/updateItem/:itemId" component={ UpdateItem } />
+                                        <Route path="/order/:orderId" component={ OrderInfo } />
                                     </Switch>
                                     <Link to="/items">
                                         items page
