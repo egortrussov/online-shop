@@ -8,6 +8,9 @@ export default class AdminPage extends Component {
                 <Link to="/adminPage/createItem">
                     Create item
                 </Link>
+                <Link to="/adminPage/allOrders">
+                    All orders
+                </Link>
             </div>
         )
     }

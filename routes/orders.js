@@ -59,6 +59,44 @@ router.get('/allOrders/:userId', auth, (req, res) => {
 
 /*
     @Method: GET
+    @Access: Private (admin only)
+    @Description: Get all orders by all users
+    @Request Params: {
+        userId
+    }
+    @Request headers: {
+        token
+    }
+    @Response: {
+        success <true, false>, orders
+    }
+*/
+
+router.get('/allOrdersByUsers', auth, (req, res) => {
+    if (!req.userData.isAdmin) 
+        return res  
+                    .status(401)
+                    .json({
+                        success: false,
+                        msg: 'You must be an admin',
+                        isAccessError: false,
+                        orders: null
+                    })
+    
+    Order
+        .find()
+        .then(orders => {
+            res
+                .status(200)
+                .json({
+                    success: true,
+                    orders
+                })
+        })
+})
+
+/*
+    @Method: GET
     @Access: Protected
     @Description: Get order info
     @Request Params: {

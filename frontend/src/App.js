@@ -22,6 +22,7 @@ import OrderInfo from './components/OrderInfo/OrderInfo'
 import AdminPage from './components/AdminPage/AdminPage'
 import CreateItem from './components/CreateItem/CreateItem'
 import UpdateItem from './components/UpdateItem/UpdateItem'
+import AllOrders from './components/AllOrders/AllOrders'
 
 export default class App extends Component {
 
@@ -46,6 +47,7 @@ export default class App extends Component {
                                         <Route path="/shoppingCart" component={ ShoppingCart } />
                                         <Route exact path="/adminPage" component={ AdminPage } />
                                         <Route path="/adminPage/createItem" component={ CreateItem } />
+                                        <Route path="/adminPage/allOrders" component={ AllOrders } />
                                         <Route path="/updateItem/:itemId" component={ UpdateItem } />
                                     </Switch>
                                     <Link to="/items">
