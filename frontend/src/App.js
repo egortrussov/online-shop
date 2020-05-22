@@ -24,6 +24,8 @@ import CreateItem from './components/CreateItem/CreateItem'
 import UpdateItem from './components/UpdateItem/UpdateItem'
 import AllOrders from './components/AllOrders/AllOrders'
 
+import './App.css'
+
 export default class App extends Component {
 
     render() {
@@ -36,21 +38,23 @@ export default class App extends Component {
                             <ItemContextProvider>
                                 <>
                                     <Navbar />
-                                    <Switch>
-                                        <Route path="/login" component={ Login } /> 
-                                        <Route path="/register" component={ Register } /> 
-                                        <Route path="/items" component={ Items } />
-                                        <Route path="/item/:itemId" component={ ItemInfo } />
-                                        <Route exact path="/profile" component={ Profile } />
-                                        <Route exact path="/profile/orders" component={ Orders } />
-                                        <Route path="/profile/orders/:orderId" component={ OrderInfo } />
-                                        <Route path="/shoppingCart" component={ ShoppingCart } />
-                                        <Route exact path="/adminPage" component={ AdminPage } />
-                                        <Route path="/adminPage/createItem" component={ CreateItem } />
-                                        <Route path="/adminPage/allOrders" component={ AllOrders } />
-                                        <Route path="/updateItem/:itemId" component={ UpdateItem } />
-                                        <Route path="/order/:orderId" component={ OrderInfo } />
-                                    </Switch>
+                                    <div className="app-container">
+                                        <Switch>
+                                            <Route path="/login" component={ Login } /> 
+                                            <Route path="/register" component={ Register } /> 
+                                            <Route path="/items" component={ Items } />
+                                            <Route path="/item/:itemId" component={ ItemInfo } />
+                                            <Route exact path="/profile" component={ Profile } />
+                                            <Route exact path="/profile/orders" component={ Orders } />
+                                            <Route path="/profile/orders/:orderId" component={ OrderInfo } />
+                                            <Route path="/shoppingCart" component={ ShoppingCart } />
+                                            <Route exact path="/adminPage" component={ AdminPage } />
+                                            <Route path="/adminPage/createItem" component={ CreateItem } />
+                                            <Route path="/adminPage/allOrders" component={ AllOrders } />
+                                            <Route path="/updateItem/:itemId" component={ UpdateItem } />
+                                            <Route path="/order/:orderId" component={ OrderInfo } />
+                                        </Switch>
+                                    </div>
                                     <Link to="/items">
                                         items page
                                     </Link>

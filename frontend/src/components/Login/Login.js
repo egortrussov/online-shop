@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext'
+import InputField from '../ReusableComponents/InputField/InputField';
 
 export default class Login extends Component {
 
@@ -66,8 +67,8 @@ export default class Login extends Component {
         return (
             <div>
                 <form onSubmit={ (e) => this.handleSubmit(e) } ref={ this.formRef } action="">
-                    <input type="text" name="email" />
-                    <input type="password" name="password" />
+                    <InputField type="text" label="E-mail" name="email" />
+                    <InputField type="password" label="Password" name="password" />
                     <input type="submit"/>
                 </form>
             </div>

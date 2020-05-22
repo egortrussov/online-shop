@@ -1,0 +1,70 @@
+.input-group {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1.3rem;
+}
+
+.input-group.mini {
+  max-width: 250px;
+}
+
+.input-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.input-group input {
+  background: none;
+  border: none;
+  border-bottom: 3px solid #ddd;
+  width: 100%;
+  max-width: 400px;
+  color: var(--main-text-color);
+  padding: .4rem;
+  font-size: 1.1rem;
+}
+
+.input-group input:focus {
+  outline: none;
+}
+
+.input-group input.mini {
+  max-width: 250px;
+  border-bottom-width: 2px;
+}
+
+.input-group input:-webkit-autofill,
+.input-group input:-webkit-autofill:hover,
+.input-group input:-webkit-autofill:focus,
+.input-group input:-webkit-autofill:active {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background: none !important;
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 30px var(--main-bg-color) inset !important;
+  -webkit-text-fill-color: var(--main-text-color) !important;
+}
+
+.input-group label {
+  position: absolute;
+  width: 0px;
+  height: 3px;
+  z-index: 10;
+  background-color: var(--orange) !important;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  bottom: 0;
+  -webkit-transition: all .25s ease;
+  transition: all .25s ease;
+}
+
+.input-group input.mini + label {
+  height: 2px;
+}
+
+.input-group input:focus + label {
+  width: 100% !important;
+}
+/*# sourceMappingURL=style.css.map */
