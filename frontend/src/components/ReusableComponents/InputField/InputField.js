@@ -35,7 +35,7 @@ const InputField = ({ label, onChange, name, type, value }) => {
         <div className="input-group">
             
             <span className="input-label">{ label }</span>
-            <input  autoComplete={ name === 'email' ? "true" : "false" } type={ type } name={ name }  />
+            <input  autoComplete={ name === 'email' ? "on" : "false" } type={ type } name={ name }  />
             <label htmlFor={ name }></label> 
         </div>
     )

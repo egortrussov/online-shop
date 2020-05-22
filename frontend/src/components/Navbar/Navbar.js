@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext'
 
+import './css/style.css'
+
 export default class Navbar extends Component {
 
     state = {
@@ -29,6 +31,7 @@ export default class Navbar extends Component {
             ...this.state,
             isLoggedIn: false
         })
+        window.location.href = '/login'
     }    
 
     render() {
@@ -39,38 +42,42 @@ export default class Navbar extends Component {
         console.log(isLoggedIn)
 
         return (
-            <div>
+            <nav>
+                <div className="nav-left">
+                    <img src="/images/logo.jpg" alt="" className="logo"/>
+                </div>
                 {
                     isLoggedIn ? (
                         <>
-                            Hello!
 
-                            <Link to="/profile">
-                                Profile
-                            </Link>
+                            <div className="nav-right">
+                                <Link className="nav-link" to="/profile">
+                                    Profile
+                                </Link>
 
-                            <button onClick={ () => this.logout() }>Logout</button>
+                                <a className="nav-link" onClick={ () => this.logout() }>Logout</a>
 
-                            {
-                                user.isAdmin && (
-                                    <Link to="/adminPage">
-                                        Admin page
-                                    </Link>
-                                )
-                            }
+                                {
+                                    user.isAdmin && (
+                                        <Link className="nav-link" to="/adminPage">
+                                            Admin page
+                                        </Link>
+                                    )
+                                }
+                            </div>
                         </>
                     ) : (
-                        <>
-                            <Link to="/login">
+                        <div className="nav-right">
+                            <Link className="btn" to="/login">
                                 Login
                             </Link>
-                            <Link to="/register">
+                            <Link className="btn btn-cta" to="/register">
                                 Register
                             </Link>
-                        </>
+                        </div>
                     )
                 }
-            </div>
+            </nav>
         )
     }
 }

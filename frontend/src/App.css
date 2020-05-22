@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito', sans-serif !important;
 
   --orange: #fa744f;
   --light-orange: #f79071;
@@ -22,4 +22,36 @@ body {
 
 .app-container {
   padding: 1.5rem .5rem;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.btn {
+  margin: 0 .6rem;
+  padding: .3rem 1.2rem !important;
+  border: 1.5px solid var(--orange);
+  border-radius: .3rem;
+  font-size: 1rem !important;
+  color: #000;
+  font-weight: bold;
+  transition: all .2s;
+  cursor: pointer;
+}
+
+.btn.btn-cta {
+  color: #fff;
+  background-color: var(--orange);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, .15);
+}
+
+.btn.btn-cta.lg {
+  margin-left: 0;
+  font-size: 1.1rem !important;
+  padding: .4rem 1.6rem !important;
 }

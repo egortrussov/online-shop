@@ -69,7 +69,7 @@ export default class Login extends Component {
                 <form onSubmit={ (e) => this.handleSubmit(e) } ref={ this.formRef } action="">
                     <InputField type="text" label="E-mail" name="email" />
                     <InputField type="password" label="Password" name="password" />
-                    <input type="submit"/>
+                    <button type="submit" className="btn btn-cta lg">Login</button>
                 </form>
             </div>
         )

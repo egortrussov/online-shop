@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext'
+import InputField from '../ReusableComponents/InputField/InputField';
 
 export default class Register extends Component {
 
@@ -83,44 +84,36 @@ export default class Register extends Component {
         return (
             <div>
                 <form onSubmit={ (e) => this.register(e) } ref={ this.formRef }>
-                    <label htmlFor="">E-mail</label>
-                    <input type="email" name="email"  /> <br/>
+                    <InputField type="text" label="E-mail" name="email" />
                     {
                         !isCompany && (
                             <>
-                            <label htmlFor="">Telephone</label>
-                            <input type="telephone" name="telephone" />
+                                <InputField type="telephone" label="Telephone" name="telephone" />
                             </>
                         )
                     }
                     {
                         !isCompany && (
                             <>
-                                <label htmlFor="">Name</label>
-                                <input type="text" name="username" />
+                                <InputField type="text" label="Username" name="username" />  
                             </>
                         )
                     }
-                    <label htmlFor="">Password</label>
-                    <input type="password" name="password" />
+                    <InputField type="password" label="Password" name="password" />
 
                     <label htmlFor="">is company</label>
                     <input type="checkbox" onChange={ () => this.setCompanyState() } />
                     {
                         isCompany && (
                             <>
-                                <label htmlFor="">Company name</label>
-                                <input type="text" name="companyName" />
-                                <label htmlFor="">Company adress</label>
-                                <input type="text" name="companyAdress" />
-                                <label htmlFor="">Company BIN</label>
-                                <input type="text" name="companyBin" />
+                                <InputField type="text" label="Company name" name="companyName" />
+                                <InputField type="text" label="Company adress" name="companyAdress" />
+                                <InputField type="text" label="Company BIN" name="companyBIN" />
 
                                 <div>
-                                    <label htmlFor="">Contact person name</label>
-                                    <input type="text" name="contactName"  />
-                                    <label htmlFor="">Contact</label>
-                                    <input type="text" name="contact"  />
+                                    <InputField type="text" label="Contact name" name="contactName" />
+                                    <InputField type="text" label="Contact" name="contact" />
+                                    
                                 </div>
                             </>
                         )
