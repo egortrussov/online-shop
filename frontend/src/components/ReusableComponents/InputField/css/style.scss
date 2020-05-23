@@ -42,8 +42,8 @@
             box-shadow: none !important;
     background: none !important;
     background-color: transparent !important;
-    -webkit-box-shadow: 0 0 0 30px var(--main-bg-color) inset !important;
-    -webkit-text-fill-color: var(--main-text-color) !important;
+    // -webkit-box-shadow: 0 0 0 30px var(--main-bg-color) inset !important;
+    // -webkit-text-fill-color: var(--main-text-color) !important;
 }
 
 .input-group label {
@@ -52,12 +52,12 @@
     height: 3px;
     z-index: 10;
     background-color: var(--orange) !important;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-            transform: translateX(-50%);
+    left: 0%;
+    // -webkit-transform: translateX(-50%);
+    //         transform: translateX(-50%);
     bottom: 0;
     -webkit-transition: all .25s ease;
-    transition: all .25s ease;
+    transition: all .25s ease-out;
 }
 
 .input-group input.mini + label {

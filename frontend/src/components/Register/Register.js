@@ -119,7 +119,7 @@ export default class Register extends Component {
                         )
                     }
 
-                    <input type="submit" value="Register"/>
+                    <button className="btn btn-cta lg">Register</button>
                 </form>
             </div>
         )

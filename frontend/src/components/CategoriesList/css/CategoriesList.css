@@ -1,0 +1,43 @@
+.categories-container {
+  width: 250px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.categories-container .list-item {
+  width: 100%;
+}
+
+.categories-container .list-item button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-top: .5px solid #ddd;
+  border-bottom: .5px solid #ddd;
+  background-color: #fff;
+  text-align: left;
+  padding: .5rem;
+  font-size: .9rem;
+  cursor: pointer;
+  -webkit-transition: all .1s;
+  transition: all .1s;
+}
+
+.categories-container .list-item button:hover {
+  background-color: #f1efef;
+}
+
+.categories-container .list-item button.active {
+  background-color: #eee;
+  outline: none;
+}
+
+.categories-container .list-item button:focus {
+  outline: none;
+}
+/*# sourceMappingURL=CategoriesList.css.map */

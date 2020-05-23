@@ -3,7 +3,9 @@ import React, { Component, createRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ItemContext } from '../../contexts/ItemContext'
-import CategoriesContainer from './CategoriesContainer/CategoriesContainer';
+import CategoriesList from '../CategoriesList/CategoriesList'
+
+import './css/Items.css'
 
 export default class Items extends Component {
 
@@ -236,49 +238,52 @@ export default class Items extends Component {
         console.log(categories, 'categ', categories ? false : true)
 
         return (
-            <div>
-                <CategoriesContainer 
+            <div className="content-container">
+                <CategoriesList 
                     setCategory={ (category) => this.setCategory(category) }
                     searchType={ searchType }
                     isCategoryChosen={ category ? true : false } 
                     hasToLoadCategories={ categories ? false : true }
                     itemContext={ this.context }
                 /> 
-                <span>Search by article</span>
-                <form ref={ this.articleFormRef } onSubmit={ (e) => this.findItemByArticle(e) }>
-                    <input type="text" name="article" />
-                    <input type="submit" value="find" />
-                </form>
-                <span>Search by name</span>
-                <form ref={ this.itemNameFormRef } onSubmit={ (e) => this.findItemsByName(e) }>
-                    <input type="text" name="itemName" />
-                    <input type="submit" value="find" />
-                </form>
-                Items page
-                { category && (
-                    <h2>{ category.name }</h2>
-                ) }
-                {
-                    isLoading && <h1>Loading...</h1>
-                }
-                {
-                    (!items.length && !isLoading) && <h1>No items found!</h1> 
-                }
-                {
-                    items ? ((!items.length && !isLoading) && <h1>No items found!</h1>) : ''
-                }
-                {
-                    items ? 
-                        items.map(item => {
-                            return (
-                                <Link to={ `/item/${ item._id }` }>
-                                    { item.imageData && <img width="200" height="200" src={ item.imageData } alt=""/> }
-                                    { item.title }
-                                </Link>
-                            )
-                        })
-                    : <h1>Loading...</h1>
-                }
+                <div className="content">
+
+                    <span>Search by article</span>
+                    <form ref={ this.articleFormRef } onSubmit={ (e) => this.findItemByArticle(e) }>
+                        <input type="text" name="article" />
+                        <input type="submit" value="find" />
+                    </form>
+                    <span>Search by name</span>
+                    <form ref={ this.itemNameFormRef } onSubmit={ (e) => this.findItemsByName(e) }>
+                        <input type="text" name="itemName" />
+                        <input type="submit" value="find" />
+                    </form>
+                    Items page
+                    { category && (
+                        <h2>{ category.name }</h2>
+                    ) }
+                    {
+                        isLoading && <h1>Loading...</h1>
+                    }
+                    {
+                        (!items.length && !isLoading) && <h1>No items found!</h1> 
+                    }
+                    {
+                        items ? ((!items.length && !isLoading) && <h1>No items found!</h1>) : ''
+                    }
+                    {
+                        items ? 
+                            items.map(item => {
+                                return (
+                                    <Link to={ `/item/${ item._id }` }>
+                                        { item.imageData && <img width="200" height="200" src={ item.imageData } alt=""/> }
+                                        { item.title }
+                                    </Link>
+                                )
+                            })
+                        : <h1>Loading...</h1>
+                    }
+                </div>
             </div>
         )
     }

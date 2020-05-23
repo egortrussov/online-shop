@@ -44,7 +44,9 @@ export default class Navbar extends Component {
         return (
             <nav>
                 <div className="nav-left">
-                    <img src="/images/logo.jpg" alt="" className="logo"/>
+                    <Link to="/">
+                        <img src="/images/logo.jpg" alt="" className="logo"/>
+                    </Link>
                 </div>
                 {
                     isLoggedIn ? (
