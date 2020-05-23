@@ -233,6 +233,14 @@ export default class Items extends Component {
             })
     }
 
+    setCurrentSearchType(type) {
+        this.setState({
+            currentSearchType: type
+        })
+        this.context.setSearchType(type)
+        console.log(type)
+    }
+
     render() {
         const { category, isLoading, items, searchType, categories } = this.state;
 
@@ -251,7 +259,9 @@ export default class Items extends Component {
                 <div className="content">
 
                     <div className="search-block">
-                        <ChooseSeachType />
+                        <ChooseSeachType
+                            setCurrentSearchType={ (type) => this.setCurrentSearchType(type) }
+                         />
                         <form ref={ this.searchCreds }>
                             <input type="text" name="name" />
                             <button className="btn-submit">Find</button>

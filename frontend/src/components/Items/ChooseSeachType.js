@@ -12,12 +12,17 @@ export default class ChooseSeachType extends Component {
         let values = [5 * 60, 10 * 60, 20 * 60, 30 * 60, 1 * 60 * 60, 1.5 * 60 * 60];
 
         const setst = (j) => {
-            console.log("hhhh");
-            
-            this.setState({
-                ...this.state,
-                currentSearchType: values[j - 1]
-            }, () => console.log(this.state))
+        }
+
+        const setSearchType = (typeId) => {
+            let type = '';
+            if (typeId === 1) 
+                type = 'name';
+            else if (typeId === 2) 
+                type = 'acricle';
+            else if (typeId == 3) 
+                type = 'company';
+            this.props.setCurrentSearchType(type);
         }
 
         for (i = 0; i < x.length; i++) {
@@ -35,7 +40,6 @@ export default class ChooseSeachType extends Component {
             create a new DIV that will act as an option item: */
                 c = document.createElement('DIV');
                 c.innerHTML = selElmnt.options[j].innerHTML;
-                console.log(selElmnt);
                 
                 c.addEventListener('click', function(e) {
                     /* When an item is clicked, update the original select box,
@@ -68,6 +72,7 @@ export default class ChooseSeachType extends Component {
                     h.click();
 
                     setst(j);
+                    setSearchType(j)
                 });
                 b.appendChild(c);
             }
