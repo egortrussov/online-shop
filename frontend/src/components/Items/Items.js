@@ -6,6 +6,7 @@ import { ItemContext } from '../../contexts/ItemContext'
 import CategoriesList from '../CategoriesList/CategoriesList'
 
 import './css/Items.css'
+import ChooseSeachType from './ChooseSeachType'
 
 export default class Items extends Component {
 
@@ -245,10 +246,20 @@ export default class Items extends Component {
                     isCategoryChosen={ category ? true : false } 
                     hasToLoadCategories={ categories ? false : true }
                     itemContext={ this.context }
+                    currentCategory={ category }
                 /> 
                 <div className="content">
 
-                    <span>Search by article</span>
+                    <div className="search-block">
+                        <ChooseSeachType />
+                        <form ref={ this.searchCreds }>
+                            <input type="text" name="name" />
+                            <button className="btn-submit">Find</button>
+                        </form>
+                    </div>
+
+
+                    {/* <span>Search by article</span>
                     <form ref={ this.articleFormRef } onSubmit={ (e) => this.findItemByArticle(e) }>
                         <input type="text" name="article" />
                         <input type="submit" value="find" />
@@ -257,7 +268,7 @@ export default class Items extends Component {
                     <form ref={ this.itemNameFormRef } onSubmit={ (e) => this.findItemsByName(e) }>
                         <input type="text" name="itemName" />
                         <input type="submit" value="find" />
-                    </form>
+                    </form> */}
                     Items page
                     { category && (
                         <h2>{ category.name }</h2>

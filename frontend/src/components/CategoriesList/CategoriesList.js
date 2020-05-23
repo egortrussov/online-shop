@@ -30,8 +30,19 @@ export default class CategoriesList extends Component {
                 })
                 console.log('kkkkkk')
                 this.props.itemContext.setCategories(res.categories);
-                if (!this.props.isCategoryChosen)
-                    this.props.setCategory(res.categories[0])
+                if (!this.props.currentCategory) {
+                    this.props.setCategory(res.categories[0]);
+                    this.setState({
+                        ...this.state,
+                        currentCategory: res.categories[0]
+                    })
+                } else {
+                    this.setState({
+                        ...this.state,
+                        currentCategory: this.props.currentCategory
+                    })
+                }
+                    
             })
     }
 
