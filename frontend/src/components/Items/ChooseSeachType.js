@@ -25,6 +25,8 @@ export default class ChooseSeachType extends Component {
             this.props.setCurrentSearchType(type);
         }
 
+        const props = this.props;
+
         for (i = 0; i < x.length; i++) {
             selElmnt = x[i].getElementsByTagName('select')[0];
             /* For each element, create a new DIV that will act as the selected item: */
@@ -55,7 +57,8 @@ export default class ChooseSeachType extends Component {
                     
                     
                     for (i = 0; i < s.length; i++) {
-                        if (s.options[i].innerHTML === this.innerHTML) {
+                        console.log(s.options[i].innerHTML.toLowerCase())
+                        if (s.options[i].innerHTML === this.innerHTML || s.options[i].innerHTML.toLowerCase() === props.currentSearchType) {
                             s.selectedIndex = i;
 
                             h.innerHTML = this.innerHTML;

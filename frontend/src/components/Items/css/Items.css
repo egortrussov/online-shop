@@ -104,5 +104,7 @@
 
 .select-items div {
   background-color: #fff;
+  border: none;
+  border-bottom: .5px solid #ddd;
 }
 /*# sourceMappingURL=Items.css.map */

@@ -14,6 +14,7 @@ export default class Items extends Component {
         category: null,
         isLoading: true,
         searchType: 'category',
+        currentSearchType: null,
         items: [],
         categories: null
     }
@@ -25,6 +26,7 @@ export default class Items extends Component {
 
         this.articleFormRef = createRef();
         this.itemNameFormRef = createRef();
+        this.searchCreds = createRef();
     }    
 
     loadItems() {
@@ -82,7 +84,8 @@ export default class Items extends Component {
             category: this.context.currentCategory,
             items: this.context.items,
             isLoading: this.context.items.length ? false : true,
-            categories: this.context.categories
+            categories: this.context.categories,
+            currentSearchType: this.context.currentSearchType
         }, () => {
             if (this.context.currentCategory) 
                 this.loadItems()
@@ -174,14 +177,8 @@ export default class Items extends Component {
             })
     }
 
-    findItemsByName(e) {
-        e.preventDefault();
-
-        const formEl = this.itemNameFormRef.current;
-
+    findItemsByName(searchText) {
         this.context.setSearchType('name');
-
-        const formData = new FormData(formEl);
 
         this.setState({
             ...this.state,
@@ -189,7 +186,7 @@ export default class Items extends Component {
             isLoading: true
         })
 
-        fetch(`${ this.context.proxy }/api/items/itemsByName/${ formData.get('itemName') }`)
+        fetch(`${ this.context.proxy }/api/items/itemsByName/${ searchText }`)
             .then(res => res.json())
             .then(res => {
                 this.setState({
@@ -241,8 +238,35 @@ export default class Items extends Component {
         console.log(type)
     }
 
+    findItems(e) {
+        e.preventDefault();
+
+        const formEl = this.searchCreds.current;
+        const formData = new FormData(formEl);
+
+        const { currentSearchType } = this.state;
+
+        const searchText = formData.get('name');
+
+        switch (currentSearchType) {
+            case 'name':
+                this.findItemsByName(searchText);
+                break;
+            case 'article':
+                this.findItemByArticle(searchText);
+        
+            default:
+                this.setState({
+                    currentSearchType: 'name'
+                })
+                this.findItemsByName(searchText);
+        }
+    }
+
     render() {
-        const { category, isLoading, items, searchType, categories } = this.state;
+        const { category, isLoading, items, searchType, categories, currentSearchType } = this.state;
+
+        console.log(currentSearchType)
 
         console.log(categories, 'categ', categories ? false : true)
 
@@ -261,24 +285,14 @@ export default class Items extends Component {
                     <div className="search-block">
                         <ChooseSeachType
                             setCurrentSearchType={ (type) => this.setCurrentSearchType(type) }
+                            searchType={ currentSearchType }
                          />
-                        <form ref={ this.searchCreds }>
+                        <form ref={ this.searchCreds } onSubmit={ (e) => this.findItems(e) }>
                             <input type="text" name="name" />
                             <button className="btn-submit">Find</button>
                         </form>
                     </div>
 
-
-                    {/* <span>Search by article</span>
-                    <form ref={ this.articleFormRef } onSubmit={ (e) => this.findItemByArticle(e) }>
-                        <input type="text" name="article" />
-                        <input type="submit" value="find" />
-                    </form>
-                    <span>Search by name</span>
-                    <form ref={ this.itemNameFormRef } onSubmit={ (e) => this.findItemsByName(e) }>
-                        <input type="text" name="itemName" />
-                        <input type="submit" value="find" />
-                    </form> */}
                     Items page
                     { category && (
                         <h2>{ category.name }</h2>
