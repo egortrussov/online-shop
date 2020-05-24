@@ -111,14 +111,9 @@ export default class Items extends Component {
         
     }
 
-    findItemByArticle(e) {
-        e.preventDefault();
-
+    findItemByArticle(article) {
         this.context.setSearchType('article');
-
-        const formEl = this.articleFormRef.current;
-
-        const formData = new FormData(formEl);
+        console.log(article)
 
         this.setState({
             ...this.state,
@@ -126,7 +121,7 @@ export default class Items extends Component {
             isLoading: true
         })
 
-        fetch(`${ this.context.proxy }/api/items/itemInfoByArticle/${ formData.get('article') }`)
+        fetch(`${ this.context.proxy }/api/items/itemInfoByArticle/${ article }`)
             .then(res => res.json())
             .then(res => {
                 if (!res.item) {
@@ -245,6 +240,7 @@ export default class Items extends Component {
         const formData = new FormData(formEl);
 
         const { currentSearchType } = this.state;
+        console.log(currentSearchType)
 
         const searchText = formData.get('name');
 
@@ -253,6 +249,7 @@ export default class Items extends Component {
                 this.findItemsByName(searchText);
                 break;
             case 'article':
+                console.log('object')
                 this.findItemByArticle(searchText);
         
             default:

@@ -19,7 +19,7 @@ export default class ChooseSeachType extends Component {
             if (typeId === 1) 
                 type = 'name';
             else if (typeId === 2) 
-                type = 'acricle';
+                type = 'article';
             else if (typeId == 3) 
                 type = 'company';
             this.props.setCurrentSearchType(type);

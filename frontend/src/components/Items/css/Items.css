@@ -6,6 +6,8 @@
 
 .content-container .content {
   padding-left: 1rem;
+  padding-right: 2rem;
+  width: 100%;
 }
 
 .content-container .search-block {
@@ -54,11 +56,14 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  margin: 1rem 0;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
 }
 
 .content-container .items-container .item-card .card-left {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
 
 .content-container .items-container .item-card .card-left img {
