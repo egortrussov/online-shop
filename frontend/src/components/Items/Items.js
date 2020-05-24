@@ -294,9 +294,6 @@ export default class Items extends Component {
                     </div>
 
                     Items page
-                    { category && (
-                        <h2>{ category.name }</h2>
-                    ) }
                     {
                         isLoading && <h1>Loading...</h1>
                     }
@@ -306,18 +303,33 @@ export default class Items extends Component {
                     {
                         items ? ((!items.length && !isLoading) && <h1>No items found!</h1>) : ''
                     }
-                    {
-                        items ? 
-                            items.map(item => {
-                                return (
-                                    <Link to={ `/item/${ item._id }` }>
-                                        { item.imageData && <img width="200" height="200" src={ item.imageData } alt=""/> }
-                                        { item.title }
-                                    </Link>
-                                )
-                            })
-                        : <h1>Loading...</h1>
-                    }
+                    <div className="items-container">
+                        {
+                            items ? 
+                                items.map(item => {
+                                    return (
+                                        <div className="item-card">
+                                            <Link to={ `/item/${ item._id }` }>
+                                                <div className="card-left">
+                                                    { item.imageData ? <img  src={ item.imageData } alt=""/> : <span>No image!</span> }
+                                                </div>
+                                            </Link>
+                                            <Link to={ `/item/${ item._id }` }>
+                                                <div className="card-middle">
+                                                    <h3>{ item.title }</h3>
+                                                    <p>{ item.description }</p>
+                                                    <p className="qty">Quantity: { item.quantity }</p>
+                                                </div>
+                                            </Link>
+                                            <div className="card-right">
+                                                <h4 className="price">{ item.price }</h4>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            : <h1>Loading...</h1>
+                        }
+                    </div>
                 </div>
             </div>
         )
