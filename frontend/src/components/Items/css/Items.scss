@@ -109,13 +109,19 @@
                 margin-top: auto;
 
                 button {
-                  padding: .3rem;
+                  padding: .5rem;
                   font-size: 1.2rem;
                   border: none;
                   background-color: #fff;
                   color: var(--orange);
                   cursor: pointer;
                   background-color: #f4f4f4;
+                  border-radius: .2rem;
+
+                  &.active {
+                    color: #fff;
+                    background-color: var(--orange);
+                  }
                 }
               }
             }
