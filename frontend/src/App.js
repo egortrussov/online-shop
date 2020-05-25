@@ -36,7 +36,7 @@ export default class App extends Component {
                     <ShoppingCartContextProvider>
                         <OrdersContextProvider>
                             <ItemContextProvider>
-                                <>
+                                <main>
                                     <Navbar />
                                     <div className="app-container">
                                         <Switch>
@@ -58,7 +58,7 @@ export default class App extends Component {
                                     <Link to="/items">
                                         items page
                                     </Link>
-                                </>
+                                </main>
                             </ItemContextProvider>
                         </OrdersContextProvider>
                     </ShoppingCartContextProvider>

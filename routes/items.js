@@ -195,6 +195,46 @@ router.get('/itemsByName/:itemName', (req, res) => {
         })
 })
 
+/*
+    @Method: GET
+    @Access: Public
+    @Description: Get all items by company name
+    @Request params: {
+        categoryId
+    }
+    @Request headers: {
+        token
+    }
+    @Response: {
+        success <true, false>, items
+    }
+*/
+
+router.get('/itemsByCompanyName/:companyName', (req, res) => {
+    let { companyName } = req.params;
+
+    Item 
+        .find()
+        .then(items => {
+            let matchingItems = [];
+
+            companyName = companyName.toLowerCase().trim();
+
+            items.forEach(item => {
+                let currItemName = item.company.toLowerCase().trim();
+                if (currItemName.includes(companyName)) 
+                    matchingItems.push(item);
+            })
+
+            res 
+                .status(200)
+                .json({
+                    success: true,
+                    items: matchingItems
+                })
+        })
+})
+
 // POST routes
 /*
     @Method: POST

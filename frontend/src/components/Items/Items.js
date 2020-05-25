@@ -226,6 +226,59 @@ export default class Items extends Component {
             })
     }
 
+    findItemsByCompanyName(searchText) {
+        this.context.setSearchType('company');
+
+        this.setState({
+            ...this.state,
+            items: [],
+            isLoading: true
+        })
+
+        fetch(`${ this.context.proxy }/api/items/itemsByCompanyName/${ searchText }`)
+            .then(res => res.json())
+            .then(res => {
+                this.setState({
+                    ...this.state,
+                    items: res.items,
+                    isLoading: false
+                })
+
+                let items = res.items;
+                
+                items.forEach(item => {
+
+                    fetch(`${ this.context.proxy }/api/items/itemImage/${ item._id }`)
+                        .then(res => res.blob())
+                        .then(res => {
+                            let reader = new FileReader();
+                            reader.readAsDataURL(res); 
+
+                            const update = () => {
+                                this.context.setItems(items)
+                                this.setState({
+                                    ...this.state,
+                                    items
+                                })
+                            }
+
+                            reader.onloadend = function() {
+                                let base64data = reader.result;      
+                                for (let i = 0; i < items.length; i++) {
+                                    let currItem = items[i];
+                                    if (currItem._id === item._id) {
+                                        console.log(i)
+                                        items[i].imageData = base64data;
+                                        update()
+                                        break;
+                                    }
+                                }
+                            }
+                        })
+                })
+            })
+    }
+
     setCurrentSearchType(type) {
         this.setState({
             currentSearchType: type
@@ -250,8 +303,11 @@ export default class Items extends Component {
                 this.findItemsByName(searchText);
                 break;
             case 'article':
-                console.log('object')
                 this.findItemByArticle(searchText);
+                break;
+            case 'company':
+                this.findItemsByCompanyName(searchText);
+                break;
         
             default:
                 this.setState({
@@ -312,6 +368,7 @@ export default class Items extends Component {
                                             <Link to={ `/item/${ item._id }` }>
                                                 <div className="card-middle">
                                                     <h3>{ item.title }</h3>
+                                                    <p>Company: { item.company || 'No company' }</p>
                                                     <p>{ item.description }</p>
                                                     <p className="qty">Quantity: { item.quantity }</p>
                                                 </div>
