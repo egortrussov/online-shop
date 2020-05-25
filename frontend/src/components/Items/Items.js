@@ -7,6 +7,7 @@ import CategoriesList from '../CategoriesList/CategoriesList'
 
 import './css/Items.css'
 import ChooseSeachType from './ChooseSeachType'
+import AddToShoppingCartBtn from './AddToShoppingCartBtn'
 
 export default class Items extends Component {
 
@@ -295,9 +296,6 @@ export default class Items extends Component {
                         isLoading && <h1>Loading...</h1>
                     }
                     {
-                        (!items.length && !isLoading) && <h1>No items found!</h1> 
-                    }
-                    {
                         items ? ((!items.length && !isLoading) && <h1>No items found!</h1>) : ''
                     }
                     <div className="items-container">
@@ -319,7 +317,10 @@ export default class Items extends Component {
                                                 </div>
                                             </Link>
                                             <div className="card-right">
-                                                <h4 className="price">{ item.price }</h4>
+                                                <h4 className="price"> <span>Price: </span> <br/> { item.price }</h4>
+                                                <div className="bottom">
+                                                    <AddToShoppingCartBtn />
+                                                </div>
                                             </div>
                                         </div>
                                     )
