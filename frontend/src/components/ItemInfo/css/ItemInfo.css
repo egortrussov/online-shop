@@ -1,0 +1,39 @@
+.item-info-container .item-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.item-info-container .item-info .item-image .img {
+  width: 250px;
+  height: auto;
+}
+
+.item-info-container .item-info .item-image .img img {
+  width: 100%;
+}
+
+.item-info-container .item-info .item-image .shopping-cart {
+  padding: .5rem;
+}
+
+.item-info-container .item-info .item-image .shopping-cart .item-price {
+  font-size: 1.1rem;
+}
+
+.item-info-container .item-info .item-description {
+  margin-left: 1rem;
+}
+
+.item-info-container .item-info .item-description .desc-block {
+  margin: .5rem 0;
+}
+
+.item-info-container .item-info .item-description .desc-block h3 {
+  font-size: 1.8rem;
+}
+
+.item-info-container .item-info .item-description .desc-block .bold {
+  font-weight: bold;
+}
+/*# sourceMappingURL=ItemInfo.css.map */

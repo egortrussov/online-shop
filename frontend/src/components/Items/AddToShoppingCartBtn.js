@@ -38,8 +38,13 @@ export default class AddToShoppingCartBtn extends Component {
 
         return (
             <>
-                <button onClick={ () => this.addToCart() } className={ isActive ? 'active' : '' }>
-                    <FontAwesomeIcon icon={ faCartPlus } />
+                <button onClick={ () => this.addToCart() } className={ isActive ? 'add-to-shopping-cart-btn active' : 'add-to-shopping-cart-btn' }>
+                    <i>
+                        <FontAwesomeIcon icon={ faCartPlus } />
+                    </i>
+                    {
+                        this.props.showText && 'Add to shopping cart'
+                    }
                 </button>
             </>
         )

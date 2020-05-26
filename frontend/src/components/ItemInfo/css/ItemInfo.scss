@@ -1,0 +1,42 @@
+.item-info-container {
+
+    .item-info {
+        display: flex;
+
+        .item-image {
+
+            .img {
+                width: 250px;
+                height: auto;
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .shopping-cart {
+                padding: .5rem;
+                
+                .item-price {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+
+        .item-description {
+            margin-left: 1rem;
+
+            .desc-block {
+                margin: .5rem 0;
+
+                h3 {
+                    font-size: 1.8rem;
+                }
+                
+                .bold {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

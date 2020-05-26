@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext'
 import AddToShoppingCart from './AddToShoppingCart/AddToShoppingCart';
+import AddToShoppingCartBtn from '../Items/AddToShoppingCartBtn';
+
+import './css/ItemInfo.css'
 
 export default class ItemInfo extends Component {
 
@@ -65,19 +68,49 @@ export default class ItemInfo extends Component {
         )
 
         return (
-            <div>
-                <h1>Item: { item.title }</h1>
-                {
-                    imageData && (
-                        <img src={ imageData } width="200" height="200" alt="" />
-                    )
-                }
-                <AddToShoppingCart 
-                    itemId={ item._id }
-                />
-                <Link to={ `/updateItem/${ item._id }` }>
-                    Update item
-                </Link>
+            <div className="item-info-container">
+                <div className="item-info">
+                    <div className="item-image">
+                        <div className="img">
+                            <img src={ imageData } alt=""/>
+                        </div>
+                        <div className="shopping-cart">
+                            <h4 className="item-price">
+                                Price: { item.price }
+                            </h4>
+                            <p>
+                                Maximum quantity: { item.quantity }
+                            </p>
+                            <p>
+                                <AddToShoppingCartBtn
+                                    showText={ true }
+                                    itemId={ item._id }
+                                />
+                            </p>
+                        </div>
+                    </div>
+                    <div className="item-description">
+                        <div className="desc-block">
+                            <h3 className="bold">{ item.title }</h3>
+                        </div>
+                        <div className="desc-block">
+                            <span className="bold">Article: </span>
+                            { item.article || 'no article' }
+                        </div>
+                        <div className="desc-block">
+                            <span className="bold">Description: </span>
+                            { item.description }
+                        </div> 
+                        <div className="desc-block">
+                            <span className="bold">Company: </span>
+                            { item.company }
+                        </div>
+                        <div className="desc-block">
+                            <span className="bold">Total orders: </span>
+                            { item.customers.length }
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
