@@ -346,8 +346,6 @@ export default class Items extends Component {
                             <button className="btn-submit">Find</button>
                         </form>
                     </div>
-
-                    Items page
                     {
                         isLoading && <h1>Loading...</h1>
                     }

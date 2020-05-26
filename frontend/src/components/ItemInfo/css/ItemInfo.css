@@ -17,12 +17,25 @@
   padding: .5rem;
 }
 
+.item-info-container .item-info .item-image .shopping-cart button {
+  margin-top: 1rem;
+}
+
 .item-info-container .item-info .item-image .shopping-cart .item-price {
   font-size: 1.1rem;
 }
 
 .item-info-container .item-info .item-description {
   margin-left: 1rem;
+}
+
+.item-info-container .item-info .item-description .link {
+  cursor: pointer;
+  color: var(--orange);
+}
+
+.item-info-container .item-info .item-description .link:hover {
+  text-decoration: underline;
 }
 
 .item-info-container .item-info .item-description .desc-block {

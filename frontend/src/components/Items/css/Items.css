@@ -140,6 +140,7 @@
   cursor: pointer;
   background-color: #f4f4f4;
   border-radius: .2rem;
+  float: right;
 }
 
 .content-container .items-container .item-card .card-right .bottom button.active {

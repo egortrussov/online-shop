@@ -38,6 +38,28 @@ router.get('/allCategories', (req, res) => {
         })
 })
 
+/*
+    @Method: GET
+    @Access: Public
+    @Description: Get category info
+    @Response: {
+        success <true, false>, category
+    }
+*/
+
+router.get('/categoryInfo/:categoryId', (req, res) => {
+    Category
+        .findOne({ _id: req.params.categoryId })
+        .then(category => {
+            res
+                .status(200)
+                .json({
+                    success: true,
+                    category
+                })
+        })
+})
+
 // POST routes
 
 /*

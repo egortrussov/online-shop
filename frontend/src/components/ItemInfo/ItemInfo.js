@@ -6,13 +6,15 @@ import AddToShoppingCart from './AddToShoppingCart/AddToShoppingCart';
 import AddToShoppingCartBtn from '../Items/AddToShoppingCartBtn';
 
 import './css/ItemInfo.css'
+import LinkToCategory from './LinkToCategory';
 
 export default class ItemInfo extends Component {
 
     state = {
         isLoading: true,
         item: null,
-        imageData: null
+        imageData: null,
+        category: null
     }
 
     static contextType = AuthContext;
@@ -28,6 +30,15 @@ export default class ItemInfo extends Component {
                     item: res.item,
                     isLoading: false 
                 })
+
+                fetch(`${ this.context.proxy }/api/categories/categoryInfo/${ res.item.categoryId }`)
+                    .then(res => res.json())
+                    .then(res => {
+                        this.setState({
+                            ...this.state,
+                            category: res.category
+                        })
+                    })
             })
         
         fetch(`${ this.context.proxy }/api/items/itemImage/${ itemId }`)
@@ -61,7 +72,7 @@ export default class ItemInfo extends Component {
         
 
     render() {
-        const { isLoading, item, imageData } = this.state;
+        const { isLoading, item, imageData, category } = this.state;
 
         if (isLoading) return (
             <h1>Loading...</h1>
@@ -97,6 +108,10 @@ export default class ItemInfo extends Component {
                             <span className="bold">Article: </span>
                             { item.article || 'no article' }
                         </div>
+                        <div className="desc-block">
+                            <span className="bold">Category: </span>
+                            { category ? <LinkToCategory category={ category } /> : 'loading...' }
+                        </div> 
                         <div className="desc-block">
                             <span className="bold">Description: </span>
                             { item.description }
