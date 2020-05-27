@@ -12,11 +12,55 @@ nav {
   padding: 1rem;
 }
 
+nav .nav-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 nav .nav-link {
   margin: 0 .6rem;
   color: #000 !important;
   font-size: 1.1rem;
   font-weight: bold;
+}
+
+nav .nav-link .icon {
+  font-size: 1.5rem;
+  margin: 0 .2rem;
+  color: var(--orange);
+  position: relative;
+}
+
+nav .nav-link .icon:hover {
+  -webkit-filter: brightness(0.9);
+          filter: brightness(0.9);
+}
+
+nav .nav-link .icon .shopping-cart-amount {
+  position: absolute;
+  font-weight: 800;
+  font-size: 10px;
+  height: 17px;
+  width: 17px;
+  text-align: center;
+  background-color: #fff;
+  border: 0.5px solid var(--orange);
+  border-radius: 50%;
+  left: auto;
+  right: 0;
+  -webkit-transform: translateX(30%);
+          transform: translateX(30%);
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 nav .nav-left {

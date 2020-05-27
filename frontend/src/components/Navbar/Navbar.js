@@ -3,8 +3,12 @@ import ls from 'local-storage'
 import { Link } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext'
+import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 
 import './css/style.css'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faShoppingCart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default class Navbar extends Component {
 
@@ -53,12 +57,6 @@ export default class Navbar extends Component {
                         <>
 
                             <div className="nav-right">
-                                <Link className="nav-link" to="/profile">
-                                    Profile
-                                </Link>
-
-                                <a className="nav-link" onClick={ () => this.logout() }>Logout</a>
-
                                 {
                                     user.isAdmin && (
                                         <Link className="nav-link" to="/adminPage">
@@ -66,6 +64,31 @@ export default class Navbar extends Component {
                                         </Link>
                                     )
                                 }
+                                <Link className="nav-link" to="/profile">
+                                    <div className="icon">
+                                        <FontAwesomeIcon icon={ faUser } />
+                                    </div>
+                                </Link> 
+                                <Link className="nav-link" to="/shoppingCart">
+                                    <div className="icon">
+                                        <FontAwesomeIcon icon={ faShoppingCart } />
+                                        <ShoppingCartContext.Consumer>
+                                            {
+                                                value => (
+                                                    <div className="shopping-cart-amount">
+                                                        { value.items ? value.items.length : 0 }
+                                                    </div>
+                                                )
+                                            }
+                                        </ShoppingCartContext.Consumer>
+                                    </div>
+                                </Link> 
+
+                                <a className="nav-link" onClick={ () => this.logout() }>
+                                    <div className="icon">
+                                        <FontAwesomeIcon icon={ faSignOutAlt } />
+                                    </div>
+                                </a>
                             </div>
                         </>
                     ) : (
