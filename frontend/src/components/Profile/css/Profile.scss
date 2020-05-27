@@ -1,0 +1,23 @@
+.profile-info {
+    
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    .profile-card-block {
+        padding: .5rem 0;
+        border-bottom: .5px solid #eee;
+        font-size: 1.05rem;
+        
+        .bold {
+            font-weight: bold;
+        }
+    }
+}
+
+.orders-link {
+    display: block;
+    margin-top: 1.3rem;
+    font-size: 1.1rem;
+    color: #000;
+}
