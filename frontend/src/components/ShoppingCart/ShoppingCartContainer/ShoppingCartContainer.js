@@ -208,8 +208,8 @@ export default class ShoppingCartContainer extends Component {
                         })
                     }
                 </div>
-                <h3>Total price: { totalPrice }</h3>
-                <button onClick={ () => this.createOrder() }>Order!</button>
+                <h3 className="price">Total price: { totalPrice }</h3>
+                <button className="btn btn-cta lg" onClick={ () => this.createOrder() }>Order!</button>
                 {
                     isSubmitted && <span>waiting...</span>
                 }

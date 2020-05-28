@@ -3,7 +3,9 @@ import React, { useContext, useState } from 'react'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 import { AuthContext } from '../../contexts/AuthContext';
 import { Redirect } from 'react-router';
-import ShoppingCartContainer from './ShoppingCartContainer/ShoppingCartContainer';
+import ShoppingCartContainer from './ShoppingCartContainer/ShoppingCartContainer'
+
+import './css/style.css'
 
 const ShoppingCart = () => {
 
