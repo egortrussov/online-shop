@@ -21,34 +21,34 @@ export default class Profile extends Component {
                 <div className="profile-info">
                     <h2>Profile card</h2>
                     <div className="profile-card-block">
-                        <span className="bold">Username: </span>
+                        <div className="bold">Username: </div>
                         { user.username || user.companyInfo.name }
                     </div>
                     <div className="profile-card-block">
-                        <span className="bold">E-mail: </span>
+                        <div className="bold">E-mail: </div>
                         { user.email }
                     </div>
                     <div className="profile-card-block">
-                        <span className="bold">Telephone: </span>
+                        <div className="bold">Telephone: </div>
                         { user.telephone }
                     </div>
                     <div className="profile-card-block">
-                        <span className="bold">Orders number: </span>
+                        <div className="bold">Orders number: </div>
                         { user.orders.length }
                     </div>
                     <div className="profile-card-block">
-                        <span className="bold">Is company: </span>
+                        <div className="bold">Is company: </div>
                         { user.isCompany ? 'yes' : 'no' }
                     </div>
                     {
                         user.isCompany && (
                             <>
                                 <div className="profile-card-block">
-                                    <span className="bold">BIN: </span>
+                                    <div className="bold">BIN: </div>
                                     { user.companyInfo.bin }
                                 </div>
                                 <div className="profile-card-block">
-                                    <span className="bold">Adress: </span>
+                                    <div className="bold">Adress: </div>
                                     { user.companyInfo.adress }
                                 </div>
                             </>

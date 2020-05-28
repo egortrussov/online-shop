@@ -25,44 +25,15 @@ const ShoppingCart = () => {
         <Redirect to="/login" />
     )
 
-    // let hasResponceBeenSent = false;
-
-    // if (!hasResponceBeenSent) {
-    //     hasResponceBeenSent = true;
-    //     fetch(`${ authContext.proxy }/api/items/shoppingCartItems`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'x-auth-token': authContext.token
-    //         },
-    //         body: JSON.stringify(items)
-    //     })
-    //         .then(res => res.json())
-    //         .then(res => {
-    //             console.log(res)
-    //             if (res.isTokenError) {
-    //                 authContext.logout();
-    //                 window.location.href = '/login';
-    //                 return;
-    //             }
-    //             setItems(res.items)
-    //         })
-    // }
-
-    
-    // if (!itemInfos) return (
-    //     <h1>Loading...</h1>
-    // )
-
     return (
-        <div>
+        <>
             {
                 <ShoppingCartContainer 
                     authContext={ authContext }
                     cartContext={ cartContext }
                  />
             }
-        </div>
+        </>
     )
 }
 

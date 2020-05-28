@@ -8,9 +8,23 @@
         padding: .5rem 0;
         border-bottom: .5px solid #eee;
         font-size: 1.05rem;
+        display: flex;
+        align-items: center;
         
         .bold {
             font-weight: bold;
+            width: 40%;
+            margin-right: 1rem;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                height: 95%;
+                width: 1px;
+                background-color: #ddd;
+                right: 0;
+            }
         }
     }
 }

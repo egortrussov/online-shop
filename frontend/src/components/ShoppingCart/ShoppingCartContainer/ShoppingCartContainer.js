@@ -159,23 +159,55 @@ export default class ShoppingCartContainer extends Component {
         )
 
         return (
-            <div>
-                {
-                    itemInfos.map(item => {
-                        let currItemQty = 1;
-                        currentItemQtys.forEach(cartItem => {
-                            if (cartItem.itemId === item._id) 
-                                currItemQty = cartItem.quantity;
-                        })
+            <div className="medium-container">
+                <div className="cart-grid">
+                    <div className="grid-line head">
+                        <div className="cell name">
+                            Item name
+                        </div>
+                        <div className="cell article">
+                            Article
+                        </div>
+                        <div className="cell price">
+                            Price
+                        </div>
+                        <div className="cell quantity">
+                            Quantity
+                        </div>
+                        <div className="cell max-quantity">
+                            Max quantity
+                        </div>
+                    </div>
+                    {
+                        itemInfos.map(item => {
+                            let currItemQty = 1;
+                            currentItemQtys.forEach(cartItem => {
+                                if (cartItem.itemId === item._id) 
+                                    currItemQty = cartItem.quantity;
+                            })
 
-                        return (
-                            <div>
-                                { item.title } quantity: <input type="text" onChange={ (e) => this.setItemQuantity(e, item._id) } value={ currItemQty } /> / { item.quantity }
-                                
-                            </div>
-                        )
-                    })
-                }
+                            return (
+                                <div className="grid-line">
+                                    <div className="cell name">
+                                        { item.title }
+                                    </div>
+                                    <div className="cell article">
+                                        { item.article }
+                                    </div>
+                                    <div className="cell price">
+                                        { item.price }
+                                    </div>
+                                    <div className="cell quantity">
+                                        <input type="text" onChange={ (e) => this.setItemQuantity(e, item._id) } value={ currItemQty } />
+                                    </div> 
+                                    <div className="cell max-quantity">
+                                        { item.quantity }
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
                 <h3>Total price: { totalPrice }</h3>
                 <button onClick={ () => this.createOrder() }>Order!</button>
                 {
