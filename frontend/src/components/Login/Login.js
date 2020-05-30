@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import InputField from '../ReusableComponents/InputField/InputField';
 
+import './css/Login.css'
+
 export default class Login extends Component {
 
     state = {
@@ -65,7 +67,7 @@ export default class Login extends Component {
         )
 
         return (
-            <div>
+            <div className="small-container">
                 <form onSubmit={ (e) => this.handleSubmit(e) } ref={ this.formRef } action="">
                     <InputField type="text" label="E-mail" name="email" />
                     <InputField type="password" label="Password" name="password" />

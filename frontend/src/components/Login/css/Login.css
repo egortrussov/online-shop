@@ -1,0 +1,15 @@
+.small-container form {
+  margin: auto;
+}
+
+.small-container form button {
+  margin-left: 50% !important;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.small-container form button:hover {
+  -webkit-transform: translateX(-50%) translateY(0) !important;
+          transform: translateX(-50%) translateY(0) !important;
+}
+/*# sourceMappingURL=Login.css.map */

@@ -35,7 +35,6 @@ export default class Navbar extends Component {
             ...this.state,
             isLoggedIn: false
         })
-        window.location.href = '/login'
     }    
 
     render() {

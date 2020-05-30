@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,gBAAgB,CAAC,IAAI,CAAC;EAClB,MAAM,EAAE,IAAI;CAUf;;AAXD,AAGI,gBAHY,CAAC,IAAI,CAGjB,MAAM,CAAC;EACH,WAAW,EAAE,cAAc;EAC3B,SAAS,EAAE,gBAAgB;CAK9B;;AAVL,AAOQ,gBAPQ,CAAC,IAAI,CAGjB,MAAM,AAID,MAAM,CAAC;EACJ,SAAS,EAAE,gBAAgB,CAAC,aAAa,CAAC,UAAU;CACvD",
+    "sources": [
+        "Register.scss"
+    ],
+    "names": [],
+    "file": "Register.css"
+}

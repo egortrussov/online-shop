@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   max-width: 400px;
-  margin-bottom: 1.3rem;
+  margin: 0 auto 1.3rem auto !important;
 }
 
 .input-group.mini {
@@ -14,7 +14,7 @@
   font-weight: 600;
 }
 
-.input-group input {
+.input-group > input {
   background: none;
   border: none;
   border-bottom: 3px solid #ddd;
@@ -25,11 +25,11 @@
   font-size: 1.1rem;
 }
 
-.input-group input:focus {
+.input-group > input:focus {
   outline: none;
 }
 
-.input-group input.mini {
+.input-group > input.mini {
   max-width: 250px;
   border-bottom-width: 2px;
 }
@@ -44,7 +44,7 @@
   background-color: transparent !important;
 }
 
-.input-group label {
+.input-group > label {
   position: absolute;
   width: 0px;
   height: 3px;
@@ -57,11 +57,11 @@
   transition: all .25s ease-out;
 }
 
-.input-group input.mini + label {
+.input-group > input.mini + label {
   height: 2px;
 }
 
-.input-group input:focus + label {
+.input-group > input:focus + label {
   width: 100% !important;
 }
 /*# sourceMappingURL=style.css.map */

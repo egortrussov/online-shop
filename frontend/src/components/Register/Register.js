@@ -2,7 +2,9 @@ import React, { Component, createRef } from 'react'
 import { Redirect } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext'
-import InputField from '../ReusableComponents/InputField/InputField';
+import InputField from '../ReusableComponents/InputField/InputField'
+
+import './css/Register.css'
 
 export default class Register extends Component {
 
@@ -82,7 +84,7 @@ export default class Register extends Component {
         )
 
         return (
-            <div>
+            <div className="small-container">
                 <form onSubmit={ (e) => this.register(e) } ref={ this.formRef }>
                     <InputField type="text" label="E-mail" name="email" />
                     {
@@ -101,8 +103,12 @@ export default class Register extends Component {
                     }
                     <InputField type="password" label="Password" name="password" />
 
-                    <label htmlFor="">is company</label>
-                    <input type="checkbox" onChange={ () => this.setCompanyState() } />
+                    <div className="input-group">
+                        <div>
+                            <input type="checkbox" onChange={ () => this.setCompanyState() } />
+                            <label htmlFor="">is company</label>
+                        </div>
+                    </div>
                     {
                         isCompany && (
                             <>
