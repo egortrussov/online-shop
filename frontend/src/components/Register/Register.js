@@ -4,6 +4,9 @@ import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext'
 import InputField from '../ReusableComponents/InputField/InputField'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
+
 import './css/Register.css'
 
 export default class Register extends Component {
@@ -102,13 +105,6 @@ export default class Register extends Component {
                         )
                     }
                     <InputField type="password" label="Password" name="password" />
-
-                    <div className="input-group">
-                        <div>
-                            <input type="checkbox" onChange={ () => this.setCompanyState() } />
-                            <label htmlFor="">is company</label>
-                        </div>
-                    </div>
                     {
                         isCompany && (
                             <>
@@ -124,6 +120,18 @@ export default class Register extends Component {
                             </>
                         )
                     }
+
+                    <div className="input-group">
+                        <div className="checkbox-group pretty p-icon p-smooth p-thick p-curve">
+                            <input type="checkbox" onChange={ () => this.setCompanyState() } />
+                            <div className="state p-warning">
+                                <i className="icon">
+                                    <FontAwesomeIcon className="check-icon" icon={ faCheck } />
+                                </i>
+                                <label>Is company</label>
+                            </div>
+                        </div>
+                    </div>
 
                     <button className="btn btn-cta lg">Register</button>
                 </form>
