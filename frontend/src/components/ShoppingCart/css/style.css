@@ -37,6 +37,32 @@
   padding: .5rem;
   display: block;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cart-grid .grid-line .cell .delete-item {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: #ff0800;
+  color: #fff;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-right: .5rem;
+  cursor: pointer;
 }
 
 .cart-grid .grid-line .cell.article, .cart-grid .grid-line .cell.max-quantity, .cart-grid .grid-line .cell.price, .cart-grid .grid-line .cell.quantity {

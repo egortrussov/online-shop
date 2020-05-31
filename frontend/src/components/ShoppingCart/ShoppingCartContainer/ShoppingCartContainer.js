@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+
 export default class ShoppingCartContainer extends Component {
 
     state = {
@@ -77,6 +80,19 @@ export default class ShoppingCartContainer extends Component {
             totalPrice
         })
     }    
+
+    deleteItem(itemId) {
+        let { itemInfos, cartContext } = this.state;
+
+        const newItems = cartContext.deleteItem(itemId);
+        
+        itemInfos = itemInfos.filter(itemInfo => itemInfo._id !== itemId);
+
+        this.setState({
+            ...this.state,
+            itemInfos
+        })
+    }
 
     createOrder() {
         const { cartContext, currentItemQtys, itemInfos, authContext, isSubmitted } = this.state;
@@ -189,7 +205,9 @@ export default class ShoppingCartContainer extends Component {
                             return (
                                 <div className="grid-line">
                                     <div className="cell name">
-                                        { item.title }
+                                        <button onClick={ () => this.deleteItem(item._id) } className="delete-item">
+                                            <FontAwesomeIcon className="icon" icon={ faTimes } />
+                                        </button> { item.title }
                                     </div>
                                     <div className="cell article">
                                         { item.article }

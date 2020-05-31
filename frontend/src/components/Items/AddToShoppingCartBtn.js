@@ -43,7 +43,7 @@ export default class AddToShoppingCartBtn extends Component {
                         <FontAwesomeIcon icon={ faCartPlus } />
                     </i>
                     {
-                        this.props.showText && 'Add to shopping cart'
+                        this.props.showText && ( isActive ? 'Added to shopping cart' : 'Add to shopping cart')
                     }
                 </button>
             </>

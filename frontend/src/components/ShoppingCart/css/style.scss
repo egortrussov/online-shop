@@ -22,6 +22,22 @@
             padding: .5rem;
             display: block;
             position: relative;
+            display: flex;
+            align-items: center;
+
+            .delete-item {
+                width: 24px;
+                height: 24px;
+                border: none;
+                background-color: #ff0800;
+                color: #fff;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: .5rem;
+                cursor: pointer;
+            }
 
             &.article, &.max-quantity, &.price, &.quantity {
                 width: 200px;

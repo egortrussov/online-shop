@@ -53,6 +53,7 @@ class ShoppingCartContextProvider extends Component {
                 break;
             }
         this.items = items;
+        ls.set('shoppingCart', this.items)
 
         return items;
     }

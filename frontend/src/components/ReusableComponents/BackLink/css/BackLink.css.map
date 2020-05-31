@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,aAAa,EAAE,MAAM;EACrB,SAAS,EAAE,MAAM;EACjB,KAAK,EAAE,aAAa;EACpB,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,WAAW,EAAE,IAAI;CAKpB;;AAXD,AAQI,UARM,CAQN,KAAK,CAAC;EACF,YAAY,EAAE,KAAK;CACtB",
+    "sources": [
+        "BackLink.scss"
+    ],
+    "names": [],
+    "file": "BackLink.css"
+}

@@ -7,6 +7,7 @@ import AddToShoppingCartBtn from '../Items/AddToShoppingCartBtn';
 
 import './css/ItemInfo.css'
 import LinkToCategory from './LinkToCategory';
+import BackLink from '../ReusableComponents/BackLink/BackLink';
 
 export default class ItemInfo extends Component {
 
@@ -80,6 +81,7 @@ export default class ItemInfo extends Component {
 
         return (
             <div className="medium-container">
+                <BackLink />
                 <div className="item-info-container">
                     <div className="item-info">
                         <div className="item-image">

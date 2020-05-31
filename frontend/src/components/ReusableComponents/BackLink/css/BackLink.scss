@@ -1,0 +1,12 @@
+.back-link {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--orange);
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+
+    .icon {
+        margin-right: .5rem;
+    }
+}

@@ -1,0 +1,17 @@
+.back-link {
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  color: var(--orange);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: bold;
+}
+
+.back-link .icon {
+  margin-right: .5rem;
+}
+/*# sourceMappingURL=BackLink.css.map */
