@@ -1,12 +1,16 @@
 .item-info-container {
+    margin: auto;
 
     .item-info {
         display: flex;
+        margin: auto;
+        width: auto;
+        justify-content: center;
 
         .item-image {
 
             .img {
-                width: 250px;
+                width: 300px;
                 height: auto;
 
                 img {
@@ -28,7 +32,8 @@
         }
 
         .item-description {
-            margin-left: 1rem;
+            margin-left: 2.5rem;
+            min-width: 400px;
 
             .link {
                 cursor: pointer;
@@ -40,14 +45,32 @@
             }
 
             .desc-block {
-                margin: .5rem 0;
+                padding: .7rem 0;            
+                display: flex;    
+                border-bottom: 1px solid #eee;
 
                 h3 {
                     font-size: 1.8rem;
                 }
+
+                .text {
+                    display: block;
+                    margin-left: 1rem;
+                }
                 
                 .bold {
                     font-weight: bold;
+                    width: 40%;
+                    position: relative;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        height: 95%;
+                        width: 1px;
+                        background-color: #ddd;
+                        right: 0;
+                    }
                 }
             }
         }

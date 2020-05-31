@@ -1,11 +1,20 @@
+.item-info-container {
+  margin: auto;
+}
+
 .item-info-container .item-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: auto;
+  width: auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .item-info-container .item-info .item-image .img {
-  width: 250px;
+  width: 300px;
   height: auto;
 }
 
@@ -26,7 +35,8 @@
 }
 
 .item-info-container .item-info .item-description {
-  margin-left: 1rem;
+  margin-left: 2.5rem;
+  min-width: 400px;
 }
 
 .item-info-container .item-info .item-description .link {
@@ -39,14 +49,34 @@
 }
 
 .item-info-container .item-info .item-description .desc-block {
-  margin: .5rem 0;
+  padding: .7rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #eee;
 }
 
 .item-info-container .item-info .item-description .desc-block h3 {
   font-size: 1.8rem;
 }
 
+.item-info-container .item-info .item-description .desc-block .text {
+  display: block;
+  margin-left: 1rem;
+}
+
 .item-info-container .item-info .item-description .desc-block .bold {
   font-weight: bold;
+  width: 40%;
+  position: relative;
+}
+
+.item-info-container .item-info .item-description .desc-block .bold::after {
+  content: '';
+  position: absolute;
+  height: 95%;
+  width: 1px;
+  background-color: #ddd;
+  right: 0;
 }
 /*# sourceMappingURL=ItemInfo.css.map */

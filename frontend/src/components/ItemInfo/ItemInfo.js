@@ -79,50 +79,52 @@ export default class ItemInfo extends Component {
         )
 
         return (
-            <div className="item-info-container">
-                <div className="item-info">
-                    <div className="item-image">
-                        <div className="img">
-                            <img src={ imageData } alt=""/>
+            <div className="medium-container">
+                <div className="item-info-container">
+                    <div className="item-info">
+                        <div className="item-image">
+                            <div className="img">
+                                <img src={ imageData } alt=""/>
+                            </div>
+                            <div className="shopping-cart">
+                                <h4 className="item-price">
+                                    Price: { item.price }
+                                </h4>
+                                <p>
+                                    Maximum quantity: { item.quantity }
+                                </p>
+                                <p>
+                                    <AddToShoppingCartBtn
+                                        showText={ true }
+                                        itemId={ item._id }
+                                    />
+                                </p>
+                            </div>
                         </div>
-                        <div className="shopping-cart">
-                            <h4 className="item-price">
-                                Price: { item.price }
-                            </h4>
-                            <p>
-                                Maximum quantity: { item.quantity }
-                            </p>
-                            <p>
-                                <AddToShoppingCartBtn
-                                    showText={ true }
-                                    itemId={ item._id }
-                                />
-                            </p>
-                        </div>
-                    </div>
-                    <div className="item-description">
-                        <div className="desc-block">
-                            <h3 className="bold">{ item.title }</h3>
-                        </div>
-                        <div className="desc-block">
-                            <span className="bold">Article: </span>
-                            { item.article || 'no article' }
-                        </div>
-                        <div className="desc-block">
-                            <span className="bold">Category: </span>
-                            { category ? <LinkToCategory category={ category } /> : 'loading...' }
-                        </div> 
-                        <div className="desc-block">
-                            <span className="bold">Description: </span>
-                            { item.description }
-                        </div> 
-                        <div className="desc-block">
-                            <span className="bold">Company: </span>
-                            { item.company }
-                        </div>
-                        <div className="desc-block">
-                            <span className="bold">Total orders: </span>
-                            { item.customers.length }
+                        <div className="item-description">
+                            <div className="desc-block">
+                                <h3>{ item.title }</h3>
+                            </div>
+                            <div className="desc-block">
+                                <span className="bold">Article: </span>
+                                <span className="text">{ item.article || 'no article' }</span>
+                            </div>
+                            <div className="desc-block">
+                                <span className="bold">Category: </span>
+                                <span className="text">{ category ? <LinkToCategory category={ category } /> : 'loading...' }</span>
+                            </div> 
+                            <div className="desc-block">
+                                <span className="bold">Description: </span>
+                                <span className="text">{ item.description }</span>
+                            </div> 
+                            <div className="desc-block">
+                                <span className="bold">Company: </span>
+                                <span className="text">{ item.company }</span>
+                            </div>
+                            <div className="desc-block">
+                                <span className="bold">Total orders: </span>
+                                <span className="text">{ item.customers.length }</span>
+                            </div>
                         </div>
                     </div>
                 </div>
