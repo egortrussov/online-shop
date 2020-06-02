@@ -65,7 +65,7 @@
   cursor: pointer;
 }
 
-.cart-grid .grid-line .cell.article, .cart-grid .grid-line .cell.max-quantity, .cart-grid .grid-line .cell.price, .cart-grid .grid-line .cell.quantity {
+.cart-grid .grid-line .cell.article, .cart-grid .grid-line .cell.max-quantity, .cart-grid .grid-line .cell.price, .cart-grid .grid-line .cell.quantity, .cart-grid .grid-line .cell.total-price {
   width: 200px;
 }
 

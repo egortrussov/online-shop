@@ -194,6 +194,9 @@ export default class ShoppingCartContainer extends Component {
                         <div className="cell max-quantity">
                             Max quantity
                         </div>
+                        <div className="cell total-price">
+                            Total price
+                        </div>
                     </div>
                     {
                         itemInfos.map(item => {
@@ -224,6 +227,9 @@ export default class ShoppingCartContainer extends Component {
                                     </div> 
                                     <div className="cell max-quantity">
                                         { item.quantity }
+                                    </div>
+                                    <div className="cell total-price">
+                                        { currItemQty * item.price }
                                     </div>
                                 </div>
                             )

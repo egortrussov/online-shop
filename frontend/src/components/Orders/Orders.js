@@ -6,6 +6,8 @@ import { Redirect } from 'react-router';
 
 import OrderLink from './OrderLink/OrderLink'
 
+import './css/Orders.css'
+
 export default class Orders extends Component {
 
     state = {
@@ -50,7 +52,7 @@ export default class Orders extends Component {
         )
 
         return (
-            <div>
+            <div className="orders-container">
                 {
                     orders.map(order => (
                         <OrderLink 
