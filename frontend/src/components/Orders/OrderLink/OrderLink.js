@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router'
 
 import { OrdersContext } from '../../../contexts/OrdersContext'
+import { formatDate } from '../../../middleware/dateFormat';
 
 export default class OrderLink extends Component {
     state = {
@@ -26,9 +27,17 @@ export default class OrderLink extends Component {
         )
 
         return (
-            <a onClick={ () => this.goToOrderPage() }>
-                price: { order.totalPrice }
-            </a>
+            <div className="order-link" onClick={ () => this.goToOrderPage() }>
+                <div className="date">
+                    { formatDate(order.date) }
+                </div>
+                <div className="price">
+                    Price: <br/>
+                    <div className="bold">
+                        { order.totalPrice }
+                    </div>
+                </div>
+            </div>
         )
     }
 }

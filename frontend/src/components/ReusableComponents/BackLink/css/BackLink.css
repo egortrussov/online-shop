@@ -9,6 +9,7 @@
       -ms-flex-align: center;
           align-items: center;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .back-link .icon {

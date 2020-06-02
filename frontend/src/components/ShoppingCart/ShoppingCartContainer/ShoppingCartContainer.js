@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom';
 
 export default class ShoppingCartContainer extends Component {
 
@@ -207,7 +208,10 @@ export default class ShoppingCartContainer extends Component {
                                     <div className="cell name">
                                         <button onClick={ () => this.deleteItem(item._id) } className="delete-item">
                                             <FontAwesomeIcon className="icon" icon={ faTimes } />
-                                        </button> { item.title }
+                                        </button> 
+                                        <Link to={ `/item/${ item._id}` }>
+                                            { item.title }
+                                        </Link>
                                     </div>
                                     <div className="cell article">
                                         { item.article }
