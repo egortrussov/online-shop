@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 
 import { AuthContext } from '../../contexts/AuthContext'
-import { OrdersContext } from '../../contexts/OrdersContext';
+import { OrdersContext } from '../../contexts/OrdersContext'
+
+import './css/OrderInfo.css'
+
+import { formatDate } from '../../middleware/dateFormat'
 
 export default class OrderInfo extends Component {
 
@@ -43,9 +47,29 @@ export default class OrderInfo extends Component {
         )
 
         return (
-            <div>
+            <div className="order-info-container medium-container">
                 { order ? (
-                    <h1>{ order.date }</h1>
+                    <>
+                        <h1>Order info</h1>
+                        <div className="order-cred">
+                            <span className="bold">
+                                Order id: 
+                            </span>
+                            { order._id }
+                        </div>
+                        <div className="order-cred">
+                            <span className="bold">
+                                Order date: 
+                            </span>
+                            { formatDate(order.date) }
+                        </div>
+                        <div className="order-cred">
+                            <span className="bold">
+                                Total price:
+                            </span>
+                            { order.totalPrice }
+                        </div>
+                    </>
                 ) : (
                     <OrdersContext.Consumer>
                         { value => {
