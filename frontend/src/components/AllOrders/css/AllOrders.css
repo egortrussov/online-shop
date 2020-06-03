@@ -1,0 +1,39 @@
+.orders-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 1rem;
+}
+
+.orders-container .order-link {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: pointer;
+}
+
+.orders-container .order-link .date {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.orders-container .order-link .price .bold {
+  font-weight: bold;
+  margin-left: .5rem;
+}
+
+.orders-container .order-link .price .bold.no-margin {
+  margin-left: 0;
+}
+/*# sourceMappingURL=AllOrders.css.map */
