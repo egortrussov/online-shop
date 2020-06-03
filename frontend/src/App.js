@@ -46,7 +46,7 @@ export default class App extends Component {
                                             <Route path="/item/:itemId" component={ ItemInfo } />
                                             <Route exact path="/profile" component={ Profile } />
                                             <Route exact path="/profile/orders" component={ Orders } />
-                                            <Route path="/profile/orders/:orderId" component={ OrderInfo } />
+                                            {/* <Route path="/profile/orders/:orderId" component={ OrderInfo } /> */}
                                             <Route path="/shoppingCart" component={ ShoppingCart } />
                                             <Route exact path="/adminPage" component={ AdminPage } />
                                             <Route path="/adminPage/createItem" component={ CreateItem } />

@@ -6,6 +6,10 @@
         display: flex;
         width: 100%;
 
+        &:hover {
+            background-color: rgba(#fa744f, .05);
+        }
+
         &.head {
             font-weight: bold;
             text-align: center;

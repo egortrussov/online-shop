@@ -21,7 +21,6 @@ export default class OrderItemsContainer extends Component {
 
         this.setState({
             ...this.state,
-            currentItemQtys: cartContext.items,
             authContext
         })
 
@@ -31,7 +30,7 @@ export default class OrderItemsContainer extends Component {
                 'Content-Type': 'application/json',
                 'x-auth-token': authContext.token
             },
-            body: JSON.stringify(cartContext.items)
+            body: JSON.stringify(items)
         })
             .then(res => res.json())
             .then(res => {
@@ -44,13 +43,20 @@ export default class OrderItemsContainer extends Component {
 
                 let totalPrice = 0;
 
-                cartContext.items.forEach(item => {
-                    totalPrice += res.items.find(itemInfo => itemInfo._id === item.itemId).price * item.quantity;
+                const itemInfos = res.items;
+
+                itemInfos.forEach(item => {
+                    let currItemQty = 1;
+                    items.forEach(currItem => {
+                        if (currItem.itemId === item._id) 
+                            currItemQty = currItem.quantity;
+                    })
+                    totalPrice += item.price * currItemQty;
                 })
 
                 this.setState({
                     ...this.state,
-                    itemInfos: res.items,
+                    itemInfos,
                     totalPrice,
                     isLoading: false
                 })
@@ -59,6 +65,7 @@ export default class OrderItemsContainer extends Component {
 
     render() {
         const { isLoading, itemInfos, currentItemQtys, totalPrice, isSubmitted } = this.state;
+        const { items } = this.props;
 
         if (isLoading) return (
             <h1>Loading...</h1>
@@ -80,43 +87,35 @@ export default class OrderItemsContainer extends Component {
                         <div className="cell quantity">
                             Quantity
                         </div>
-                        <div className="cell max-quantity">
-                            Max quantity
-                        </div>
                         <div className="cell total-price">
                             Total price
                         </div>
                     </div>
                     {
                         itemInfos.map(item => {
+
                             let currItemQty = 1;
-                            currentItemQtys.forEach(cartItem => {
-                                if (cartItem.itemId === item._id) 
-                                    currItemQty = cartItem.quantity;
+                            items.forEach(currItem => {
+                                if (currItem.itemId === item._id) 
+                                    currItemQty = currItem.quantity;
                             })
 
                             return (
                                 <div className="grid-line">
                                     <div className="cell name">
-                                        <button onClick={ () => this.deleteItem(item._id) } className="delete-item">
-                                            <FontAwesomeIcon className="icon" icon={ faTimes } />
-                                        </button> 
                                         <Link to={ `/item/${ item._id}` }>
                                             { item.title }
                                         </Link>
                                     </div>
                                     <div className="cell article">
-                                        { item.article }
+                                        { item.article || '-' }
                                     </div>
                                     <div className="cell price">
                                         { item.price }
                                     </div>
                                     <div className="cell quantity">
-                                        <input type="text" onChange={ (e) => this.setItemQuantity(e, item._id) } value={ currItemQty } />
+                                        { currItemQty }
                                     </div> 
-                                    <div className="cell max-quantity">
-                                        { item.quantity }
-                                    </div>
                                     <div className="cell total-price">
                                         { currItemQty * item.price }
                                     </div>
@@ -125,11 +124,6 @@ export default class OrderItemsContainer extends Component {
                         })
                     }
                 </div>
-                <h3 className="price">Total price: { totalPrice }</h3>
-                <button className="btn btn-cta lg" onClick={ () => this.createOrder() }>Order!</button>
-                {
-                    isSubmitted && <span>waiting...</span>
-                }
             </div>
         )
     }

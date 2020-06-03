@@ -15,6 +15,10 @@
   width: 100%;
 }
 
+.cart-grid .grid-line:hover {
+  background-color: rgba(250, 116, 79, 0.05);
+}
+
 .cart-grid .grid-line.head {
   font-weight: bold;
   text-align: center;

@@ -23,7 +23,7 @@ export default class OrderLink extends Component {
         const { order } = this.props;
 
         if (isRedirectToOrderPage) return (
-            <Redirect to={ `/profile/orders/${ order._id }` } />
+            <Redirect to={ `/order/${ order._id }` } />
         )
 
         return (
