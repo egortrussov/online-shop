@@ -147,7 +147,7 @@ export default class ShoppingCartContainer extends Component {
                 console.log(res)
                 if (res.success) {
                     cartContext.clearCart();
-                    window.location.href = `/profile/orders/${ res.order._id }`;
+                    window.location.href = `/order/${ res.order._id }`;
                 } else {
                     if (res.isTokenError) {
                         authContext.logout();

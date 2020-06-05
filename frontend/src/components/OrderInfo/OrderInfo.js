@@ -32,10 +32,43 @@ export default class OrderInfo extends Component {
         })
             .then(res => res.json())
             .then(res => {
-                this.setState({
-                    isLoading: false,
-                    order: res.order
-                })
+                let { order } = res;
+
+                if (!order.adress) {
+                    if (order.userId === this.context.user._id) {
+                        order.adress = this.context.user.adress;
+                        console.log(this.context.user.adress)
+                        this.setState({
+                            isLoading: false,
+                            order: {
+                                ...order,
+                                adress: this.context.user.adress
+                            }
+                        })
+                    } else {
+                        
+                        fetch(`${ this.context.proxy }/api/users/userInfo/${ order.userId }`, {
+                            method: 'GET',
+                            headers: {
+                                'x-auth-token': this.context.token
+                            }
+                        })
+                            .then(res => res.json())
+                            .then(res => {
+                                order.adress = res.user.adress;
+                                console.log(order.adress)
+                                this.setState({
+                                    isLoading: false,
+                                    order
+                                })
+                            })
+                    }
+                } else {
+                    this.setState({
+                        isLoading: false,
+                        order
+                    })
+                }
             })
     }
 
@@ -73,6 +106,12 @@ export default class OrderInfo extends Component {
                         Total price:
                     </span>
                     { order.totalPrice }
+                </div>
+                <div className="order-cred">
+                    <span className="bold">
+                        Adress:
+                    </span>
+                    { order.adress }
                 </div>
                 <OrderItemsContainer 
                     items={ order.items }

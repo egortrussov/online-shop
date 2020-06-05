@@ -13,7 +13,8 @@ export default class AllOrders extends Component {
         isLoading: true,
         orders: null,
         isRedirectToOrderPage: false,
-        orderIdToRedirect: null
+        orderIdToRedirect: null,
+        userInfo: null
     }
 
     static contextType = AuthContext;

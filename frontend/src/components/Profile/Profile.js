@@ -40,16 +40,16 @@ export default class Profile extends Component {
                         <div className="bold">Is company: </div>
                         { user.isCompany ? 'yes' : 'no' }
                     </div>
+                    <div className="profile-card-block">
+                        <div className="bold">Adress: </div>
+                        { user.adress || user.companyInfo.adress }
+                    </div>
                     {
                         user.isCompany && (
                             <>
                                 <div className="profile-card-block">
                                     <div className="bold">BIN: </div>
                                     { user.companyInfo.bin }
-                                </div>
-                                <div className="profile-card-block">
-                                    <div className="bold">Adress: </div>
-                                    { user.companyInfo.adress }
                                 </div>
                             </>
                         )

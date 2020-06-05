@@ -14,9 +14,9 @@ const UserSchema = new mongoose.Schema({
     orders: [String],
     isAdmin: Boolean,
     isCompany: Boolean,
+    adress: String,
     companyInfo: {
         name: String,
-        adress: String,
         bin: String,
         contacts: [{
             contactType: String,

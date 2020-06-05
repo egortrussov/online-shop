@@ -52,9 +52,9 @@ export default class Register extends Component {
                 email: formData.get('email'),
                 isCompany,
                 password: formData.get('password'),
+                adress: formData.get('adress'),
                 companyInfo: {
                     name: formData.get('companyName'),
-                    adress: formData.get('companyAdress'),
                     bin: formData.get('companyBin'),
                     contacts: [{
                         contact: formData.get('contact'),
@@ -104,12 +104,13 @@ export default class Register extends Component {
                             </>
                         )
                     }
+                    <InputField type="text" label="Adress" name="adress" />
                     <InputField type="password" label="Password" name="password" />
                     {
                         isCompany && (
                             <>
                                 <InputField type="text" label="Company name" name="companyName" />
-                                <InputField type="text" label="Company adress" name="companyAdress" />
+                                
                                 <InputField type="text" label="Company BIN" name="companyBIN" />
 
                                 <div>
