@@ -101,3 +101,7 @@ button.add-to-shopping-cart-btn.active {
   margin: auto;
   padding: 1rem;
 }
+
+button:focus, input:focus {
+  outline: none;
+}

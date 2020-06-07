@@ -26,7 +26,7 @@ const router = express.Router();
     @Response: {
         success <true, false>, user
     }
-*/
+*/  
 router.get('/userInfo/:userId', auth, (req, res) => {
     const userId = req.params.userId;
     User 

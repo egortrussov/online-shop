@@ -113,4 +113,8 @@
 h3.price {
   margin: 1rem 0;
 }
+
+.empty-cart-msg {
+  text-align: center;
+}
 /*# sourceMappingURL=style.css.map */

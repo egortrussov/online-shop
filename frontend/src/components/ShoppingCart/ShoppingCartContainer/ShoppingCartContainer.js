@@ -169,10 +169,16 @@ export default class ShoppingCartContainer extends Component {
     }
 
     render() {
-        const { isLoading, itemInfos, currentItemQtys, totalPrice, isSubmitted } = this.state;
+        const { isLoading, itemInfos, currentItemQtys, totalPrice, isSubmitted, items } = this.state;
 
         if (isLoading) return (
             <h1>Loading...</h1>
+        )
+
+        if (!currentItemQtys.length) return (
+            <h1 className="empty-cart-msg">
+                Cart is empty!
+            </h1>
         )
 
         return (
