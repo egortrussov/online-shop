@@ -223,7 +223,7 @@ export default class ShoppingCartContainer extends Component {
                                         </Link>
                                     </div>
                                     <div className="cell article">
-                                        { item.article }
+                                        { item.article || '-' }
                                     </div>
                                     <div className="cell price">
                                         { item.price }

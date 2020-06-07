@@ -9,7 +9,8 @@ export default class CategoriesList extends Component {
     state = {
         isLoading: true,
         categories: this.props.categories,
-        currentCategory: null
+        currentCategory: null,
+        isActive: true
     }
 
     static contextType = AuthContext;
@@ -53,16 +54,25 @@ export default class CategoriesList extends Component {
             currentCategory: category
         })
     }
-    
+
+    toggleBlock() {
+        this.setState({
+            ...this.state,
+            isActive: !this.state.isActive
+        })
+    }    
 
     render() {
-        const { isLoading, categories, currentCategory } = this.state;
+        const { isLoading, categories, currentCategory, isActive } = this.state;
         console.log(categories)
 
         if (isLoading) return <h1>Loading</h1>
 
         return (
-            <div className="categories-container">
+            <div className={ `categories-container ${ isActive && 'active' }` }>
+                <button className="toggle-view">
+                    toggle
+                </button>
                 {
                     categories ? categories.map(category => {
                         let extraClassName = ''
