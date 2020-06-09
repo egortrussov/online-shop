@@ -5,6 +5,10 @@
   margin: 0 auto 1.3rem auto !important;
 }
 
+input {
+  font-family: 'Nunito' !important;
+}
+
 .input-group.mini {
   max-width: 250px;
 }
@@ -42,6 +46,11 @@
   box-shadow: none !important;
   background: none !important;
   background-color: transparent !important;
+}
+
+.input-group.mini {
+  margin-left: 0 !important;
+  margin-top: 1rem !important;
 }
 
 .input-group > label {

@@ -5,7 +5,8 @@ export const ShoppingCartContext = createContext();
 
 class ShoppingCartContextProvider extends Component {
     state = {
-        items: ls.get('shoppingCart') || []
+        items: ls.get('shoppingCart') || [],
+        adress: ''
     }
 
     componentWillMount() {
@@ -63,6 +64,11 @@ class ShoppingCartContextProvider extends Component {
         ls.set('shoppingCart', []);
     }
 
+    setAdress(adress) {
+        this.adress = adress;
+        ls.set('adress', adress);
+    }
+
     render() {
 
         return (
@@ -72,7 +78,8 @@ class ShoppingCartContextProvider extends Component {
                     addToShoppingCart: this.addToShoppingCart,
                     deleteItem: this.deleteItem,
                     changeItemQuantity: this.changeItemQuantity,
-                    clearCart: this.clearCart
+                    clearCart: this.clearCart,
+                    setAdress: this.setAdress
                 } }
             >
                 { this.props.children }

@@ -2,7 +2,11 @@
     position: relative;
     width: 100%;
     max-width: 400px;
-    margin: 0 auto 1.3rem auto !important
+    margin: 0 auto 1.3rem auto !important;
+}
+
+input {
+    font-family: 'Nunito' !important;
 }
 
 .input-group.mini {
@@ -44,6 +48,11 @@
     background-color: transparent !important;
     // -webkit-box-shadow: 0 0 0 30px var(--main-bg-color) inset !important;
     // -webkit-text-fill-color: var(--main-text-color) !important;
+}
+
+.input-group.mini {
+    margin-left: 0 !important;
+    margin-top: 1rem !important;
 }
 
 .input-group > label {

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
+import InputField from '../../ReusableComponents/InputField/InputField';
 
 export default class ShoppingCartContainer extends Component {
 
@@ -13,17 +14,22 @@ export default class ShoppingCartContainer extends Component {
         authContext: null,
         cartContext: null,
         totalPrice: 0,
-        isSubmitted: false
+        isSubmitted: false,
+        adress: null
     }
 
     componentDidMount() {
         const { authContext, cartContext } = this.props;
 
+        let currentAdress = cartContext.adress || authContext.user.adress || authContext.user.companyInfo.adress;
+        console.log(authContext.user)
+
         this.setState({
             ...this.state,
             currentItemQtys: cartContext.items,
             cartContext,
-            authContext
+            authContext,
+            adress: currentAdress
         })
 
         fetch(`${ authContext.proxy }/api/items/shoppingCartItems`, {
@@ -92,6 +98,17 @@ export default class ShoppingCartContainer extends Component {
         this.setState({
             ...this.state,
             itemInfos
+        })
+    }
+
+    setAdress(e) {
+        const { cartContext } = this.state;
+
+        cartContext.setAdress(e.target.value);
+
+        this.setState({
+            ...this.state,
+            adress: e.target.value
         })
     }
 
@@ -169,7 +186,7 @@ export default class ShoppingCartContainer extends Component {
     }
 
     render() {
-        const { isLoading, itemInfos, currentItemQtys, totalPrice, isSubmitted, items } = this.state;
+        const { isLoading, itemInfos, currentItemQtys, totalPrice, isSubmitted, items, adress } = this.state;
 
         if (isLoading) return (
             <h1>Loading...</h1>
@@ -242,6 +259,7 @@ export default class ShoppingCartContainer extends Component {
                         })
                     }
                 </div>
+                <InputField label="Delivery adress: " onChange={ this.setAdress } value={ adress } type="text" name="adress" isMini={ true } />
                 <h3 className="price">Total price: { totalPrice }</h3>
                 <button className="btn btn-cta lg" onClick={ () => this.createOrder() }>Order!</button>
                 {

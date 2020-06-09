@@ -2,7 +2,7 @@ import React from 'react'
 
 import './css/style.css'
 
-const InputField = ({ label, onChange, name, type, value }) => {
+const InputField = ({ label, onChange, name, type, value, isMini }) => {
 
     if (type === 'textarea' && onChange && value) return (
         <div className="input-group">
@@ -22,11 +22,14 @@ const InputField = ({ label, onChange, name, type, value }) => {
         </div>
     )
 
+    console.log(onChange, value)
+
+    if (onChange && value) console.log('kokoko')
     if (onChange && value) return (
-        <div className="input-group">
+        <div className={ `input-group ${ isMini ? 'mini' : '' }` }>
             
             <span className="input-label">{ label }</span>
-            <input autoComplete={ name === 'email' ? "true" : "false" } onChange={ (e) => onChange(e, name) }  type={ type } name={ name } value={ value || '' }  />
+            <input className={ `${ isMini ? 'mini' : '' }` } autoComplete={ name === 'email' ? "true" : "false" } onChange={ (e) => onChange(e, name) }  type={ type } name={ name } value={ value || '' }  />
             <label htmlFor={ name }></label> 
         </div>
     )
