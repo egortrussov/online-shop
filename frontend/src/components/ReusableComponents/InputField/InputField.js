@@ -21,10 +21,7 @@ const InputField = ({ label, onChange, name, type, value, isMini }) => {
             <label htmlFor={ name }></label> 
         </div>
     )
-
-    console.log(onChange, value)
-
-    if (onChange && value) console.log('kokoko')
+    
     if (onChange && value) return (
         <div className={ `input-group ${ isMini ? 'mini' : '' }` }>
             

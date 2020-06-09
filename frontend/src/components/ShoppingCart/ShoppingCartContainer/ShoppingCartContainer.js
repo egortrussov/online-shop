@@ -113,7 +113,7 @@ export default class ShoppingCartContainer extends Component {
     }
 
     createOrder() {
-        const { cartContext, currentItemQtys, itemInfos, authContext, isSubmitted } = this.state;
+        const { cartContext, currentItemQtys, itemInfos, authContext, isSubmitted, adress } = this.state;
 
         if (isSubmitted) 
             return;
@@ -148,7 +148,8 @@ export default class ShoppingCartContainer extends Component {
         let request = {
             userId: authContext.user._id,
             totalPrice,
-            items: currentItemQtys
+            items: currentItemQtys,
+            adress
         }
         
         fetch(`${ authContext.proxy }/api/orders/newOrder`, {
@@ -259,7 +260,7 @@ export default class ShoppingCartContainer extends Component {
                         })
                     }
                 </div>
-                <InputField label="Delivery adress: " onChange={ this.setAdress } value={ adress } type="text" name="adress" isMini={ true } />
+                <InputField label="Delivery adress: " onChange={ (e) => this.setAdress(e) } value={ adress } type="text" name="adress" isMini={ true } />
                 <h3 className="price">Total price: { totalPrice }</h3>
                 <button className="btn btn-cta lg" onClick={ () => this.createOrder() }>Order!</button>
                 {

@@ -53,6 +53,12 @@ input {
   margin-top: 1rem !important;
 }
 
+.input-group.mini .input-label {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: .5rem;
+}
+
 .input-group > label {
   position: absolute;
   width: 0px;

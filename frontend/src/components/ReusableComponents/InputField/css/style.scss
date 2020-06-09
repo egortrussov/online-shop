@@ -53,6 +53,18 @@ input {
 .input-group.mini {
     margin-left: 0 !important;
     margin-top: 1rem !important;
+    // display: flex;
+    // flex-flow: wrap;
+    // position: relative;
+    // width: 100% !important;
+    // max-width: 100%;
+    // align-items: center;
+
+    .input-label {
+        font-weight: bold;
+        display: inline-block;
+        margin-right: .5rem;
+    }
 }
 
 .input-group > label {

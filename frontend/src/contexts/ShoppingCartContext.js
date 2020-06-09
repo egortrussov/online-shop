@@ -6,7 +6,7 @@ export const ShoppingCartContext = createContext();
 class ShoppingCartContextProvider extends Component {
     state = {
         items: ls.get('shoppingCart') || [],
-        adress: ''
+        adress: ls.get('adress') || ''
     }
 
     componentWillMount() {
