@@ -23,7 +23,7 @@
 }
 
 @mixin tablet-sm {
-    @media (max-width: 770px) {
+    @media (max-width: 810px) {
         @content;
     }
 }

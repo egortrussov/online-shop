@@ -10,6 +10,9 @@ nav {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 1rem;
+  background-color: #fff;
+  z-index: 200;
+  position: relative;
 }
 
 nav .nav-right {

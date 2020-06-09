@@ -10,7 +10,7 @@ export default class CategoriesList extends Component {
         isLoading: true,
         categories: this.props.categories,
         currentCategory: null,
-        isActive: true
+        isActive: false
     }
 
     static contextType = AuthContext;
@@ -64,29 +64,36 @@ export default class CategoriesList extends Component {
 
     render() {
         const { isLoading, categories, currentCategory, isActive } = this.state;
-        console.log(categories)
 
         if (isLoading) return <h1>Loading</h1>
 
         return (
-            <div className={ `categories-container ${ isActive && 'active' }` }>
-                <button className="toggle-view">
-                    toggle
-                </button>
-                {
-                    categories ? categories.map(category => {
-                        let extraClassName = ''
-                        if (currentCategory) 
-                            extraClassName = category._id === currentCategory._id ? 'active' : ''
+            <>
+                
+                <div className={ `categories-container ${ isActive ? 'active' : '' }` }>
+                    
+                    <div className="toggle-btn-container">
+                        <button onClick={ () => this.toggleBlock() } className="toggle-view">
+                            toggle
+                        </button>
+                    </div>                
+                    {
+                        categories ? categories.map(category => {
+                            let extraClassName = ''
+                            if (currentCategory) 
+                                extraClassName = category._id === currentCategory._id ? 'active' : ''
 
-                        return (
-                            <div className="list-item">
-                                <button className={ extraClassName } onClick={ () => this.setCategory(category) }>{ category.name }</button>
-                            </div>
-                        )
-                    }) : <></>
-                }
-            </div>
+                            return (
+                                <div className="list-item">
+                                    <button className={ extraClassName } onClick={ () => this.setCategory(category) }>{ category.name }</button>
+                                </div>
+                            )
+                        }) : <></>
+                    }                
+                </div>
+
+                <div className={ `overlay ${ isActive ? 'active' : '' }` }></div>
+            </>
         )
     }
 }
