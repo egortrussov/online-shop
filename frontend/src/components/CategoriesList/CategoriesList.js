@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 
 import { AuthContext } from '../../contexts/AuthContext'
 
-import './css/CategoriesList.css'
+import './css/CategoriesList.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 export default class CategoriesList extends Component {
 
@@ -51,7 +54,8 @@ export default class CategoriesList extends Component {
         this.props.setCategory(category);
         this.setState({
             ...this.state,
-            currentCategory: category
+            currentCategory: category,
+            isActive: false
         })
     }
 
@@ -74,7 +78,7 @@ export default class CategoriesList extends Component {
                     
                     <div className="toggle-btn-container">
                         <button onClick={ () => this.toggleBlock() } className="toggle-view">
-                            toggle
+                            <FontAwesomeIcon icon={ faBars } />
                         </button>
                     </div>                
                     {
@@ -92,7 +96,11 @@ export default class CategoriesList extends Component {
                     }                
                 </div>
 
-                <div className={ `overlay ${ isActive ? 'active' : '' }` }></div>
+                {
+                    window.innerWidth <= 810 &&
+                    <div onClick={ () => this.toggleBlock() } className={ `overlay ${ isActive ? 'active' : '' }` }></div>
+
+                }
             </>
         )
     }

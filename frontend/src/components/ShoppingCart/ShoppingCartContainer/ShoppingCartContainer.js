@@ -199,8 +199,16 @@ export default class ShoppingCartContainer extends Component {
             </h1>
         )
 
+        if (!itemInfos.length) return (
+            <h1 className="empty-cart-msg">
+                Cart is empty!
+            </h1>
+        )
+
         return (
             <div className="medium-container">
+                <div className="cart-cont">
+
                 <div className="cart-grid">
                     <div className="grid-line head">
                         <div className="cell name">
@@ -259,6 +267,7 @@ export default class ShoppingCartContainer extends Component {
                             )
                         })
                     }
+                </div>
                 </div>
                 <InputField label="Delivery adress: " onChange={ (e) => this.setAdress(e) } value={ adress } type="text" name="adress" isMini={ true } />
                 <h3 className="price">Total price: { totalPrice }</h3>

@@ -6,6 +6,7 @@
 
 body {
   font-family: 'Nunito', sans-serif !important;
+  overflow-x: hidden;
   /* background-color: #fdf2ee; */
 
   --orange: #fa744f;

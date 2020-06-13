@@ -13,8 +13,8 @@
   .categories-container {
     position: fixed;
     height: 100%;
-    -webkit-transform: translate(-100%, -20%);
-            transform: translate(-100%, -20%);
+    -webkit-transform: translate(-100%, -2rem);
+            transform: translate(-100%, -2rem);
     z-index: 200;
     -webkit-transition: all .2s;
     transition: all .2s;
@@ -25,7 +25,24 @@
   }
   .categories-container .toggle-btn-container button {
     position: absolute;
-    right: -100px;
+    left: 100%;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #eee;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    background-color: #fff;
+    color: var(--orange);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-size: 1.2rem;
   }
   .categories-container.active {
     -webkit-transform: translate(0%, -2rem);
@@ -77,6 +94,7 @@
   background-color: rgba(0, 0, 0, 0);
   -webkit-transition: all .1s;
   transition: all .1s;
+  z-index: -100;
 }
 
 .overlay.active {

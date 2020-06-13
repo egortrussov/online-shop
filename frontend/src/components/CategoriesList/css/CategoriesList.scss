@@ -4,7 +4,7 @@
     @include tablet-sm {
         position: fixed;
         height: 100%;
-        transform: translate(-100%, -20%);
+        transform: translate(-100%, -2rem);
         // top: 0rem;
         z-index: 200;
         transition: all .2s;
@@ -15,9 +15,18 @@
 
             button {
                 position: absolute;
-
-
-                right: -100px;
+                left: 100%;
+                width: 40px;
+                height: 40px;
+                border: 1px solid #eee;
+                border-top-right-radius: 7px;
+                border-bottom-right-radius: 7px;
+                background-color: #fff;
+                color: var(--orange);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
             }
         }
 
@@ -76,6 +85,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0);
     transition: all .1s;
+    z-index: -100;
 
     &.active {
         z-index: 199;

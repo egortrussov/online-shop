@@ -72,7 +72,7 @@ export default class OrderItemsContainer extends Component {
         )
 
         return (
-            <div className="medium-container">
+            <div className="medium-container cart-cont">
                 <div className="cart-grid">
                     <div className="grid-line head">
                         <div className="cell name">

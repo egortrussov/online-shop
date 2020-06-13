@@ -1,6 +1,12 @@
+.cart-cont {
+    width: 100%;
+    overflow-x: scroll;
+}
+
 .cart-grid {
     display: flex;
     flex-direction: column;
+    min-width: 660px;
 
     .grid-line {
         display: flex;

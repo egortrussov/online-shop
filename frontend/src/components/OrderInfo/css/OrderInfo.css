@@ -1,3 +1,8 @@
+.cart-cont {
+  width: 100%;
+  overflow-x: scroll;
+}
+
 .cart-grid {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6,6 +11,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  min-width: 660px;
 }
 
 .cart-grid .grid-line {
