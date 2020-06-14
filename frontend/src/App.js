@@ -25,6 +25,7 @@ import UpdateItem from './components/UpdateItem/UpdateItem'
 import AllOrders from './components/AllOrders/AllOrders'
 
 import './App.css'
+import GlobalSearchBlock from './components/GlobalSearchBlock/GlobalSearchBlock'
 
 export default class App extends Component {
 
@@ -38,6 +39,7 @@ export default class App extends Component {
                             <ItemContextProvider>
                                 <main>
                                     <Navbar />
+                                    <GlobalSearchBlock />
                                     <div className="app-container">
                                         <Switch>
                                             <Route path="/login" component={ Login } /> 
