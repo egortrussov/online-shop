@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react'
+import ls from 'local-storage'
 
 import { ItemContext } from '../../contexts/ItemContext';
 
@@ -10,7 +11,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 export default class GlobalSearchBlock extends Component {
 
     state = {
-
+        isRedirect: false
     }
 
     constructor(props) {
@@ -27,11 +28,14 @@ export default class GlobalSearchBlock extends Component {
         let text = this.inputEl.current.value;
 
         this.context.setCurrentSearchText(text);
+        this.context.setSearchType('name');
+        ls.set('currentSearchText', text)
 
         window.location.href = "/items";
     } 
 
     render() {
+
         return (
             <div className="search-bl">
                 <Link to="/items" className="items-link">

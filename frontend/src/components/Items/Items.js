@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react'
+import ls from 'local-storage'
 
 import { Link } from 'react-router-dom'
 
@@ -17,7 +18,8 @@ export default class Items extends Component {
         searchType: 'category',
         currentSearchType: null,
         items: [],
-        categories: null
+        categories: null,
+        isCategoryChosen: false
     }
 
     static contextType = ItemContext;
@@ -28,7 +30,7 @@ export default class Items extends Component {
         this.articleFormRef = createRef();
         this.itemNameFormRef = createRef();
         this.searchCreds = createRef();
-    }    
+    }        
 
     loadItems() {
         const { category } = this.state;
@@ -41,7 +43,6 @@ export default class Items extends Component {
         fetch(`${ this.context.proxy }/api/items/categoryItems/${ category._id }`)
             .then(res => res.json())
             .then(res => {
-                console.log(res)
                 let { items } = res;
                 this.setState({
                     items: res.items,
@@ -67,7 +68,6 @@ export default class Items extends Component {
                                 for (let i = 0; i < items.length; i++) {
                                     let currItem = items[i];
                                     if (currItem._id === item._id) {
-                                        console.log(i)
                                         items[i].imageData = base64data;
                                         update()
                                         break;
@@ -80,7 +80,6 @@ export default class Items extends Component {
     }
 
     componentDidMount() {
-        console.log(this.context.categories ? false : true)
         this.setState({
             category: this.context.currentCategory,
             items: this.context.items,
@@ -88,8 +87,16 @@ export default class Items extends Component {
             categories: this.context.categories,
             currentSearchType: this.context.currentSearchType
         }, () => {
-            if (this.context.currentCategory) 
+            if (ls.get('currentSearchText')) {
+                this.findItemsByName(ls.get('currentSearchText'))
+                ls.set('currentSearchText', '')
+                this.setState({
+                    ...this.state,
+                    isCategoryChosen: true
+                })
+            } else if (this.context.currentCategory) {
                 this.loadItems()
+            }                
         })
     }
 
@@ -114,7 +121,6 @@ export default class Items extends Component {
 
     findItemByArticle(article) {
         this.context.setSearchType('article');
-        console.log(article)
 
         this.setState({
             ...this.state,
@@ -162,7 +168,6 @@ export default class Items extends Component {
                             for (let i = 0; i < items.length; i++) {
                                 let currItem = items[i];
                                 if (currItem._id === item._id) {
-                                    console.log(i)
                                     items[i].imageData = base64data;
                                     update()
                                     break;
@@ -214,7 +219,6 @@ export default class Items extends Component {
                                 for (let i = 0; i < items.length; i++) {
                                     let currItem = items[i];
                                     if (currItem._id === item._id) {
-                                        console.log(i)
                                         items[i].imageData = base64data;
                                         update()
                                         break;
@@ -267,7 +271,6 @@ export default class Items extends Component {
                                 for (let i = 0; i < items.length; i++) {
                                     let currItem = items[i];
                                     if (currItem._id === item._id) {
-                                        console.log(i)
                                         items[i].imageData = base64data;
                                         update()
                                         break;
@@ -284,7 +287,6 @@ export default class Items extends Component {
             currentSearchType: type
         })
         this.context.setSearchType(type)
-        console.log(type)
     }
 
     findItems(e) {
@@ -294,7 +296,6 @@ export default class Items extends Component {
         const formData = new FormData(formEl);
 
         const { currentSearchType } = this.state;
-        console.log(currentSearchType)
 
         const searchText = formData.get('name');
 
@@ -318,18 +319,14 @@ export default class Items extends Component {
     }
 
     render() {
-        const { category, isLoading, items, searchType, categories, currentSearchType } = this.state;
-
-        console.log(currentSearchType)
-
-        console.log(categories, 'categ', categories ? false : true)
+        const { category, isLoading, items, searchType, categories, currentSearchType, isCategoryChosen } = this.state;
 
         return (
             <div className="content-container">
                 <CategoriesList 
                     setCategory={ (category) => this.setCategory(category) }
                     searchType={ searchType }
-                    isCategoryChosen={ category ? true : false } 
+                    isCategoryChosen={ isCategoryChosen || (category ? true : false) } 
                     hasToLoadCategories={ categories ? false : true }
                     itemContext={ this.context }
                     currentCategory={ category }
