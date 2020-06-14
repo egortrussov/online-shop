@@ -1,3 +1,5 @@
+@import '../../css/config.scss';
+
 .content-container {
     display: flex;
 
@@ -126,6 +128,35 @@
     }
 }
 
+.search-block {
+  @include tablet-xsm {
+    display: initial !important;
+  }
+
+  form {
+    display: flex;
+    height: auto;
+
+    input {
+      @include tablet-xsm {
+        width: auto !important;
+        min-width: auto;
+        width: 100% !important;
+      }
+
+    }
+    .btn-submit {
+      @include tablet-xsm {
+        height: 100% !important;
+        min-height: 100% !important;
+        padding: 1.5rem !important;
+        display: block;
+        margin: 0;
+        height: 32px !important
+      }
+    }
+  }
+}
 
 // custom select
 

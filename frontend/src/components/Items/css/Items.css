@@ -148,6 +148,38 @@
   background-color: var(--orange);
 }
 
+@media (max-width: 650px) {
+  .search-block {
+    display: initial !important;
+  }
+}
+
+.search-block form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: auto;
+}
+
+@media (max-width: 650px) {
+  .search-block form input {
+    width: auto !important;
+    min-width: auto;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .search-block form .btn-submit {
+    height: 100% !important;
+    min-height: 100% !important;
+    padding: 1.5rem !important;
+    display: block;
+    margin: 0;
+    height: 32px !important;
+  }
+}
+
 .custom-select {
   position: relative;
 }

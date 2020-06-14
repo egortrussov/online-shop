@@ -59,10 +59,11 @@ export default class CategoriesList extends Component {
         })
     }
 
-    toggleBlock() {
+    toggleBlock(toFalse) {
+        let newState = toFalse ? false : !this.state.isActive;
         this.setState({
             ...this.state,
-            isActive: !this.state.isActive
+            isActive: newState
         })
     }    
 
@@ -98,7 +99,7 @@ export default class CategoriesList extends Component {
 
                 {
                     window.innerWidth <= 810 &&
-                    <div onClick={ () => this.toggleBlock() } className={ `overlay ${ isActive ? 'active' : '' }` }></div>
+                    <div onClick={ () => this.toggleBlock(true) } className={ `overlay ${ isActive ? 'active' : '' }` }></div>
 
                 }
             </>
