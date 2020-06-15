@@ -10,6 +10,12 @@
   width: 100%;
 }
 
+@media (max-width: 650px) {
+  .content-container .content {
+    margin-top: 1rem;
+  }
+}
+
 .content-container .search-block {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -62,6 +68,15 @@
   color: #000;
 }
 
+@media (max-width: 650px) {
+  .content-container .items-container .item-card {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .content-container .items-container .item-card a {
   color: #000;
 }
@@ -69,6 +84,15 @@
 .content-container .items-container .item-card .card-left {
   width: 150px;
   height: 150px;
+}
+
+@media (max-width: 650px) {
+  .content-container .items-container .item-card .card-left {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: auto;
+  }
 }
 
 .content-container .items-container .item-card .card-left img {
@@ -117,14 +141,51 @@
           flex-direction: column;
 }
 
+@media (max-width: 650px) {
+  .content-container .items-container .item-card .card-right {
+    text-align: initial;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
 .content-container .items-container .item-card .card-right .price {
   font-size: 1.1rem;
   font-weight: bold;
 }
 
+@media (max-width: 650px) {
+  .content-container .items-container .item-card .card-right .price {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
 .content-container .items-container .item-card .card-right .price span {
   font-size: .9rem;
   font-weight: normal;
+}
+
+@media (max-width: 650px) {
+  .content-container .items-container .item-card .card-right .price span {
+    margin-right: .3rem;
+  }
 }
 
 .content-container .items-container .item-card .card-right .bottom {
@@ -182,6 +243,13 @@
 
 .custom-select {
   position: relative;
+}
+
+@media (max-width: 650px) {
+  .custom-select {
+    width: 100% !important;
+    margin-bottom: .5rem;
+  }
 }
 
 .select-items {

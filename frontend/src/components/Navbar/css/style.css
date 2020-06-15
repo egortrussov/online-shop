@@ -12,7 +12,7 @@ nav {
   padding: 1rem;
   background-color: #fff;
   z-index: 200;
-  position: relative;
+  position: fixed;
 }
 
 nav .nav-right {

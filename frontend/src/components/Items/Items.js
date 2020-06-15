@@ -369,7 +369,7 @@ export default class Items extends Component {
                                                 </div>
                                             </Link>
                                             <div className="card-right">
-                                                <h4 className="price"> <span>Price: </span> <br/> { item.price }</h4>
+                                                <div className="price"> <span>Price: </span> { item.price }</div>
                                                 <div className="bottom">
                                                     <AddToShoppingCartBtn itemId={ item._id } />
                                                 </div>
