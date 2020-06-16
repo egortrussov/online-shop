@@ -28,6 +28,12 @@
     }
 }
 
+@mixin tablet-smm {
+    @media (max-width: 770px) {
+        @content;
+    }
+}
+
 @mixin tablet-xsm {
     @media (max-width: 650px) {
         @content;

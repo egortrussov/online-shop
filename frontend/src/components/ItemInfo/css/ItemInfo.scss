@@ -1,15 +1,40 @@
+@import '../../css/config.scss';
+
 .item-info-container {
+    @include tablet-smm {
+        width: 100%;
+        margin: initial;
+    }
+
     margin: auto;
 
     .item-info {
+        @include tablet-smm {
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+        }
+
         display: flex;
         margin: auto;
         width: auto;
         justify-content: center;
 
         .item-image {
+            @include tablet-smm {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
 
             .img {
+                @include tablet-smm {
+                    margin: auto;
+                    width: 100%;
+                    max-width: 300px;
+                }
+
                 width: 300px;
                 height: auto;
 
@@ -19,6 +44,13 @@
             }
 
             .shopping-cart {
+                @include tablet-smm {
+                    margin: auto;
+                    width: 100%;
+                    // max-width: 300px;
+                    text-align: left;
+                }
+
                 padding: .5rem;
 
                 button {
@@ -32,6 +64,11 @@
         }
 
         .item-description {
+            @include tablet-smm {
+                margin-left: 0;
+                min-width: 100%;
+            }
+
             margin-left: 2.5rem;
             min-width: 400px;
 
