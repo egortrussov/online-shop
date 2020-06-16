@@ -19,7 +19,8 @@ export default class Items extends Component {
         currentSearchType: null,
         items: [],
         categories: null,
-        isCategoryChosen: false
+        isCategoryChosen: false,
+        searchText: ''
     }
 
     static contextType = ItemContext;
@@ -89,14 +90,23 @@ export default class Items extends Component {
         }, () => {
             if (ls.get('currentSearchText')) {
                 this.findItemsByName(ls.get('currentSearchText'))
+                let text = ls.get('currentSearchText');
                 ls.set('currentSearchText', '')
                 this.setState({
                     ...this.state,
-                    isCategoryChosen: true
+                    isCategoryChosen: true,
+                    searchText: text
                 })
             } else if (this.context.currentCategory) {
                 this.loadItems()
             }                
+        })
+    }
+
+    changeSearchText(e) {
+        this.setState({
+            ...this.state,
+            searchText: e.target.value
         })
     }
 
@@ -319,7 +329,7 @@ export default class Items extends Component {
     }
 
     render() {
-        const { category, isLoading, items, searchType, categories, currentSearchType, isCategoryChosen } = this.state;
+        const { category, isLoading, items, searchType, categories, currentSearchType, isCategoryChosen, searchText } = this.state;
 
         return (
             <div className="content-container">
@@ -339,7 +349,7 @@ export default class Items extends Component {
                             searchType={ currentSearchType }
                          />
                         <form ref={ this.searchCreds } onSubmit={ (e) => this.findItems(e) }>
-                            <input type="text" name="name" />
+                            <input value={ searchText } type="text" name="name" />
                             <button className="btn-submit">Find</button>
                         </form>
                     </div>

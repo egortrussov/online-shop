@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 810px) {
   .content-container .content {
     margin-top: 1rem;
   }
