@@ -309,6 +309,9 @@ export default class Items extends Component {
 
         const searchText = formData.get('name');
 
+        if (!searchText.trim()) 
+            return;
+
         switch (currentSearchType) {
             case 'name':
                 this.findItemsByName(searchText);
@@ -349,7 +352,7 @@ export default class Items extends Component {
                             searchType={ currentSearchType }
                          />
                         <form ref={ this.searchCreds } onSubmit={ (e) => this.findItems(e) }>
-                            <input value={ searchText } type="text" name="name" />
+                            <input value={ searchText } onChange={ e => this.changeSearchText(e) } type="text" name="name" />
                             <button className="btn-submit">Find</button>
                         </form>
                     </div>
