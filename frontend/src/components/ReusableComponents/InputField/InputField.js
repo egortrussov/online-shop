@@ -2,7 +2,7 @@ import React from 'react'
 
 import './css/style.css'
 
-const InputField = ({ label, onChange, name, type, value, isMini }) => {
+const InputField = ({ label, onChange, name, type, value, isMini, errorMsg }) => {
 
     if (type === 'textarea' && onChange && value) return (
         <div className="input-group">
@@ -37,6 +37,9 @@ const InputField = ({ label, onChange, name, type, value, isMini }) => {
             <span className="input-label">{ label }</span>
             <input  autoComplete={ name === 'email' ? "on" : "false" } type={ type } name={ name }  />
             <label htmlFor={ name }></label> 
+            <span className="error-msg">
+                { errorMsg }
+            </span>
         </div>
     )
 }

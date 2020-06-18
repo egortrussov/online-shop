@@ -14,7 +14,8 @@ export default class Register extends Component {
 
     state = {
         isCompany: false,
-        companyContacts: []
+        companyContacts: [],
+        errors: []
     }
 
     constructor(props) {
@@ -46,12 +47,16 @@ export default class Register extends Component {
                 email: formData.get('email'),
                 username: formData.get('username'),
                 password: formData.get('password'),
+                adress: formData.get('adress'),
+                telephone: formData.get('telephone'),
                 isCompany
             }     
             let validateCreds = [
                 { 'name': 'email', 'value':  formData.get('email') },
                 { 'name': 'username', 'value':  formData.get('username') },
-                { 'name': 'password', 'value':  formData.get('password') }
+                { 'name': 'password', 'value':  formData.get('password') },
+                { 'name': 'adress', 'value':  formData.get('adress') },
+                { 'name': 'telephone', 'value':  formData.get('telephone') }
             ]   
             let errors = validate(validateCreds, false);
 
@@ -84,9 +89,9 @@ export default class Register extends Component {
                 { 'name': 'adress', 'value':  formData.get('adress') },
                 { 'name': 'password', 'value':  formData.get('password') },
                 { 'name': 'companyName', 'value':  formData.get('companyName') },
-                { 'name': 'bin', 'value':  formData.get('bin') }
+                { 'name': 'bin', 'value':  formData.get('companyBIN') }
             ]   
-            let errors = validate(validateCreds, false);
+            let errors = validate(validateCreds, true);
 
             if (errors.hasErrors) {
                 this.setState({
@@ -114,7 +119,7 @@ export default class Register extends Component {
     }
 
     render() {
-        const { isCompany } = this.state;
+        const { isCompany, errors } = this.state;
 
         if (this.context.token) return (
             <Redirect to='/' />
@@ -123,33 +128,32 @@ export default class Register extends Component {
         return (
             <div className="small-container">
                 <form onSubmit={ (e) => this.register(e) } ref={ this.formRef }>
-                    <InputField type="text" label="E-mail" name="email" />
+                    <InputField type="text" label="E-mail" name="email"  errorMsg={ errors['email'] } />
                     {
                         !isCompany && (
                             <>
-                                <InputField type="telephone" label="Telephone" name="telephone" />
+                                <InputField type="telephone" label="Telephone" name="telephone" errorMsg={ errors['telephone'] } />
                             </>
                         )
                     }
                     {
                         !isCompany && (
                             <>
-                                <InputField type="text" label="Username" name="username" />  
+                                <InputField type="text" label="Username" name="username" errorMsg={ errors['username'] } />  
                             </>
                         )
                     }
-                    <InputField type="text" label="Adress" name="adress" />
-                    <InputField type="password" label="Password" name="password" />
+                    <InputField type="text" label="Adress" name="adress" errorMsg={ errors['adress'] } />
+                    <InputField type="password" label="Password" name="password" errorMsg={ errors['password'] } />
                     {
                         isCompany && (
                             <>
-                                <InputField type="text" label="Company name" name="companyName" />
+                                <InputField type="text" label="Company name" name="companyName" errorMsg={ errors['companyName'] } />
                                 
-                                <InputField type="text" label="Company BIN" name="companyBIN" />
+                                <InputField type="text" label="Company BIN" name="companyBIN" errorMsg={ errors['bin'] } />
 
                                 <div>
-                                    <InputField type="text" label="Contact name" name="contactName" />
-                                    <InputField type="text" label="Contact" name="contact" />
+                                    <InputField type="text" label="Contact" name="contact" errorMsg={ errors[''] } />
                                     
                                 </div>
                             </>
