@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 import './css/Register.css'
+import { validate } from '../../middleware/validator'
 
 export default class Register extends Component {
 
@@ -40,14 +41,30 @@ export default class Register extends Component {
         const { isCompany } = this.state;
 
         let creds = {}
-        if (!isCompany)
+        if (!isCompany) {
             creds = {
                 email: formData.get('email'),
                 username: formData.get('username'),
                 password: formData.get('password'),
                 isCompany
-            }        
-        else 
+            }     
+            let validateCreds = [
+                { 'name': 'email', 'value':  formData.get('email') },
+                { 'name': 'username', 'value':  formData.get('username') },
+                { 'name': 'password', 'value':  formData.get('password') }
+            ]   
+            let errors = validate(validateCreds, false);
+
+            if (errors.hasErrors) {
+                this.setState({
+                    ...this.state,
+                    errors: errors.errors
+                });
+                console.log('error')
+                return;
+            }
+        }
+        else {
             creds = {
                 email: formData.get('email'),
                 isCompany,
@@ -62,6 +79,23 @@ export default class Register extends Component {
                     }]
                 }
             }
+            let validateCreds = [
+                { 'name': 'email', 'value':  formData.get('email') },
+                { 'name': 'adress', 'value':  formData.get('adress') },
+                { 'name': 'password', 'value':  formData.get('password') },
+                { 'name': 'companyName', 'value':  formData.get('companyName') },
+                { 'name': 'bin', 'value':  formData.get('bin') }
+            ]   
+            let errors = validate(validateCreds, false);
+
+            if (errors.hasErrors) {
+                this.setState({
+                    ...this.state,
+                    errors: errors.errors
+                });
+                return;
+            }
+        }
         
         fetch(`${ this.context.proxy }/api/users/register`, {
             method: 'POST',
