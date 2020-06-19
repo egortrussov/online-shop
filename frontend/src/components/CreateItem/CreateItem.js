@@ -3,6 +3,7 @@ import { createRef } from 'react';
 import InputField from '../ReusableComponents/InputField/InputField';
 
 import { AuthContext } from '../../contexts/AuthContext'
+import ChooseCategory from './ChooseCategory';
 
 export default class CreateItem extends Component {
 
@@ -21,16 +22,16 @@ export default class CreateItem extends Component {
     static contextType = AuthContext;
 
     componentDidMount() {
-        fetch(`${ this.context.proxy }/api/categories/allCategories`)
-            .then(res => res.json())
-            .then(res => {
-                this.setState({
-                    ...this.state,
-                    isLoading: false,
-                    categories: res.categories,
-                    currentCategory: res.categories[0]
-                })
-            })
+        // fetch(`${ this.context.proxy }/api/categories/allCategories`)
+        //     .then(res => res.json())
+        //     .then(res => {
+        //         this.setState({
+        //             ...this.state,
+        //             isLoading: false,
+        //             categories: res.categories,
+        //             currentCategory: res.categories[0]
+        //         })
+        //     })
     }
     
     setCurrentCategory(category) {
@@ -65,22 +66,11 @@ export default class CreateItem extends Component {
     }
 
     render() {
-        const { categories, isLoading, currentCategory } = this.state;
+        const { isLoading, currentCategory } = this.state;
 
-        if (isLoading) return (
-            <h1>Loading...</h1>
-        )
-        
         return (
             <div>
-                {
-                    categories.map(category => {
-                        return (
-                            <button onClick={ () => this.setCurrentCategory(category) }>{ category.name }</button>
-                        )
-                    })
-                }
-                <span>category: { currentCategory.name }</span>
+                <ChooseCategory setCurrentCategory={ (category) => this.setCurrentCategory(category) } />
                 <form ref={ this.formRef } onSubmit={ (e) => this.createItem(e) }>                   
                     <InputField name="title" label="title" type="text" />
                     <InputField name="description" label="description" type="textarea" />
