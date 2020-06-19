@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   max-width: 400px;
-  margin: 0 auto 1.3rem auto !important;
+  margin: 0 auto 2rem auto !important;
 }
 
 input {
@@ -78,5 +78,15 @@ input {
 
 .input-group > input:focus + label {
   width: 100% !important;
+}
+
+.error-msg {
+  color: red;
+  position: absolute;
+  top: auto;
+  bottom: -20px;
+  font-size: .9rem;
+  left: 0;
+  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */
