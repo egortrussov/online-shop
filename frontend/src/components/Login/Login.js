@@ -9,7 +9,8 @@ import './css/Login.css'
 export default class Login extends Component {
 
     state = {
-        isRedirectToHomepage: false
+        isRedirectToHomepage: false,
+        errors: false
     }
 
     constructor(props) {
@@ -48,15 +49,21 @@ export default class Login extends Component {
             .then(res => res.json())
             .then(res => {
                 console.log(res)
-                if (!res.success)
-                    return;
+                if (!res.success) {
+                    let errors = [];
+                    errors['email'] = 'Incorrect email or password';
+                    return this.setState({
+                        ...this.state,
+                        errors
+                    })
+                }
                 this.context.login(res.token, res.user);
                 window.location.href = '/'
             })
     }
 
     render() {
-        const { isRedirectToHomepage } = this.state;
+        const { isRedirectToHomepage, errors } = this.state;
 
         if (this.context.token) return (
             <Redirect to="/" />
@@ -69,7 +76,7 @@ export default class Login extends Component {
         return (
             <div className="small-container">
                 <form onSubmit={ (e) => this.handleSubmit(e) } ref={ this.formRef } action="">
-                    <InputField type="text" label="E-mail" name="email" />
+                    <InputField errorMsg={ errors['email'] } type="text" label="E-mail" name="email" />
                     <InputField type="password" label="Password" name="password" />
                     <button type="submit" className="btn btn-cta lg">Login</button>
                 </form>
