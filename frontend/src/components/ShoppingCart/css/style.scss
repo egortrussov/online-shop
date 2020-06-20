@@ -30,6 +30,10 @@
             display: flex;
             align-items: center;
 
+            input {
+                width: 100%;
+            }
+
             .delete-item {
                 width: 24px;
                 height: 24px;

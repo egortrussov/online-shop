@@ -50,6 +50,10 @@
           align-items: center;
 }
 
+.cart-grid .grid-line .cell input {
+  width: 100%;
+}
+
 .cart-grid .grid-line .cell .delete-item {
   width: 24px;
   height: 24px;

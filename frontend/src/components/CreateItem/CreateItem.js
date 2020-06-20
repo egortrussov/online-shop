@@ -9,7 +9,7 @@ import { AuthContext } from '../../contexts/AuthContext'
 import ChooseCategory from './ChooseCategory';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import './css/CreateItem.css'
 
@@ -70,6 +70,33 @@ export default class CreateItem extends Component {
             })
     }
 
+    addItem() {
+        let { items } = this.state;
+        items.push(newItem);
+        this.setState({
+            ...this.state,
+            items
+        })
+    } 
+
+    changeItemInfo(e, inx, type) {
+        let { items } = this.state;
+
+        let newVal = e.target.value;
+        if (type === 'quantity' || type === 'price') 
+            newVal = +newVal;
+
+        items[inx] = {
+            ...items[inx],
+            [type]: newVal
+        }
+
+        this.setState({
+            ...this.state,
+            items
+        })
+    }
+
     render() {
         const { isLoading, currentCategory, items } = this.state;
 
@@ -98,7 +125,7 @@ export default class CreateItem extends Component {
                         </div>
                     </div>
                     {
-                        items.map(item => {
+                        items.map((item, inx) => {
 
                             return (
                                 <div className="grid-line">
@@ -106,30 +133,29 @@ export default class CreateItem extends Component {
                                         <button onClick={ () => this.deleteItem(item._id) } className="delete-item">
                                             <FontAwesomeIcon className="icon" icon={ faTimes } />
                                         </button> 
-                                        <Link to={ `/item/${ item._id}` }>
-                                            <input type="text" value={ item.title } />
-                                        </Link>
+                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'title') } type="text" value={ item.title } />
                                     </div>
                                     <div className="cell description">
-                                        <input type="text" value={ item.description } />
+                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'description') } type="text" value={ item.description } />
                                     </div>
                                     <div className="cell article">
-                                        <input type="text" value={ item.article } />
+                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'article') } type="text" value={ item.article } />
                                     </div>
                                     <div className="cell price">
-                                        <input type="text" value={ item.price } />
+                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'price') } type="text" value={ item.price } />
                                     </div>
                                     <div className="cell max-quantity">
-                                        <input type="text" value={ item.quantity } />
+                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'quantity') } type="text" value={ item.quantity } />
                                     </div>
                                     <div className="cell company">
-                                        <input type="text" value={ item.company } />
+                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'company') } type="text" value={ item.company } />
                                     </div>
                                 </div>
                             )
                         })
                     }
                 </div>
+                <button onClick={ () => this.addItem() } className="btn"> <FontAwesomeIcon icon={ faPlus } /> Add item</button>
                 
                 {/* <form ref={ this.formRef } onSubmit={ (e) => this.createItem(e) }>                   
                     <InputField name="title" label="title" type="text" />
