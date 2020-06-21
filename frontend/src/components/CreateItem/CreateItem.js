@@ -49,7 +49,7 @@ export default class CreateItem extends Component {
     createItem(e) {
         e.preventDefault()
 
-        const { currentCategory } = this.state;
+        const { currentCategory, items } = this.state;
         
         let formEl = this.formRef.current;
 
@@ -128,7 +128,7 @@ export default class CreateItem extends Component {
                         items.map((item, inx) => {
 
                             return (
-                                <div className="grid-line">
+                                <form onSubmit={ (e) => e.preventDefault() } id={ `form-${ inx }` } className="grid-line">
                                     <div className="cell name">
                                         <button onClick={ () => this.deleteItem(item._id) } className="delete-item">
                                             <FontAwesomeIcon className="icon" icon={ faTimes } />
@@ -150,7 +150,7 @@ export default class CreateItem extends Component {
                                     <div className="cell company">
                                         <input onChange={ (e) => this.changeItemInfo(e, inx, 'company') } type="text" value={ item.company } />
                                     </div>
-                                </div>
+                                </form>
                             )
                         })
                     }
