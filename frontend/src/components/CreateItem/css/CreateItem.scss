@@ -1,14 +1,24 @@
+.create-items-grid-cont {
+    overflow-x: scroll;
+}
+
 .cart-grid {
     display: flex;
     flex-direction: column;
+    // overflow-x: scroll;
 
     &.create-item {
         min-width: 1000px;
     }
 
+    // form {
+    //     overflow-x: scroll
+    // }
+
     .grid-line {
         display: flex;
         width: 100%;
+        // overflow-x: scroll;
 
         &:hover {
             background-color: rgba(#fa744f, .05);
@@ -48,7 +58,7 @@
                 cursor: pointer;
             }
 
-            &.article, &.max-quantity, &.price, &.quantity, &.total-price {
+            &.article, &.max-quantity, &.price, &.quantity, &.total-price, &.image {
                 width: 250px;
             }
 
@@ -107,4 +117,8 @@ h3.price {
 
 .empty-cart-msg {
     text-align: center;
+}
+
+button.with-mt {
+    margin-top: 1rem !important;
 }

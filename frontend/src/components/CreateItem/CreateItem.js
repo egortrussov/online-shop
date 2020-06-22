@@ -97,65 +97,102 @@ export default class CreateItem extends Component {
         })
     }
 
+    createItems() {
+        const { currentCategory, items } = this.state;
+
+        if (!currentCategory) {
+            return alert('Choose category')
+        }
+
+        items.forEach((item, inx) => {
+            let formEl = document.getElementById(`form-${ inx }`);
+
+            let formData = new FormData(formEl);
+
+            formData.append('categoryId', currentCategory._id);
+
+            fetch(`${ this.context.proxy }/api/items/createItem`, {
+                method: 'POST',
+                headers: {
+                    'x-auth-token': this.context.token
+                },
+                body: formData
+            })
+                .then(res => res.json())
+                .then(res => {
+                    console.log(res)
+                })
+        })
+    }
+
     render() {
         const { isLoading, currentCategory, items } = this.state;
 
         return (
             <div>
                 <ChooseCategory setCurrentCategory={ (category) => this.setCurrentCategory(category) } />
-                <div className="cart-grid create-item">
-                    <div className="grid-line head">
-                        <div className="cell name">
-                            Item name
+                <div  className="create-items-grid-cont" >
+                    <div className="cart-grid create-item">
+                        <div className="grid-line head">
+                            <div className="cell name">
+                                Item name
+                            </div>
+                            <div className="cell description">
+                                Item description
+                            </div>
+                            <div className="cell article">
+                                Article
+                            </div>
+                            <div className="cell price">
+                                Price
+                            </div>
+                            <div className="cell quantity">
+                                Quantity
+                            </div>
+                            <div className="cell company">
+                                Company
+                            </div>
+                            <div className="cell image">
+                                Image
+                            </div>
                         </div>
-                        <div className="cell description">
-                            Item description
-                        </div>
-                        <div className="cell article">
-                            Article
-                        </div>
-                        <div className="cell price">
-                            Price
-                        </div>
-                        <div className="cell quantity">
-                            Quantity
-                        </div>
-                        <div className="cell company">
-                            Company
-                        </div>
-                    </div>
-                    {
-                        items.map((item, inx) => {
+                        {
+                            items.map((item, inx) => {
 
-                            return (
-                                <form onSubmit={ (e) => e.preventDefault() } id={ `form-${ inx }` } className="grid-line">
-                                    <div className="cell name">
-                                        <button onClick={ () => this.deleteItem(item._id) } className="delete-item">
-                                            <FontAwesomeIcon className="icon" icon={ faTimes } />
-                                        </button> 
-                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'title') } type="text" value={ item.title } />
-                                    </div>
-                                    <div className="cell description">
-                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'description') } type="text" value={ item.description } />
-                                    </div>
-                                    <div className="cell article">
-                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'article') } type="text" value={ item.article } />
-                                    </div>
-                                    <div className="cell price">
-                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'price') } type="text" value={ item.price } />
-                                    </div>
-                                    <div className="cell max-quantity">
-                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'quantity') } type="text" value={ item.quantity } />
-                                    </div>
-                                    <div className="cell company">
-                                        <input onChange={ (e) => this.changeItemInfo(e, inx, 'company') } type="text" value={ item.company } />
-                                    </div>
+                                return (
+                                    <form onSubmit={ (e) => e.preventDefault() } id={ `form-${ inx }` } className="grid-line">
+                                        <div className="cell name">
+                                            <a onClick={ () => this.deleteItem(item._id) } className="delete-item">
+                                                <FontAwesomeIcon className="icon" icon={ faTimes } />
+                                            </a> 
+                                            <input name="title" onChange={ (e) => this.changeItemInfo(e, inx, 'title') } type="text" value={ item.title } />
+                                        </div>
+                                        <div className="cell description">
+                                            <input name="description" onChange={ (e) => this.changeItemInfo(e, inx, 'description') } type="text" value={ item.description } />
+                                        </div>
+                                        <div className="cell article">
+                                            <input name="article" onChange={ (e) => this.changeItemInfo(e, inx, 'article') } type="text" value={ item.article } />
+                                        </div>
+                                        <div className="cell price">
+                                            <input name="price" onChange={ (e) => this.changeItemInfo(e, inx, 'price') } type="text" value={ item.price } />
+                                        </div>
+                                        <div className="cell max-quantity">
+                                            <input name="quantity" onChange={ (e) => this.changeItemInfo(e, inx, 'quantity') } type="text" value={ item.quantity } />
+                                        </div>
+                                        <div className="cell company">
+                                            <input name="company" onChange={ (e) => this.changeItemInfo(e, inx, 'company') } type="text" value={ item.company } />
+                                        </div>
+                                        <div className="cell image">
+                                            <input type="file" name="photo" accept="image/*" />
+                                        </div>
                                 </form>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-                <button onClick={ () => this.addItem() } className="btn"> <FontAwesomeIcon icon={ faPlus } /> Add item</button>
+                <button onClick={ () => this.addItem() } className="btn"> <FontAwesomeIcon icon={ faPlus } /> Add item</button> <br/>
+                <button className="btn btn-cta with-mt" onClick={ () => this.createItems() }>Create items!</button>
                 
                 {/* <form ref={ this.formRef } onSubmit={ (e) => this.createItem(e) }>                   
                     <InputField name="title" label="title" type="text" />

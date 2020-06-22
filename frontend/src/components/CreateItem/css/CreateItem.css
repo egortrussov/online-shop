@@ -1,3 +1,7 @@
+.create-items-grid-cont {
+  overflow-x: scroll;
+}
+
 .cart-grid {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -74,7 +78,7 @@
   cursor: pointer;
 }
 
-.cart-grid .grid-line .cell.article, .cart-grid .grid-line .cell.max-quantity, .cart-grid .grid-line .cell.price, .cart-grid .grid-line .cell.quantity, .cart-grid .grid-line .cell.total-price {
+.cart-grid .grid-line .cell.article, .cart-grid .grid-line .cell.max-quantity, .cart-grid .grid-line .cell.price, .cart-grid .grid-line .cell.quantity, .cart-grid .grid-line .cell.total-price, .cart-grid .grid-line .cell.image {
   width: 250px;
 }
 
@@ -129,5 +133,9 @@ h3.price {
 
 .empty-cart-msg {
   text-align: center;
+}
+
+button.with-mt {
+  margin-top: 1rem !important;
 }
 /*# sourceMappingURL=CreateItem.css.map */
