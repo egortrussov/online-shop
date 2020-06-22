@@ -149,7 +149,8 @@ router.post('/newOrder', (req, res) => {
     // Check if there are less items available than reqested
 
     newOrder.items.forEach(it => {
-        items.set(it.itemId, it.quantity);
+        items.set(it.itemId.toString(), it.quantity);
+        console.log(items.get(it.itemId.toString()))
         itemIds.push(it.itemId);
     });
     console.log(itemIds)
@@ -161,7 +162,7 @@ router.post('/newOrder', (req, res) => {
         .find({ _id: { $in: itemIds } })
         .then(orderedItems => {
             orderedItems.forEach(it => {
-                if (+it.quantity < +items[it._id]) {
+                if (+it.quantity < +items.get(it._id.toString())) {
                     errors[it._id] = true;
                     hasErrors = true;
                 }
@@ -184,7 +185,8 @@ router.post('/newOrder', (req, res) => {
                 .find({ _id: { $in: itemIds } })
                 .then(orderedItems => {
                     orderedItems.forEach(it => {
-                        it.quantity -= items[it._id];
+                        console.log(items.get(it._id.toString()))
+                        it.quantity -= items.get(it._id.toString());
                         it.save()
                     })
                 })
