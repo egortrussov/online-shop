@@ -23,9 +23,10 @@ import AdminPage from './components/AdminPage/AdminPage'
 import CreateItem from './components/CreateItem/CreateItem'
 import UpdateItem from './components/UpdateItem/UpdateItem'
 import AllOrders from './components/AllOrders/AllOrders'
+import GlobalSearchBlock from './components/GlobalSearchBlock/GlobalSearchBlock'
+import ManageCategories from './components/ManageCategories/ManageCategories'
 
 import './App.css'
-import GlobalSearchBlock from './components/GlobalSearchBlock/GlobalSearchBlock'
 
 export default class App extends Component {
 
@@ -52,6 +53,7 @@ export default class App extends Component {
                                             <Route exact path="/adminPage" component={ AdminPage } />
                                             <Route path="/adminPage/createItem" component={ CreateItem } />
                                             <Route path="/adminPage/allOrders" component={ AllOrders } />
+                                            <Route path="/adminPage/manageCategories" component={ ManageCategories } />
                                             <Route path="/updateItem/:itemId" component={ UpdateItem } />
                                             <Route path="/order/:orderId" component={ OrderInfo } />
                                         </Switch>

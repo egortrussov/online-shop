@@ -11,6 +11,9 @@ export default class AdminPage extends Component {
                 <Link to="/adminPage/allOrders">
                     All orders
                 </Link>
+                <Link to="/adminPage/manageCategories">
+                    Manage categories
+                </Link>
             </div>
         )
     }
