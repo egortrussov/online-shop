@@ -125,6 +125,17 @@ export default class CreateItem extends Component {
         })
     }
 
+    deleteItem(inx) {
+        let { items } = this.state;
+
+        items.splice(inx, 1);
+
+        this.setState({
+            ...this.state,
+            items
+        })
+    }
+
     render() {
         const { isLoading, currentCategory, items } = this.state;
 
@@ -162,7 +173,7 @@ export default class CreateItem extends Component {
                                 return (
                                     <form onSubmit={ (e) => e.preventDefault() } id={ `form-${ inx }` } className="grid-line">
                                         <div className="cell name">
-                                            <a onClick={ () => this.deleteItem(item._id) } className="delete-item">
+                                            <a onClick={ () => this.deleteItem(inx) } className="delete-item">
                                                 <FontAwesomeIcon className="icon" icon={ faTimes } />
                                             </a> 
                                             <input name="title" onChange={ (e) => this.changeItemInfo(e, inx, 'title') } type="text" value={ item.title } />
