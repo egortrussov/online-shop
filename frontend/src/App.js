@@ -27,6 +27,7 @@ import GlobalSearchBlock from './components/GlobalSearchBlock/GlobalSearchBlock'
 import ManageCategories from './components/ManageCategories/ManageCategories'
 
 import './App.css'
+import LandingPage from './components/LandingPage/LandingPage'
 
 export default class App extends Component {
 
@@ -43,6 +44,7 @@ export default class App extends Component {
                                     <GlobalSearchBlock />
                                     <div className="app-container">
                                         <Switch>
+                                            <Route exact path="/" component={ LandingPage } />
                                             <Route path="/login" component={ Login } /> 
                                             <Route path="/register" component={ Register } /> 
                                             <Route path="/items" component={ Items } />

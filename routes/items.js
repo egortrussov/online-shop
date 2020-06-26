@@ -35,6 +35,28 @@ const upload = multer({
 /*
     @Method: GET
     @Access: Public
+    @Description: Get all items
+    @Response: {
+        success <true, false>, items
+    }
+*/
+
+router.get('/allItems', (req, res) => {
+    Item 
+        .find()
+        .then(items => {
+            res 
+                .status(200)
+                .json({
+                    success: true,
+                    items
+                })
+        })
+})
+
+/*
+    @Method: GET
+    @Access: Public
     @Description: Get info about the item from the database
     @Request Params: {
         itemId

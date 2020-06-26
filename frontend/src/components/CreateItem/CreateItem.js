@@ -122,6 +122,7 @@ export default class CreateItem extends Component {
                 .then(res => res.json())
                 .then(res => {
                     console.log(res)
+                    window.location.href = '/adminPage/createItem'
                 })
         })
     }
