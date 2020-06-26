@@ -62,8 +62,40 @@ export default class ManageCategories extends Component {
             })
     }    
 
-    deleteCategory() {
+    deleteCategory(inx) {
+        let { categories } = this.state;
+        let categoryToDelete = categories[inx];
 
+        let typedName = prompt('Enter category name to delete it');
+
+        if (typedName.trim() !== categoryToDelete.name) {
+            return;
+        }
+
+        let choice = window.confirm(`Are ypu sure u want to delete? all items (${ categoryToDelete.items.length }) will be deleted`);
+
+        if (choice) {
+            fetch(`${ this.context.proxy }/api/categories/deleteCategory/${ categoryToDelete._id }`, {
+                method: 'POST',
+                headers: {
+                    'x-auth-token': this.context.token,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json()) 
+                .then(res => {
+                    if (res.success) {
+                        // let { categories } = this.state;
+    
+                        categories.splice(inx, 1);
+    
+                        this.setState({
+                            ...this.state,
+                            categories
+                        })
+                    }
+                })
+        }
     }
 
     render() {
@@ -78,7 +110,7 @@ export default class ManageCategories extends Component {
                 {
                     categories.map((category, inx) => (
                         <div className="category-block">
-                            <button onClick={ () => this.deleteCategory() }>delete</button>
+                            <button onClick={ () => this.deleteCategory(inx) }>delete</button>
                             <span>{ category.name } </span>
                         </div>
                     ))

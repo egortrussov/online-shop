@@ -18,7 +18,8 @@ export default class ChooseCategory extends Component {
         }
 
         const setSearchType = (typeId) => {
-            this.props.setCurrentCategory(categories[typeId]);
+            console.log(categories, typeId)
+            this.props.setCurrentCategory(categories[typeId - 1]);
         }
 
         const props = this.props;

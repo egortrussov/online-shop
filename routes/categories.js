@@ -65,7 +65,7 @@ router.get('/categoryInfo/:categoryId', (req, res) => {
 /*
     @Method: POST
     @Access: protected (admin only)
-    @Description: create new item
+    @Description: create new category
     @Request Body type: {
         name,
         description
@@ -97,6 +97,46 @@ router.post('/createCategory', auth, (req, res) => {
                 .json({
                     success: true,
                     category: createdCategory
+                })
+        })
+})
+
+/*
+    @Method: POST
+    @Access: protected (admin only)
+    @Description: delete category
+    @Params: {
+        categoryId
+    }
+    @Response: {
+        success <true, false>, category?, msg?
+    }
+*/
+router.post('/deleteCategory/:categoryId', auth, (req, res) => {
+    if (!req.userData || !req.userData.isAdmin) {
+        res
+            .status(401)
+            .json({
+                success: false,
+                msg: 'You must be an admin'
+            })
+        return;
+    }
+    
+    Category
+        .findOne({ _id: req.params.categoryId })
+        .then(foundCategory => {
+            foundCategory.items.forEach(item => {
+                Item 
+                    .deleteOne({ _id: item })
+                    .then(res => {
+                        console.log(res)
+                    })
+            })
+            Category 
+                .deleteOne({ _id: req.params.categoryId })
+                .then(res => {
+                    console.log(res)
                 })
         })
 })

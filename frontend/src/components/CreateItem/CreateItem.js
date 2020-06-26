@@ -40,6 +40,7 @@ export default class CreateItem extends Component {
     static contextType = AuthContext;
     
     setCurrentCategory(category) {
+        console.log(category)
         this.setState({
             ...this.state,
             currentCategory: category
