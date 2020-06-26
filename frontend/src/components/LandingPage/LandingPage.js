@@ -20,13 +20,15 @@ export default class LandingPage extends Component {
                 this.setState({
                     ...this.state,
                     items: res.items
-                })
+                }, () => this.forceUpdate())
             })
     }
     
 
     render() {
         const { items } = this.state;
+
+        console.log(items)
 
         return (
             <div>
