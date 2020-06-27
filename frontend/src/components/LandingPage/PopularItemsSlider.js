@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 
+import OwlCarousel from 'react-owl-carousel';
+
+import { Helmet } from 'react-helmet'
+
 import { AuthContext } from '../../contexts/AuthContext'
 
 export default class PopularItemsSlider extends Component {
@@ -7,6 +11,16 @@ export default class PopularItemsSlider extends Component {
     state = {
         items: []
     }
+
+    componentDidMount() {
+        const script = document.createElement("script");
+
+        script.src = "public_js/owl.config.js";
+        script.async = true;
+
+        document.body.appendChild(script);
+    }
+    
     
     componentWillRecieveProps() {
         let items = this.props.items
@@ -48,25 +62,25 @@ export default class PopularItemsSlider extends Component {
     
 
     render() {
-        const { items } = this.state;
-
-        console.log(items)
+        const { items } = this.props;
 
         return (
             <div>
-                <div className="owl-carousel owl-theme">
+                <OwlCarousel className="owl-theme" loop autoplay={ true } autoplayTimeout={ 2000 } autoplayHoverPause={ true } responsive={ {0:{ items:1}, 600:{ items:3 }, 1300:{ items:5 }} }>
                     {
                         items.map(item => (
                             <div className="item">
-                                {
-                                    item.imageData ? ( <img src={ item.imageData } alt=""/> ) : 'No img'
-                                }
+                                <img src={ item.imageData || '/images/no-image.png' } alt=""/>
                                 <div>{ item.title }</div>
                             </div>
                         ))
                     }
                     { this.props.items.length }
-                </div>
+                </OwlCarousel>
+
+                <Helmet>
+                    <script src="/public_js/owl.config.js"></script>
+                </Helmet>
             </div>
         )
     }
