@@ -66,16 +66,18 @@ export default class PopularItemsSlider extends Component {
 
         return (
             <div>
-                <OwlCarousel className="owl-theme" loop autoplay={ true } autoplayTimeout={ 2000 } autoplayHoverPause={ true } responsive={ {0:{ items:1}, 600:{ items:3 }, 1300:{ items:5 }} }>
+                <h3 className="slider-heading">Popular items</h3>
+                <OwlCarousel className="owl-theme slider" loop autoplay={ true } autoplayTimeout={ 2000 } autoplayHoverPause={ true } responsive={ {0:{ items:1}, 420: { items: 2 } , 900:{ items:3 }, 1300:{ items:4 }, 1900: { items: 5 }}  }>
                     {
                         items.map(item => (
                             <div className="item">
-                                <img src={ item.imageData || '/images/no-image.png' } alt=""/>
-                                <div>{ item.title }</div>
+                                <div className="img-container">
+                                    <img src={ item.imageData || '/images/no-image.png' } alt=""/>
+                                </div>
+                                <div className="title">{ item.title }</div>
                             </div>
                         ))
                     }
-                    { this.props.items.length }
                 </OwlCarousel>
 
                 <Helmet>

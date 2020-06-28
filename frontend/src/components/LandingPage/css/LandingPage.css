@@ -1,1 +1,41 @@
-/* No CSS *//*# sourceMappingURL=LandingPage.css.map */
+.slider-heading {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+}
+
+.slider {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.slider .item .img-container {
+  width: 100%;
+  height: 20vw;
+  min-height: 280px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.slider .item .img-container img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+}
+
+.slider .item .title {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  margin-top: .5rem;
+}
+/*# sourceMappingURL=LandingPage.css.map */
