@@ -86,7 +86,7 @@ export default class ItemInfo extends Component {
                     <div className="item-info">
                         <div className="item-image">
                             <div className="img">
-                                <img src={ imageData } alt=""/>
+                                <img src={ imageData || '/images/no-image.png' } alt=""/>
                             </div>
                             <div className="shopping-cart">
                                 <h4 className="item-price">

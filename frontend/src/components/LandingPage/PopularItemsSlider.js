@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import OwlCarousel from 'react-owl-carousel';
 
@@ -64,18 +65,24 @@ export default class PopularItemsSlider extends Component {
     render() {
         const { items } = this.props;
 
+        items.sort((a, b) => a.customers.length > b.customers.length);
+
+        let itemsToDisplay = items.slice(0, 8);
+
         return (
             <div>
                 <h3 className="slider-heading">Popular items</h3>
                 <OwlCarousel className="owl-theme slider" loop autoplay={ true } autoplayTimeout={ 2000 } autoplayHoverPause={ true } responsive={ {0:{ items:1}, 420: { items: 2 } , 900:{ items:3 }, 1300:{ items:4 }, 1900: { items: 5 }}  }>
                     {
-                        items.map(item => (
-                            <div className="item">
-                                <div className="img-container">
-                                    <img src={ item.imageData || '/images/no-image.png' } alt=""/>
+                        itemsToDisplay.map(item => (
+                            <Link to={ `/item/${ item._id }` }>
+                                <div className="item">
+                                    <div className="img-container">
+                                        <img src={ item.imageData || '/images/no-image.png' } alt=""/>
+                                    </div>
+                                    <div className="title">{ item.title } { item.customers.length }</div>
                                 </div>
-                                <div className="title">{ item.title }</div>
-                            </div>
+                            </Link>
                         ))
                     }
                 </OwlCarousel>

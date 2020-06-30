@@ -187,6 +187,7 @@ router.post('/newOrder', (req, res) => {
                     orderedItems.forEach(it => {
                         console.log(items.get(it._id.toString()))
                         it.quantity -= items.get(it._id.toString());
+                        it.customers.push(newOrder.userId);
                         it.save()
                     })
                 })
