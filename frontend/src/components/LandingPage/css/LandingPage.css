@@ -6,6 +6,7 @@
 
 .slider {
   background-color: rgba(0, 0, 0, 0.1);
+  padding-bottom: 1rem;
 }
 
 .slider .item .img-container {

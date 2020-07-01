@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
  
 import './css/LandingPage.css'
-import PopularItemsSlider from './PopularItemsSlider';
+import ItemsSlider from './ItemsSlider';
 
 export default class LandingPage extends Component {
 
@@ -60,7 +60,8 @@ export default class LandingPage extends Component {
 
         return (
             <div>
-                <PopularItemsSlider items={ items } />
+                <ItemsSlider items={ items } type="popular" />
+                <ItemsSlider items={ items } type="new" />
             </div>
         )
     }

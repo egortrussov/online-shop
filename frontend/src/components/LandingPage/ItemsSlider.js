@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet'
 
 import { AuthContext } from '../../contexts/AuthContext'
 
-export default class PopularItemsSlider extends Component {
+export default class ItemsSlider extends Component {
 
     state = {
         items: []
@@ -63,11 +63,19 @@ export default class PopularItemsSlider extends Component {
     
 
     render() {
-        const { items } = this.props;
+        const { items, type } = this.props;
+        console.log(items)
 
-        items.sort((a, b) => a.customers.length > b.customers.length);
+        let itemsToDisplay = [];
 
-        let itemsToDisplay = items.slice(0, 8);
+        if (type === 'popular') {
+            items.sort((a, b) => b.customers.length - a.customers.length);
+            itemsToDisplay = items.slice(0, 8);
+        } else if (type === 'new') {
+            itemsToDisplay = items.slice(Math.max(items.length - 8, 0), 8);
+        }
+
+        
 
         return (
             <div>
